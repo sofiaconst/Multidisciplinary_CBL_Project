@@ -1,175 +1,377 @@
 <script lang="ts">
-import '../app.css'
-import Chart from './Chart.svelte'
-import SettingsForm from './SettingsForm.svelte'
-// import Title from './Title.svelte'
-import { Toaster } from 'svelte-french-toast'
-import Settings from 'virtual:icons/mingcute/settings-1-line'
-import ConnectStartButton from './ConnectStartButton.svelte'
-import Gauge from './Gauge.svelte'
 import { Scale } from '$lib/scale.svelte'
-import BatteryLevel from './BatteryLevel.svelte'
+import { Auth } from '$lib/auth.svelte'
+import ConnectStartButton from './ConnectStartButton.svelte'
+import { Toaster } from 'svelte-french-toast'
+import toast from 'svelte-french-toast'
 
 const scale = Scale.getInstance()
+const auth = Auth.getInstance()
 
-const trackingStatusLabels = {
-  tracking_off: 'Tracking off',
-  no_cup_detected: 'No cup detected',
-  cup_settling: 'Cup settling',
-  cup_placed: 'Cup placed',
-  cup_lifted: 'Cup lifted',
-}
-
-const reminderStatusLabels = {
-  reminders_off: 'Reminders off',
-  target_reached: 'Hourly target reached',
-  on_track: 'Reminder in',
-  sip_due: 'Take a sip',
+const reminderLabels = {
+	reminders_off: 'Reminders off',
+	target_reached: 'Hourly target reached',
+	on_track: 'Reminder in',
+	sip_due: 'Take a sip',
 }
 
 const formatMinutes = (ms: number | null) => {
-  if (ms === null) {
-    return '—'
-  }
-  return `${Math.max(1, Math.round(ms / 60000))} min`
+	if (ms === null) return '—'
+	return `${Math.max(1, Math.round(ms / 60000))} min`
+}
+
+const goalPct = $derived(
+	scale.dailyTargetIntake.current > 0
+		? Math.min(100, (scale.consumedMl / scale.dailyTargetIntake.current) * 100)
+		: 0,
+)
+
+const isSipDue = $derived(scale.reminderStatus === 'sip_due')
+
+const tare = async () => {
+	try {
+		await scale.bt.tareScale()
+	} catch (err) {
+		toast.error(`Tare failed: ${(err as Error).message}`)
+	}
 }
 </script>
 
-<div class="w-screen h-screen relative drawer drawer-end">
-  <input id="form-drawer" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
-    <Chart />
-    <div class="absolute inset-0">
-      <!-- Temporarily hide top-left branding -->
-      <!-- <Title /> -->
-      <div class="absolute left-6 top-6">
-        <div class="card bg-base-100/90 shadow-xl backdrop-blur-sm w-96">
-          <div class="card-body gap-3">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-xs uppercase tracking-[0.18em] opacity-60">Tracking</div>
-                <div class="text-xl font-semibold">{trackingStatusLabels[scale.trackingStatus]}</div>
-              </div>
-              <button
-                type="button"
-                class:btn-success={scale.trackingEnabled.current}
-                class:btn-outline={!scale.trackingEnabled.current}
-                class="btn btn-sm"
-                onclick={scale.toggleTracking}
-                disabled={!scale.bt.connected}
-              >
-                {scale.trackingEnabled.current ? 'Tracking on' : 'Tracking off'}
-              </button>
-            </div>
+<div class="page">
+	<!-- Greeting bar -->
+	<div class="greeting-bar">
+		<div class="avatar">{auth.user.current?.avatarInitials ?? '?'}</div>
+		<div class="greeting-text">
+			<div class="greeting-label">{auth.greeting}</div>
+			<div class="greeting-name">{auth.user.current?.name ?? ''}</div>
+		</div>
+		<div class="badges">
+			<div class="streak-badge">{auth.streakDays.current}d streak</div>
+			<div class="ble-badge" class:ble-connected={scale.bt.connected}>
+				{scale.bt.connected ? 'Connected' : 'Offline'}
+			</div>
+		</div>
+	</div>
 
-            <div class="stats stats-horizontal shadow-sm bg-base-200/60">
-              <div class="stat px-4 py-3">
-                <div class="stat-title">Sips</div>
-                <div class="stat-value text-3xl">{scale.sipCount}</div>
-              </div>
-              <div class="stat px-4 py-3">
-                <div class="stat-title">Consumed</div>
-                <div class="stat-value text-3xl">{scale.consumedMl.toFixed(0)}</div>
-                <div class="stat-desc">ml</div>
-              </div>
-            </div>
+	<!-- Daily goal progress -->
+	<div class="card">
+		<div class="card-row">
+			<span class="card-label">Daily Goal</span>
+			<span class="goal-pct">{goalPct.toFixed(0)}%</span>
+		</div>
+		<div class="progress-track">
+			<div class="progress-fill" style="width: {goalPct}%"></div>
+		</div>
+		<div class="goal-values">{scale.consumedMl.toFixed(0)} / {scale.dailyTargetIntake.current.toFixed(0)} ml</div>
+	</div>
 
-            <div class="rounded-box bg-base-200/60 px-3 py-3">
-              <div class="flex items-center justify-between gap-3">
-                <div>
-                  <div class="font-semibold">{reminderStatusLabels[scale.reminderStatus]}</div>
-                </div>
-                <div
-                  class:text-success={scale.reminderStatus === 'target_reached'}
-                  class:text-warning={scale.reminderStatus === 'sip_due'}
-                  class="text-right text-sm font-medium"
-                >
-                  {scale.reminderStatus === 'sip_due'
-                    ? 'Sip now'
-                    : scale.reminderStatus === 'target_reached'
-                      ? 'This hour done'
-                      : formatMinutes(scale.nextSipDueInMs)}
-                </div>
-              </div>
-              <div class="mt-3 grid grid-cols-3 gap-2 text-sm">
-                <div class="rounded-box bg-base-100/70 px-3 py-2">
-                  <div class="opacity-60">This hour</div>
-                  <div class="font-medium">{scale.consumedThisHourMl.toFixed(0)} / {scale.hourlyTargetIntake.current.toFixed(0)} ml</div>
-                </div>
-                <div class="rounded-box bg-base-100/70 px-3 py-2">
-                  <div class="opacity-60">Avg sip</div>
-                  <div class="font-medium">{scale.averageSipSizeMl.toFixed(0)} ml</div>
-                </div>
-                <div class="rounded-box bg-base-100/70 px-3 py-2">
-                  <div class="opacity-60">Pace</div>
-                  <div class="font-medium">{formatMinutes(scale.recommendedSipIntervalMs)}</div>
-                </div>
-              </div>
-            </div>
+	<!-- Stats grid -->
+	<div class="stats-grid">
+		<div class="stat-card">
+			<div class="stat-value">{scale.sipCount}</div>
+			<div class="stat-label">Sips</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-value">{scale.consumedMl.toFixed(0)}<span class="stat-unit">ml</span></div>
+			<div class="stat-label">Consumed</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-value">{scale.averageSipSizeMl.toFixed(0)}<span class="stat-unit">ml</span></div>
+			<div class="stat-label">Avg sip</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-value">{formatMinutes(scale.nextSipDueInMs)}</div>
+			<div class="stat-label">Next sip in</div>
+		</div>
+	</div>
 
-            {#if scale.showTrackingDebugPanels.current}
-              <div class="rounded-box bg-base-200/60 px-3 py-2 text-xs">
-                <div class="font-medium mb-1">Tracking debug</div>
-                <div>Live: {scale.bt.currentWeight.toFixed(1)} g</div>
-                <div>Stable avg: {scale.currentStableAverage === null ? '—' : `${scale.currentStableAverage.toFixed(1)} g`}</div>
-                <div>Stable for: {scale.stableForMs} ms</div>
-                <div>Samples: {scale.stableSampleCount}</div>
-              </div>
+	<!-- Reminder card -->
+	<div class="card reminder-card" class:sip-due={isSipDue}>
+		<div class="reminder-row">
+			<div>
+				<div class="reminder-title">{reminderLabels[scale.reminderStatus]}</div>
+				<div class="reminder-sub">
+					{scale.reminderStatus === 'on_track'
+						? formatMinutes(scale.nextSipDueInMs)
+						: scale.reminderStatus === 'sip_due'
+							? 'Drink now'
+							: scale.reminderStatus === 'target_reached'
+								? 'Great job this hour!'
+								: ''}
+				</div>
+			</div>
+			<div class="reminder-hour">
+				{scale.consumedThisHourMl.toFixed(0)} / {scale.hourlyTargetIntake.current.toFixed(0)} ml this hour
+			</div>
+		</div>
+	</div>
 
-              <div class="rounded-box bg-base-200/60 px-3 py-2 text-xs max-h-32 overflow-auto">
-                <div class="font-medium mb-1">Recent events</div>
-                {#if scale.trackingDebugLog.length === 0}
-                  <div class="opacity-60">No tracking events yet</div>
-                {:else}
-                  {#each scale.trackingDebugLog as entry}
-                    <div class="leading-snug">{entry}</div>
-                  {/each}
-                {/if}
-              </div>
-            {/if}
-
-          </div>
-        </div>
-      </div>
-      <div class="absolute right-10 bottom-20">
-        <label for="form-drawer" class="btn btn-neutral drawer-button" aria-label="Open settings drawer">
-          <Settings class="h-6 w-6" /> Targets
-        </label>
-      </div>
-      <div class="absolute left-20 bottom-20">
-        <ConnectStartButton />
-      </div>
-      {#if scale.bt.connected}
-        <div class="absolute left-20 top-[calc(55%-5rem)]" style="width: min(15rem, 45vh)">
-          <Gauge
-            startAngle={-110}
-            endAngle={110}
-            value={scale.bt.currentWeight}
-            max={Math.max(scale.hourlyTargetIntake.current, 1)}
-            separatorStep={Math.max(scale.hourlyTargetIntake.current / 4, 1)}
-            innerRadius={70}
-            scaleInterval={0}
-          >
-            <div class="w-full h-full text-3xl font-bold text-center mt-16">
-              {scale.bt.currentWeight.toFixed(0)} g
-            </div>
-          </Gauge>
-        </div>
-      {/if}
-      {#if scale.bt.batteryLevel}
-        <div class="absolute right-4 bottom-2">
-          <BatteryLevel level={scale.bt.batteryLevel} />
-        </div>
-      {/if}
-    </div>
-  </div>
-  <div class="drawer-side">
-    <label for="form-drawer" class="drawer-overlay"></label>
-    <SettingsForm />
-  </div>
+	<!-- Scale reading or connect button -->
+	{#if scale.bt.connected}
+		<div class="card scale-card">
+			<div class="scale-row">
+				<div>
+					<div class="card-label">Scale reading</div>
+					<div class="scale-weight">{scale.bt.currentWeight.toFixed(1)}<span class="stat-unit">g</span></div>
+				</div>
+				<button type="button" class="tare-btn" onclick={tare} disabled={scale.bt.calibrationBusy}>
+					Tare
+				</button>
+			</div>
+		</div>
+	{:else}
+		<div class="connect-wrap">
+			<ConnectStartButton />
+		</div>
+	{/if}
 </div>
+
 <Toaster />
 
 <svelte:head>
-  <title>Hydration Scale</title>
+	<title>Hydration Scale</title>
 </svelte:head>
+
+<style>
+.page {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.greeting-bar {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 0 4px;
+}
+
+.avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: var(--teal-primary);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.greeting-text {
+	flex: 1;
+}
+
+.greeting-label {
+	font-size: 12px;
+	color: var(--warm-text-secondary);
+}
+
+.greeting-name {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--warm-text);
+}
+
+.badges {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: flex-end;
+}
+
+.streak-badge {
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--teal-dark);
+	background: var(--teal-light);
+	border: 1px solid var(--teal-primary);
+	border-radius: 20px;
+	padding: 2px 8px;
+}
+
+.ble-badge {
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--warm-text-tertiary);
+	background: var(--warm-bg);
+	border: 1px solid var(--warm-border);
+	border-radius: 20px;
+	padding: 2px 8px;
+}
+
+.ble-badge.ble-connected {
+	color: var(--teal-dark);
+	background: var(--teal-light);
+	border-color: var(--teal-primary);
+}
+
+.card {
+	background: var(--warm-surface);
+	border: 1px solid var(--warm-border);
+	border-radius: 12px;
+	padding: 16px;
+}
+
+.card-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.card-label {
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--warm-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.goal-pct {
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--teal-primary);
+}
+
+.progress-track {
+	height: 8px;
+	background: var(--warm-bg);
+	border-radius: 99px;
+	overflow: hidden;
+	margin-bottom: 6px;
+}
+
+.progress-fill {
+	height: 100%;
+	background: var(--teal-primary);
+	border-radius: 99px;
+	transition: width 0.4s ease;
+	min-width: 2px;
+}
+
+.goal-values {
+	font-size: 13px;
+	color: var(--warm-text-secondary);
+}
+
+.stats-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.stat-card {
+	background: var(--warm-surface);
+	border: 1px solid var(--warm-border);
+	border-radius: 12px;
+	padding: 14px 16px;
+}
+
+.stat-value {
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--warm-text);
+	line-height: 1.1;
+}
+
+.stat-unit {
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--warm-text-secondary);
+	margin-left: 2px;
+}
+
+.stat-label {
+	font-size: 12px;
+	color: var(--warm-text-tertiary);
+	margin-top: 2px;
+}
+
+.reminder-card {
+	border-color: var(--warm-border);
+	transition: background 0.2s, border-color 0.2s;
+}
+
+.reminder-card.sip-due {
+	background: var(--amber-bg);
+	border-color: var(--amber-border);
+}
+
+.reminder-card.sip-due .reminder-title {
+	color: var(--amber-text);
+}
+
+.reminder-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+}
+
+.reminder-title {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--warm-text);
+}
+
+.reminder-sub {
+	font-size: 13px;
+	color: var(--warm-text-secondary);
+	margin-top: 2px;
+}
+
+.reminder-hour {
+	font-size: 12px;
+	color: var(--warm-text-secondary);
+	text-align: right;
+	flex-shrink: 0;
+}
+
+.scale-card {
+}
+
+.scale-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.scale-weight {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--warm-text);
+	margin-top: 4px;
+}
+
+.tare-btn {
+	padding: 8px 20px;
+	background: var(--teal-light);
+	color: var(--teal-dark);
+	border: 1px solid var(--teal-primary);
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.tare-btn:hover {
+	background: var(--teal-primary);
+	color: #fff;
+}
+
+.tare-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.connect-wrap {
+	display: flex;
+	justify-content: center;
+	padding: 8px 0;
+}
+</style>
