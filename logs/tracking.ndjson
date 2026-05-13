@@ -1,0 +1,490 @@
+{"ts":"2026-05-08T16:49:45.817Z","type":"page_loaded","source":"client"}
+{"ts":"2026-05-08T16:49:45.828Z","type":"availability_checked","source":"bluetooth","enabled":true}
+{"ts":"2026-05-08T16:51:56.831Z","type":"page_loaded","source":"client","sessionId":"sess-1778259116828-6gwo41","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:56.864Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:56.981Z","type":"beforeunload","source":"client","sessionId":"sess-1778259116828-6gwo41"}
+{"ts":"2026-05-08T16:51:57.042Z","type":"pagehide","source":"client","sessionId":"sess-1778259116828-6gwo41"}
+{"ts":"2026-05-08T16:51:57.107Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117104-eq9ipb","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.121Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.176Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117104-eq9ipb"}
+{"ts":"2026-05-08T16:51:57.203Z","type":"pagehide","source":"client","sessionId":"sess-1778259117104-eq9ipb"}
+{"ts":"2026-05-08T16:51:57.203Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259117104-eq9ipb","state":"hidden"}
+{"ts":"2026-05-08T16:51:57.259Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117257-8lrjc7","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.270Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.280Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117257-8lrjc7"}
+{"ts":"2026-05-08T16:51:57.308Z","type":"pagehide","source":"client","sessionId":"sess-1778259117257-8lrjc7"}
+{"ts":"2026-05-08T16:51:57.395Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117378-ma044m","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.395Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.408Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259117378-ma044m","state":"hidden"}
+{"ts":"2026-05-08T16:51:57.408Z","type":"pagehide","source":"client","sessionId":"sess-1778259117378-ma044m"}
+{"ts":"2026-05-08T16:51:57.453Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117452-sx7dja","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.465Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.477Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117452-sx7dja"}
+{"ts":"2026-05-08T16:51:57.498Z","type":"pagehide","source":"client","sessionId":"sess-1778259117452-sx7dja"}
+{"ts":"2026-05-08T16:51:57.550Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117547-dt0xe1","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.561Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.588Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117547-dt0xe1"}
+{"ts":"2026-05-08T16:51:57.611Z","type":"pagehide","source":"client","sessionId":"sess-1778259117547-dt0xe1"}
+{"ts":"2026-05-08T16:51:57.662Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117660-cyjoxb","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.674Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.683Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117660-cyjoxb"}
+{"ts":"2026-05-08T16:51:57.707Z","type":"pagehide","source":"client","sessionId":"sess-1778259117660-cyjoxb"}
+{"ts":"2026-05-08T16:51:57.771Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117769-zualr1","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.783Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.788Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117769-zualr1"}
+{"ts":"2026-05-08T16:51:57.812Z","type":"pagehide","source":"client","sessionId":"sess-1778259117769-zualr1"}
+{"ts":"2026-05-08T16:51:57.857Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117855-6fg5co","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.869Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.878Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117855-6fg5co"}
+{"ts":"2026-05-08T16:51:57.904Z","type":"pagehide","source":"client","sessionId":"sess-1778259117855-6fg5co"}
+{"ts":"2026-05-08T16:51:57.954Z","type":"page_loaded","source":"client","sessionId":"sess-1778259117952-v3ioe9","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:57.967Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:57.977Z","type":"beforeunload","source":"client","sessionId":"sess-1778259117952-v3ioe9"}
+{"ts":"2026-05-08T16:51:57.999Z","type":"pagehide","source":"client","sessionId":"sess-1778259117952-v3ioe9"}
+{"ts":"2026-05-08T16:51:57.999Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259117952-v3ioe9","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.053Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118051-6g2w0a","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.064Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.090Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118051-6g2w0a"}
+{"ts":"2026-05-08T16:51:58.124Z","type":"pagehide","source":"client","sessionId":"sess-1778259118051-6g2w0a"}
+{"ts":"2026-05-08T16:51:58.124Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259118051-6g2w0a","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.164Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118162-zc45ia","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.175Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.183Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118162-zc45ia"}
+{"ts":"2026-05-08T16:51:58.209Z","type":"pagehide","source":"client","sessionId":"sess-1778259118162-zc45ia"}
+{"ts":"2026-05-08T16:51:58.209Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259118162-zc45ia","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.270Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118268-kbreqw","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.280Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.288Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118268-kbreqw"}
+{"ts":"2026-05-08T16:51:58.309Z","type":"pagehide","source":"client","sessionId":"sess-1778259118268-kbreqw"}
+{"ts":"2026-05-08T16:51:58.375Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118373-nzq2nw","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.386Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.386Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118373-nzq2nw"}
+{"ts":"2026-05-08T16:51:58.419Z","type":"pagehide","source":"client","sessionId":"sess-1778259118373-nzq2nw"}
+{"ts":"2026-05-08T16:51:58.469Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118467-9ryn2t","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.492Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.493Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118467-9ryn2t"}
+{"ts":"2026-05-08T16:51:58.492Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118467-9ryn2t"}
+{"ts":"2026-05-08T16:51:58.514Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259118467-9ryn2t","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.514Z","type":"pagehide","source":"client","sessionId":"sess-1778259118467-9ryn2t"}
+{"ts":"2026-05-08T16:51:58.566Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118564-c7t8rn","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.576Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.586Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118564-c7t8rn"}
+{"ts":"2026-05-08T16:51:58.607Z","type":"pagehide","source":"client","sessionId":"sess-1778259118564-c7t8rn"}
+{"ts":"2026-05-08T16:51:58.607Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259118564-c7t8rn","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.658Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118656-f9aq9g","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.668Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.694Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118656-f9aq9g"}
+{"ts":"2026-05-08T16:51:58.721Z","type":"pagehide","source":"client","sessionId":"sess-1778259118656-f9aq9g"}
+{"ts":"2026-05-08T16:51:58.796Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118790-bykjke","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.806Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.811Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259118790-bykjke","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.811Z","type":"pagehide","source":"client","sessionId":"sess-1778259118790-bykjke"}
+{"ts":"2026-05-08T16:51:58.857Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118855-ynz46p","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:58.869Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:58.897Z","type":"beforeunload","source":"client","sessionId":"sess-1778259118855-ynz46p"}
+{"ts":"2026-05-08T16:51:58.921Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259118855-ynz46p","state":"hidden"}
+{"ts":"2026-05-08T16:51:58.921Z","type":"pagehide","source":"client","sessionId":"sess-1778259118855-ynz46p"}
+{"ts":"2026-05-08T16:51:58.994Z","type":"page_loaded","source":"client","sessionId":"sess-1778259118985-q78qzo","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.004Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.008Z","type":"pagehide","source":"client","sessionId":"sess-1778259118985-q78qzo"}
+{"ts":"2026-05-08T16:51:59.055Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119052-8ztr78","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.066Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.096Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119052-8ztr78"}
+{"ts":"2026-05-08T16:51:59.121Z","type":"pagehide","source":"client","sessionId":"sess-1778259119052-8ztr78"}
+{"ts":"2026-05-08T16:51:59.199Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119192-leclia","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.209Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.214Z","type":"pagehide","source":"client","sessionId":"sess-1778259119192-leclia"}
+{"ts":"2026-05-08T16:51:59.260Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119258-huv1ts","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.276Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.298Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119258-huv1ts"}
+{"ts":"2026-05-08T16:51:59.319Z","type":"pagehide","source":"client","sessionId":"sess-1778259119258-huv1ts"}
+{"ts":"2026-05-08T16:51:59.372Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119370-j603rh","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.384Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.384Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119370-j603rh"}
+{"ts":"2026-05-08T16:51:59.416Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259119370-j603rh","state":"hidden"}
+{"ts":"2026-05-08T16:51:59.416Z","type":"pagehide","source":"client","sessionId":"sess-1778259119370-j603rh"}
+{"ts":"2026-05-08T16:51:59.489Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119483-0y1pq1","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.500Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.514Z","type":"pagehide","source":"client","sessionId":"sess-1778259119483-0y1pq1"}
+{"ts":"2026-05-08T16:51:59.567Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119565-x93ss6","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.578Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.586Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119565-x93ss6"}
+{"ts":"2026-05-08T16:51:59.607Z","type":"pagehide","source":"client","sessionId":"sess-1778259119565-x93ss6"}
+{"ts":"2026-05-08T16:51:59.660Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119659-4sl6h8","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.671Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.698Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119659-4sl6h8"}
+{"ts":"2026-05-08T16:51:59.721Z","type":"pagehide","source":"client","sessionId":"sess-1778259119659-4sl6h8"}
+{"ts":"2026-05-08T16:51:59.721Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259119659-4sl6h8","state":"hidden"}
+{"ts":"2026-05-08T16:51:59.774Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119772-sljodk","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.786Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119772-sljodk"}
+{"ts":"2026-05-08T16:51:59.786Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.820Z","type":"pagehide","source":"client","sessionId":"sess-1778259119772-sljodk"}
+{"ts":"2026-05-08T16:51:59.874Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119872-yxllav","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:51:59.886Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:51:59.895Z","type":"beforeunload","source":"client","sessionId":"sess-1778259119872-yxllav"}
+{"ts":"2026-05-08T16:51:59.921Z","type":"pagehide","source":"client","sessionId":"sess-1778259119872-yxllav"}
+{"ts":"2026-05-08T16:52:00.000Z","type":"page_loaded","source":"client","sessionId":"sess-1778259119991-o3t3yp","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:52:00.013Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:52:00.018Z","type":"pagehide","source":"client","sessionId":"sess-1778259119991-o3t3yp"}
+{"ts":"2026-05-08T16:52:16.263Z","type":"page_loaded","source":"client","sessionId":"sess-1778259136261-0etl15","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:16.297Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:16.398Z","type":"beforeunload","source":"client","sessionId":"sess-1778259136261-0etl15"}
+{"ts":"2026-05-08T16:52:16.426Z","type":"pagehide","source":"client","sessionId":"sess-1778259136261-0etl15"}
+{"ts":"2026-05-08T16:52:16.426Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259136261-0etl15","state":"hidden"}
+{"ts":"2026-05-08T16:52:16.515Z","type":"page_loaded","source":"client","sessionId":"sess-1778259136513-1vnjd3","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:16.526Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:16.601Z","type":"beforeunload","source":"client","sessionId":"sess-1778259136513-1vnjd3"}
+{"ts":"2026-05-08T16:52:16.625Z","type":"pagehide","source":"client","sessionId":"sess-1778259136513-1vnjd3"}
+{"ts":"2026-05-08T16:52:16.625Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259136513-1vnjd3","state":"hidden"}
+{"ts":"2026-05-08T16:52:16.699Z","type":"page_loaded","source":"client","sessionId":"sess-1778259136697-v5i0ly","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:16.714Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:16.714Z","type":"beforeunload","source":"client","sessionId":"sess-1778259136697-v5i0ly"}
+{"ts":"2026-05-08T16:52:16.739Z","type":"pagehide","source":"client","sessionId":"sess-1778259136697-v5i0ly"}
+{"ts":"2026-05-08T16:52:16.789Z","type":"page_loaded","source":"client","sessionId":"sess-1778259136788-6l7aeh","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:16.800Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:16.803Z","type":"beforeunload","source":"client","sessionId":"sess-1778259136788-6l7aeh"}
+{"ts":"2026-05-08T16:52:16.823Z","type":"pagehide","source":"client","sessionId":"sess-1778259136788-6l7aeh"}
+{"ts":"2026-05-08T16:52:16.881Z","type":"page_loaded","source":"client","sessionId":"sess-1778259136879-a3h0gt","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:16.892Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:16.918Z","type":"beforeunload","source":"client","sessionId":"sess-1778259136879-a3h0gt"}
+{"ts":"2026-05-08T16:52:16.938Z","type":"pagehide","source":"client","sessionId":"sess-1778259136879-a3h0gt"}
+{"ts":"2026-05-08T16:52:17.012Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137005-cegb5u","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.020Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.023Z","type":"pagehide","source":"client","sessionId":"sess-1778259137005-cegb5u"}
+{"ts":"2026-05-08T16:52:17.023Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259137005-cegb5u","state":"hidden"}
+{"ts":"2026-05-08T16:52:17.076Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137075-7qfopu","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.088Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.112Z","type":"beforeunload","source":"client","sessionId":"sess-1778259137075-7qfopu"}
+{"ts":"2026-05-08T16:52:17.134Z","type":"pagehide","source":"client","sessionId":"sess-1778259137075-7qfopu"}
+{"ts":"2026-05-08T16:52:17.191Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137189-jmfn2v","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.202Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.206Z","type":"beforeunload","source":"client","sessionId":"sess-1778259137189-jmfn2v"}
+{"ts":"2026-05-08T16:52:17.228Z","type":"pagehide","source":"client","sessionId":"sess-1778259137189-jmfn2v"}
+{"ts":"2026-05-08T16:52:17.228Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259137189-jmfn2v","state":"hidden"}
+{"ts":"2026-05-08T16:52:17.287Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137285-1tyiwj","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.297Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.303Z","type":"beforeunload","source":"client","sessionId":"sess-1778259137285-1tyiwj"}
+{"ts":"2026-05-08T16:52:17.323Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259137285-1tyiwj","state":"hidden"}
+{"ts":"2026-05-08T16:52:17.323Z","type":"pagehide","source":"client","sessionId":"sess-1778259137285-1tyiwj"}
+{"ts":"2026-05-08T16:52:17.383Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137382-55aa39","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.396Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.415Z","type":"beforeunload","source":"client","sessionId":"sess-1778259137382-55aa39"}
+{"ts":"2026-05-08T16:52:17.435Z","type":"pagehide","source":"client","sessionId":"sess-1778259137382-55aa39"}
+{"ts":"2026-05-08T16:52:17.504Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137502-8kh6rn","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.514Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.519Z","type":"beforeunload","source":"client","sessionId":"sess-1778259137502-8kh6rn"}
+{"ts":"2026-05-08T16:52:17.538Z","type":"pagehide","source":"client","sessionId":"sess-1778259137502-8kh6rn"}
+{"ts":"2026-05-08T16:52:17.591Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137589-mkmaa5","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.604Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:17.607Z","type":"beforeunload","source":"client","sessionId":"sess-1778259137589-mkmaa5"}
+{"ts":"2026-05-08T16:52:17.628Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259137589-mkmaa5","state":"hidden"}
+{"ts":"2026-05-08T16:52:17.628Z","type":"pagehide","source":"client","sessionId":"sess-1778259137589-mkmaa5"}
+{"ts":"2026-05-08T16:52:17.750Z","type":"page_loaded","source":"client","sessionId":"sess-1778259137731-txbpeq","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:17.750Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259136251-ygm1ds","enabled":true}
+{"ts":"2026-05-08T16:52:44.753Z","type":"page_loaded","source":"client","sessionId":"sess-1778259164750-7tngob","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:44.785Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:44.913Z","type":"beforeunload","source":"client","sessionId":"sess-1778259164750-7tngob"}
+{"ts":"2026-05-08T16:52:44.947Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259164750-7tngob","state":"hidden"}
+{"ts":"2026-05-08T16:52:44.947Z","type":"pagehide","source":"client","sessionId":"sess-1778259164750-7tngob"}
+{"ts":"2026-05-08T16:52:45.032Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165031-p3ykag","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.046Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.117Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165031-p3ykag"}
+{"ts":"2026-05-08T16:52:45.141Z","type":"pagehide","source":"client","sessionId":"sess-1778259165031-p3ykag"}
+{"ts":"2026-05-08T16:52:45.212Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165210-n7awjo","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.224Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.228Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165210-n7awjo"}
+{"ts":"2026-05-08T16:52:45.250Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259165210-n7awjo","state":"hidden"}
+{"ts":"2026-05-08T16:52:45.250Z","type":"pagehide","source":"client","sessionId":"sess-1778259165210-n7awjo"}
+{"ts":"2026-05-08T16:52:45.303Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165301-wewvim","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.313Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.318Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165301-wewvim"}
+{"ts":"2026-05-08T16:52:45.339Z","type":"pagehide","source":"client","sessionId":"sess-1778259165301-wewvim"}
+{"ts":"2026-05-08T16:52:45.395Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165393-99adsi","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.407Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.429Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165393-99adsi"}
+{"ts":"2026-05-08T16:52:45.448Z","type":"pagehide","source":"client","sessionId":"sess-1778259165393-99adsi"}
+{"ts":"2026-05-08T16:52:45.513Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165511-48siko","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.525Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.525Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165511-48siko"}
+{"ts":"2026-05-08T16:52:45.546Z","type":"pagehide","source":"client","sessionId":"sess-1778259165511-48siko"}
+{"ts":"2026-05-08T16:52:45.597Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165596-dr9p2m","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.610Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.629Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165596-dr9p2m"}
+{"ts":"2026-05-08T16:52:45.654Z","type":"pagehide","source":"client","sessionId":"sess-1778259165596-dr9p2m"}
+{"ts":"2026-05-08T16:52:45.729Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165719-y35jy0","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.738Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.741Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259165719-y35jy0","state":"hidden"}
+{"ts":"2026-05-08T16:52:45.741Z","type":"pagehide","source":"client","sessionId":"sess-1778259165719-y35jy0"}
+{"ts":"2026-05-08T16:52:45.792Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165791-m26u34","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.805Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.828Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165791-m26u34"}
+{"ts":"2026-05-08T16:52:45.848Z","type":"pagehide","source":"client","sessionId":"sess-1778259165791-m26u34"}
+{"ts":"2026-05-08T16:52:45.848Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259165791-m26u34","state":"hidden"}
+{"ts":"2026-05-08T16:52:45.904Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165902-cmwrcf","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:45.917Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:45.921Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165902-cmwrcf"}
+{"ts":"2026-05-08T16:52:45.939Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259165902-cmwrcf","state":"hidden"}
+{"ts":"2026-05-08T16:52:45.939Z","type":"pagehide","source":"client","sessionId":"sess-1778259165902-cmwrcf"}
+{"ts":"2026-05-08T16:52:46.000Z","type":"page_loaded","source":"client","sessionId":"sess-1778259165998-heta70","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.011Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.033Z","type":"beforeunload","source":"client","sessionId":"sess-1778259165998-heta70"}
+{"ts":"2026-05-08T16:52:46.054Z","type":"pagehide","source":"client","sessionId":"sess-1778259165998-heta70"}
+{"ts":"2026-05-08T16:52:46.054Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259165998-heta70","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.121Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166119-lpfnyl","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.134Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166119-lpfnyl"}
+{"ts":"2026-05-08T16:52:46.134Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.158Z","type":"pagehide","source":"client","sessionId":"sess-1778259166119-lpfnyl"}
+{"ts":"2026-05-08T16:52:46.158Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259166119-lpfnyl","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.211Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166209-dj50wp","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.221Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.227Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166209-dj50wp"}
+{"ts":"2026-05-08T16:52:46.245Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259166209-dj50wp","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.245Z","type":"pagehide","source":"client","sessionId":"sess-1778259166209-dj50wp"}
+{"ts":"2026-05-08T16:52:46.303Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166302-kgd8is","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.314Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.323Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166302-kgd8is"}
+{"ts":"2026-05-08T16:52:46.343Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259166302-kgd8is","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.343Z","type":"pagehide","source":"client","sessionId":"sess-1778259166302-kgd8is"}
+{"ts":"2026-05-08T16:52:46.400Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166398-1knawh","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.411Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.434Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166398-1knawh"}
+{"ts":"2026-05-08T16:52:46.456Z","type":"pagehide","source":"client","sessionId":"sess-1778259166398-1knawh"}
+{"ts":"2026-05-08T16:52:46.456Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259166398-1knawh","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.521Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166519-kieacx","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.533Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166519-kieacx"}
+{"ts":"2026-05-08T16:52:46.533Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.556Z","type":"pagehide","source":"client","sessionId":"sess-1778259166519-kieacx"}
+{"ts":"2026-05-08T16:52:46.556Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259166519-kieacx","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.608Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166606-sokkv9","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.620Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.627Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166606-sokkv9"}
+{"ts":"2026-05-08T16:52:46.648Z","type":"pagehide","source":"client","sessionId":"sess-1778259166606-sokkv9"}
+{"ts":"2026-05-08T16:52:46.648Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259166606-sokkv9","state":"hidden"}
+{"ts":"2026-05-08T16:52:46.711Z","type":"page_loaded","source":"client","sessionId":"sess-1778259166709-xw4jyo","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"}
+{"ts":"2026-05-08T16:52:46.722Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259164741-wgi0fn","enabled":true}
+{"ts":"2026-05-08T16:52:46.728Z","type":"beforeunload","source":"client","sessionId":"sess-1778259166709-xw4jyo"}
+{"ts":"2026-05-08T16:52:46.754Z","type":"pagehide","source":"client","sessionId":"sess-1778259166709-xw4jyo"}
+{"ts":"2026-05-08T16:59:23.954Z","type":"page_loaded","source":"client","sessionId":"sess-1778259563951-j2iyt0","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:23.989Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.206Z","type":"beforeunload","source":"client","sessionId":"sess-1778259563951-j2iyt0"}
+{"ts":"2026-05-08T16:59:24.252Z","type":"pagehide","source":"client","sessionId":"sess-1778259563951-j2iyt0"}
+{"ts":"2026-05-08T16:59:24.320Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564317-ldmq1h","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:24.335Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.394Z","type":"beforeunload","source":"client","sessionId":"sess-1778259564317-ldmq1h"}
+{"ts":"2026-05-08T16:59:24.426Z","type":"pagehide","source":"client","sessionId":"sess-1778259564317-ldmq1h"}
+{"ts":"2026-05-08T16:59:24.517Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564507-4r9eda","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:24.530Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.534Z","type":"pagehide","source":"client","sessionId":"sess-1778259564507-4r9eda"}
+{"ts":"2026-05-08T16:59:24.606Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564593-atmouw","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:24.617Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.620Z","type":"pagehide","source":"client","sessionId":"sess-1778259564593-atmouw"}
+{"ts":"2026-05-08T16:59:24.664Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564663-gi6hak","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:24.674Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.702Z","type":"beforeunload","source":"client","sessionId":"sess-1778259564663-gi6hak"}
+{"ts":"2026-05-08T16:59:24.728Z","type":"pagehide","source":"client","sessionId":"sess-1778259564663-gi6hak"}
+{"ts":"2026-05-08T16:59:24.804Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564793-iakyjf","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:24.818Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.821Z","type":"pagehide","source":"client","sessionId":"sess-1778259564793-iakyjf"}
+{"ts":"2026-05-08T16:59:24.871Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564868-2f6x1c","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:24.882Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:24.892Z","type":"beforeunload","source":"client","sessionId":"sess-1778259564868-2f6x1c"}
+{"ts":"2026-05-08T16:59:25.014Z","type":"page_loaded","source":"client","sessionId":"sess-1778259564999-deulx8","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.014Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.030Z","type":"pagehide","source":"client","sessionId":"sess-1778259564999-deulx8"}
+{"ts":"2026-05-08T16:59:25.116Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565106-agj63a","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.133Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.135Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259565106-agj63a","state":"hidden"}
+{"ts":"2026-05-08T16:59:25.135Z","type":"pagehide","source":"client","sessionId":"sess-1778259565106-agj63a"}
+{"ts":"2026-05-08T16:59:25.170Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565167-kxxf1w","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.182Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.195Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565167-kxxf1w"}
+{"ts":"2026-05-08T16:59:25.222Z","type":"pagehide","source":"client","sessionId":"sess-1778259565167-kxxf1w"}
+{"ts":"2026-05-08T16:59:25.222Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259565167-kxxf1w","state":"hidden"}
+{"ts":"2026-05-08T16:59:25.274Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565272-b2boov","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.287Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.292Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565272-b2boov"}
+{"ts":"2026-05-08T16:59:25.318Z","type":"pagehide","source":"client","sessionId":"sess-1778259565272-b2boov"}
+{"ts":"2026-05-08T16:59:25.372Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565370-9b5nkg","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.382Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.395Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565370-9b5nkg"}
+{"ts":"2026-05-08T16:59:25.417Z","type":"pagehide","source":"client","sessionId":"sess-1778259565370-9b5nkg"}
+{"ts":"2026-05-08T16:59:25.478Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565476-q363b6","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.490Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.504Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565476-q363b6"}
+{"ts":"2026-05-08T16:59:25.532Z","type":"pagehide","source":"client","sessionId":"sess-1778259565476-q363b6"}
+{"ts":"2026-05-08T16:59:25.601Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565591-lkyegi","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.614Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.633Z","type":"pagehide","source":"client","sessionId":"sess-1778259565591-lkyegi"}
+{"ts":"2026-05-08T16:59:25.675Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565673-uwjtn8","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.688Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.696Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565673-uwjtn8"}
+{"ts":"2026-05-08T16:59:25.718Z","type":"pagehide","source":"client","sessionId":"sess-1778259565673-uwjtn8"}
+{"ts":"2026-05-08T16:59:25.771Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565769-jlasnv","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.781Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.809Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565769-jlasnv"}
+{"ts":"2026-05-08T16:59:25.830Z","type":"pagehide","source":"client","sessionId":"sess-1778259565769-jlasnv"}
+{"ts":"2026-05-08T16:59:25.829Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259565769-jlasnv","state":"hidden"}
+{"ts":"2026-05-08T16:59:25.890Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565888-cpflws","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:25.901Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:25.909Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565888-cpflws"}
+{"ts":"2026-05-08T16:59:25.936Z","type":"pagehide","source":"client","sessionId":"sess-1778259565888-cpflws"}
+{"ts":"2026-05-08T16:59:25.936Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259565888-cpflws","state":"hidden"}
+{"ts":"2026-05-08T16:59:25.996Z","type":"page_loaded","source":"client","sessionId":"sess-1778259565994-74a1ot","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.007Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.095Z","type":"beforeunload","source":"client","sessionId":"sess-1778259565994-74a1ot"}
+{"ts":"2026-05-08T16:59:26.123Z","type":"pagehide","source":"client","sessionId":"sess-1778259565994-74a1ot"}
+{"ts":"2026-05-08T16:59:26.179Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566176-chhdo8","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.190Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.198Z","type":"beforeunload","source":"client","sessionId":"sess-1778259566176-chhdo8"}
+{"ts":"2026-05-08T16:59:26.223Z","type":"pagehide","source":"client","sessionId":"sess-1778259566176-chhdo8"}
+{"ts":"2026-05-08T16:59:26.278Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566276-pot1qh","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.290Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.304Z","type":"beforeunload","source":"client","sessionId":"sess-1778259566276-pot1qh"}
+{"ts":"2026-05-08T16:59:26.328Z","type":"pagehide","source":"client","sessionId":"sess-1778259566276-pot1qh"}
+{"ts":"2026-05-08T16:59:26.407Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566397-pk73q0","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.419Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.424Z","type":"pagehide","source":"client","sessionId":"sess-1778259566397-pk73q0"}
+{"ts":"2026-05-08T16:59:26.481Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566468-mf0p3s","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.482Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.509Z","type":"beforeunload","source":"client","sessionId":"sess-1778259566468-mf0p3s"}
+{"ts":"2026-05-08T16:59:26.535Z","type":"pagehide","source":"client","sessionId":"sess-1778259566468-mf0p3s"}
+{"ts":"2026-05-08T16:59:26.615Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566607-co3wdt","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.625Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.629Z","type":"pagehide","source":"client","sessionId":"sess-1778259566607-co3wdt"}
+{"ts":"2026-05-08T16:59:26.673Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566671-u8auet","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.684Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.710Z","type":"beforeunload","source":"client","sessionId":"sess-1778259566671-u8auet"}
+{"ts":"2026-05-08T16:59:26.735Z","type":"pagehide","source":"client","sessionId":"sess-1778259566671-u8auet"}
+{"ts":"2026-05-08T16:59:26.814Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566807-90xif2","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.826Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.831Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259566807-90xif2","state":"hidden"}
+{"ts":"2026-05-08T16:59:26.831Z","type":"pagehide","source":"client","sessionId":"sess-1778259566807-90xif2"}
+{"ts":"2026-05-08T16:59:26.878Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566876-skjsev","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.888Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:26.898Z","type":"beforeunload","source":"client","sessionId":"sess-1778259566876-skjsev"}
+{"ts":"2026-05-08T16:59:26.923Z","type":"pagehide","source":"client","sessionId":"sess-1778259566876-skjsev"}
+{"ts":"2026-05-08T16:59:26.923Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259566876-skjsev","state":"hidden"}
+{"ts":"2026-05-08T16:59:26.972Z","type":"page_loaded","source":"client","sessionId":"sess-1778259566970-4e2r0f","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:26.989Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.010Z","type":"beforeunload","source":"client","sessionId":"sess-1778259566970-4e2r0f"}
+{"ts":"2026-05-08T16:59:27.034Z","type":"pagehide","source":"client","sessionId":"sess-1778259566970-4e2r0f"}
+{"ts":"2026-05-08T16:59:27.108Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567099-0w4usj","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.119Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.123Z","type":"pagehide","source":"client","sessionId":"sess-1778259567099-0w4usj"}
+{"ts":"2026-05-08T16:59:27.169Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567167-b5fnm1","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.181Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.209Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567167-b5fnm1"}
+{"ts":"2026-05-08T16:59:27.232Z","type":"pagehide","source":"client","sessionId":"sess-1778259567167-b5fnm1"}
+{"ts":"2026-05-08T16:59:27.286Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567284-wdxrjc","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.298Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.306Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567284-wdxrjc"}
+{"ts":"2026-05-08T16:59:27.335Z","type":"pagehide","source":"client","sessionId":"sess-1778259567284-wdxrjc"}
+{"ts":"2026-05-08T16:59:27.412Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567404-u66v7h","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.422Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.427Z","type":"pagehide","source":"client","sessionId":"sess-1778259567404-u66v7h"}
+{"ts":"2026-05-08T16:59:27.472Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567470-d701tp","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.483Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.511Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567470-d701tp"}
+{"ts":"2026-05-08T16:59:27.537Z","type":"pagehide","source":"client","sessionId":"sess-1778259567470-d701tp"}
+{"ts":"2026-05-08T16:59:27.537Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259567470-d701tp","state":"hidden"}
+{"ts":"2026-05-08T16:59:27.598Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567593-25x9ob","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.609Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.622Z","type":"pagehide","source":"client","sessionId":"sess-1778259567593-25x9ob"}
+{"ts":"2026-05-08T16:59:27.666Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567664-7qvtdp","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.678Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.710Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567664-7qvtdp"}
+{"ts":"2026-05-08T16:59:27.732Z","type":"pagehide","source":"client","sessionId":"sess-1778259567664-7qvtdp"}
+{"ts":"2026-05-08T16:59:27.783Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567781-p3fdgn","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.795Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.804Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567781-p3fdgn"}
+{"ts":"2026-05-08T16:59:27.885Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567883-6m74t9","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.896Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567883-6m74t9"}
+{"ts":"2026-05-08T16:59:27.896Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:27.926Z","type":"pagehide","source":"client","sessionId":"sess-1778259567883-6m74t9"}
+{"ts":"2026-05-08T16:59:27.977Z","type":"page_loaded","source":"client","sessionId":"sess-1778259567975-k3xfzg","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:27.992Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:28.010Z","type":"beforeunload","source":"client","sessionId":"sess-1778259567975-k3xfzg"}
+{"ts":"2026-05-08T16:59:28.084Z","type":"page_loaded","source":"client","sessionId":"sess-1778259568082-vwmwr1","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:28.095Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:28.103Z","type":"beforeunload","source":"client","sessionId":"sess-1778259568082-vwmwr1"}
+{"ts":"2026-05-08T16:59:28.126Z","type":"pagehide","source":"client","sessionId":"sess-1778259568082-vwmwr1"}
+{"ts":"2026-05-08T16:59:28.175Z","type":"page_loaded","source":"client","sessionId":"sess-1778259568173-vt461h","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T16:59:28.187Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259116819-1w3cy5","enabled":true}
+{"ts":"2026-05-08T16:59:28.211Z","type":"beforeunload","source":"client","sessionId":"sess-1778259568173-vt461h"}
+{"ts":"2026-05-08T16:59:28.248Z","type":"beforeunload","source":"client","sessionId":"sess-1778259568173-vt461h"}
+{"ts":"2026-05-08T16:59:28.253Z","type":"pagehide","source":"client","sessionId":"sess-1778259568173-vt461h"}
+{"ts":"2026-05-08T16:59:28.253Z","type":"visibilitychange","source":"client","sessionId":"sess-1778259568173-vt461h","state":"hidden"}
+{"ts":"2026-05-08T17:00:35.413Z","type":"page_loaded","source":"client","sessionId":"sess-1778259635401-ccaswa","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:35.437Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259635396-gmxq39","enabled":true}
+{"ts":"2026-05-08T17:00:35.685Z","type":"page_loaded","source":"client","sessionId":"sess-1778259635682-m1vavz","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:35.700Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259635672-7v95lm","enabled":true}
+{"ts":"2026-05-08T17:00:35.800Z","type":"page_loaded","source":"client","sessionId":"sess-1778259635798-vqujy7","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:35.813Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259635790-jxc98n","enabled":true}
+{"ts":"2026-05-08T17:00:35.895Z","type":"page_loaded","source":"client","sessionId":"sess-1778259635894-qkzmkp","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:35.907Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259635884-riam7t","enabled":true}
+{"ts":"2026-05-08T17:00:36.042Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636030-cplwc5","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.045Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636010-2rkwn1","enabled":true}
+{"ts":"2026-05-08T17:00:36.089Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636087-h60l91","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.101Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636076-fgvxld","enabled":true}
+{"ts":"2026-05-08T17:00:36.200Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636198-4m177a","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.212Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636190-ecxohx","enabled":true}
+{"ts":"2026-05-08T17:00:36.297Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636295-lpziui","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.308Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636285-ywpj5n","enabled":true}
+{"ts":"2026-05-08T17:00:36.399Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636397-jlpawd","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.409Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636387-r53brs","enabled":true}
+{"ts":"2026-05-08T17:00:36.526Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636516-b9exn7","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.538Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636504-swxm1f","enabled":true}
+{"ts":"2026-05-08T17:00:36.596Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636594-o3uixi","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.608Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636580-t0d9m3","enabled":true}
+{"ts":"2026-05-08T17:00:36.711Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636706-p0iax0","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.719Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636690-gdtg51","enabled":true}
+{"ts":"2026-05-08T17:00:36.804Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636802-kezez2","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.815Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636792-ihrxob","enabled":true}
+{"ts":"2026-05-08T17:00:36.892Z","type":"page_loaded","source":"client","sessionId":"sess-1778259636890-spxr65","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:36.903Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259636885-w4dzg1","enabled":true}
+{"ts":"2026-05-08T17:00:37.032Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637025-mwhpwg","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.043Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637010-9dz7ec","enabled":true}
+{"ts":"2026-05-08T17:00:37.097Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637095-xrw1zd","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.109Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637081-s73n7t","enabled":true}
+{"ts":"2026-05-08T17:00:37.202Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637200-ug849a","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.213Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637195-45axz8","enabled":true}
+{"ts":"2026-05-08T17:00:37.301Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637299-wq0bnn","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.312Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637288-x0b2j5","enabled":true}
+{"ts":"2026-05-08T17:00:37.394Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637392-1tq485","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.405Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637384-qsri2e","enabled":true}
+{"ts":"2026-05-08T17:00:37.535Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637526-ywbntd","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.545Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637508-k2b1r9","enabled":true}
+{"ts":"2026-05-08T17:00:37.594Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637592-4x8qid","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.605Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637581-j1xcpk","enabled":true}
+{"ts":"2026-05-08T17:00:37.708Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637706-23l5kj","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.720Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637696-upxcbj","enabled":true}
+{"ts":"2026-05-08T17:00:37.833Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637821-27xm34","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.843Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637807-b3l1bv","enabled":true}
+{"ts":"2026-05-08T17:00:37.893Z","type":"page_loaded","source":"client","sessionId":"sess-1778259637890-79m9tk","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:37.904Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259637880-4exx4p","enabled":true}
+{"ts":"2026-05-08T17:00:38.035Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638027-7ptw9e","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.046Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638010-9p2dba","enabled":true}
+{"ts":"2026-05-08T17:00:38.100Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638098-418t4r","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.111Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638087-uksb54","enabled":true}
+{"ts":"2026-05-08T17:00:38.203Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638200-2y02ci","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.230Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638184-oi8vq7","enabled":true}
+{"ts":"2026-05-08T17:00:38.290Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638288-j6m8vc","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.300Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638277-4l2u6r","enabled":true}
+{"ts":"2026-05-08T17:00:38.399Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638397-dy74uu","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.410Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638389-in605i","enabled":true}
+{"ts":"2026-05-08T17:00:38.521Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638517-ogfyy5","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.541Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638506-8blc5q","enabled":true}
+{"ts":"2026-05-08T17:00:38.589Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638587-j1yvu4","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.600Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638577-ur3r6o","enabled":true}
+{"ts":"2026-05-08T17:00:38.701Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638699-fkk9op","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.712Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638690-pswa2n","enabled":true}
+{"ts":"2026-05-08T17:00:38.810Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638808-4yhp0t","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.822Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638798-hv8fg4","enabled":true}
+{"ts":"2026-05-08T17:00:38.904Z","type":"page_loaded","source":"client","sessionId":"sess-1778259638903-rw1rgq","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:38.916Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638895-1qlrha","enabled":true}
+{"ts":"2026-05-08T17:00:39.009Z","type":"page_loaded","source":"client","sessionId":"sess-1778259639007-4747bz","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:39.021Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259638997-6t90c9","enabled":true}
+{"ts":"2026-05-08T17:00:39.109Z","type":"page_loaded","source":"client","sessionId":"sess-1778259639107-zrfzw1","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:39.120Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259639099-zdhrxs","enabled":true}
+{"ts":"2026-05-08T17:00:39.205Z","type":"page_loaded","source":"client","sessionId":"sess-1778259639203-dqxgt9","href":"http://127.0.0.1:4173/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"ts":"2026-05-08T17:00:39.218Z","type":"availability_checked","source":"bluetooth","sessionId":"sess-1778259639191-yqcd6p","enabled":true}
