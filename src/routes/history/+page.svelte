@@ -50,11 +50,11 @@ const goalPct = (session: ReturnType<typeof history.weekSessions>[0]) => {
 	<!-- Session list -->
 	<div class="card">
 		<div class="section-label">All sessions</div>
-		{#if history.sessions.current.length === 0}
+		{#if history.sessions.length === 0}
 			<div class="empty">No sessions yet. Start tracking to record your hydration.</div>
 		{:else}
 			<div class="session-list">
-				{#each [...history.sessions.current].reverse() as session}
+				{#each [...history.sessions].reverse() as session}
 					{@const pct = goalPct(session)}
 					<div class="session-item">
 						<div class="session-left">

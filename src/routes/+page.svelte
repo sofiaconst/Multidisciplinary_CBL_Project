@@ -40,13 +40,13 @@ const tare = async () => {
 <div class="page">
 	<!-- Greeting bar -->
 	<div class="greeting-bar">
-		<div class="avatar">{auth.user.current?.avatarInitials ?? '?'}</div>
+		<div class="avatar">{auth.user?.avatarInitials ?? '?'}</div>
 		<div class="greeting-text">
 			<div class="greeting-label">{auth.greeting}</div>
-			<div class="greeting-name">{auth.user.current?.name ?? ''}</div>
+			<div class="greeting-name">{auth.user?.name ?? ''}</div>
 		</div>
 		<div class="badges">
-			<div class="streak-badge">{auth.streakDays.current}d streak</div>
+			<div class="streak-badge">{auth.streakDays}d streak</div>
 			<div class="ble-badge" class:ble-connected={scale.bt.connected}>
 				{scale.bt.connected ? 'Connected' : 'Offline'}
 			</div>

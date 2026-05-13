@@ -45,7 +45,7 @@ const stopLedPreview = async () => {
 }
 
 const signOut = async () => {
-	auth.logout()
+	await auth.logout()
 	await goto('/login')
 }
 </script>

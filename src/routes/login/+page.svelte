@@ -7,15 +7,23 @@ const auth = Auth.getInstance()
 let email = $state('')
 let password = $state('')
 let error = $state('')
+let loading = $state(false)
 
-const handleSubmit = (e: Event) => {
+const handleSubmit = async (e: Event) => {
 	e.preventDefault()
 	error = ''
-	const ok = auth.login(email, password)
-	if (ok) {
-		void goto('/')
-	} else {
-		error = 'Please enter your email and password.'
+	loading = true
+	try {
+		await auth.login(email, password)
+		await goto('/')
+	} catch (err: unknown) {
+		const msg = (err as Error).message ?? ''
+		if (msg.includes('invalid-email')) error = 'Invalid email address.'
+		else if (msg.includes('weak-password')) error = 'Password must be at least 6 characters.'
+		else if (msg.includes('too-many-requests')) error = 'Too many attempts. Try again later.'
+		else error = msg || 'Sign in failed. Check your email and password.'
+	} finally {
+		loading = false
 	}
 }
 </script>
@@ -62,7 +70,9 @@ const handleSubmit = (e: Event) => {
 				<div class="error-msg">{error}</div>
 			{/if}
 
-			<button type="submit" class="signin-btn">Sign in</button>
+			<button type="submit" class="signin-btn" disabled={loading}>
+				{loading ? 'Signing in…' : 'Sign in'}
+			</button>
 		</form>
 	</div>
 </div>

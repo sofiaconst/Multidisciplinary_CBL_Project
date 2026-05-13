@@ -54,7 +54,7 @@ if (browser) {
 }
 
 $effect(() => {
-	if (!auth.isLoggedIn && page.url.pathname !== '/login') {
+	if (!auth.loading && !auth.isLoggedIn && page.url.pathname !== '/login') {
 		void goto('/login')
 	}
 })
@@ -62,7 +62,11 @@ $effect(() => {
 const isLoginPage = $derived(page.url.pathname === '/login')
 </script>
 
-{#if isLoginPage}
+{#if auth.loading && !isLoginPage}
+	<div class="splash">
+		<div class="splash-dot"></div>
+	</div>
+{:else if isLoginPage}
 	{@render children()}
 {:else}
 	<div class="app-shell">
@@ -85,5 +89,26 @@ const isLoginPage = $derived(page.url.pathname === '/login')
 	flex: 1;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
+}
+
+.splash {
+	height: 100dvh;
+	background: var(--warm-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.splash-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--teal-primary);
+	animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.4; transform: scale(0.8); }
 }
 </style>

@@ -15,10 +15,10 @@ const scale = Scale.getInstance()
 
 	<!-- Avatar + user info -->
 	<div class="card identity-card">
-		<div class="avatar-large">{auth.user.current?.avatarInitials ?? '?'}</div>
-		<div class="identity-name">{auth.user.current?.name ?? '—'}</div>
-		<div class="identity-email">{auth.user.current?.email ?? '—'}</div>
-		<div class="streak-pill">{auth.streakDays.current} day streak</div>
+		<div class="avatar-large">{auth.user?.avatarInitials ?? '?'}</div>
+		<div class="identity-name">{auth.user?.name ?? '—'}</div>
+		<div class="identity-email">{auth.user?.email ?? '—'}</div>
+		<div class="streak-pill">{auth.streakDays} day streak</div>
 	</div>
 
 	<!-- Stats -->
