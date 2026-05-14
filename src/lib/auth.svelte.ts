@@ -5,6 +5,7 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	signOut as firebaseSignOut,
+	sendPasswordResetEmail,
 	onAuthStateChanged,
 	type User as FirebaseUser,
 } from 'firebase/auth'
@@ -21,6 +22,7 @@ export interface UserProfile {
 export class Auth {
 	private static instance: Auth
 	private _uid: string | null = null
+	private _firebaseUser = $state<FirebaseUser | null>(null)
 
 	user = $state<UserProfile | null>(null)
 	loading = $state(true)
@@ -36,6 +38,8 @@ export class Auth {
 			}
 
 			onAuthStateChanged(firebaseAuth, async (fbUser) => {
+				// Set _firebaseUser immediately so isLoggedIn is true before profile loads
+				this._firebaseUser = fbUser
 				this._uid = fbUser?.uid ?? null
 				if (fbUser) {
 					await this._loadOrCreateProfile(fbUser)
@@ -58,7 +62,7 @@ export class Auth {
 	}
 
 	get isLoggedIn(): boolean {
-		return this.user !== null
+		return this._firebaseUser !== null
 	}
 
 	get greeting(): string {
@@ -73,15 +77,20 @@ export class Auth {
 	}
 
 	async login(email: string, password: string): Promise<void> {
+		// Set loading so the auth guard waits while onAuthStateChanged fires
+		this.loading = true
 		try {
 			await signInWithEmailAndPassword(firebaseAuth, email, password)
+			// onAuthStateChanged will set loading = false once profile is loaded
 		} catch (signInErr: unknown) {
 			const code = (signInErr as { code?: string }).code
 			if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
 				// New user — create account
 				try {
 					await createUserWithEmailAndPassword(firebaseAuth, email, password)
+					// onAuthStateChanged will fire and finish loading
 				} catch (createErr: unknown) {
+					this.loading = false
 					const createCode = (createErr as { code?: string }).code
 					if (createCode === 'auth/email-already-in-use') {
 						throw new Error('Incorrect email or password.')
@@ -89,6 +98,7 @@ export class Auth {
 					throw createErr
 				}
 			} else {
+				this.loading = false
 				throw signInErr
 			}
 		}
@@ -97,6 +107,10 @@ export class Auth {
 	async logout(): Promise<void> {
 		await firebaseSignOut(firebaseAuth)
 		this._cache.current = null
+	}
+
+	async sendPasswordReset(email: string): Promise<void> {
+		await sendPasswordResetEmail(firebaseAuth, email)
 	}
 
 	private async _loadOrCreateProfile(fbUser: FirebaseUser): Promise<void> {

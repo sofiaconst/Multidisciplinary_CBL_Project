@@ -7,11 +7,14 @@ const auth = Auth.getInstance()
 let email = $state('')
 let password = $state('')
 let error = $state('')
+let success = $state('')
 let loading = $state(false)
+let showForgot = $state(false)
 
 const handleSubmit = async (e: Event) => {
 	e.preventDefault()
 	error = ''
+	success = ''
 	loading = true
 	try {
 		await auth.login(email, password)
@@ -22,6 +25,28 @@ const handleSubmit = async (e: Event) => {
 		else if (msg.includes('weak-password')) error = 'Password must be at least 6 characters.'
 		else if (msg.includes('too-many-requests')) error = 'Too many attempts. Try again later.'
 		else error = msg || 'Sign in failed. Check your email and password.'
+	} finally {
+		loading = false
+	}
+}
+
+const handleForgotPassword = async () => {
+	error = ''
+	success = ''
+	if (!email) {
+		error = 'Enter your email address above first.'
+		return
+	}
+	loading = true
+	try {
+		await auth.sendPasswordReset(email)
+		success = 'Password reset email sent. Check your inbox.'
+		showForgot = false
+	} catch (err: unknown) {
+		const msg = (err as Error).message ?? ''
+		if (msg.includes('user-not-found')) error = 'No account found with that email.'
+		else if (msg.includes('invalid-email')) error = 'Invalid email address.'
+		else error = 'Could not send reset email. Try again.'
 	} finally {
 		loading = false
 	}
@@ -38,7 +63,7 @@ const handleSubmit = async (e: Event) => {
 				</svg>
 			</div>
 			<h1>Hydration Scale</h1>
-			<p>Track your hydration with your smart scale</p>
+			<p>Sign in or create a new account</p>
 		</div>
 
 		<form onsubmit={handleSubmit}>
@@ -54,25 +79,43 @@ const handleSubmit = async (e: Event) => {
 				/>
 			</div>
 
-			<div class="field">
-				<label for="password">Password</label>
-				<input
-					id="password"
-					type="password"
-					bind:value={password}
-					placeholder="Enter password"
-					autocomplete="current-password"
-					required
-				/>
-			</div>
+			{#if !showForgot}
+				<div class="field">
+					<label for="password">Password</label>
+					<input
+						id="password"
+						type="password"
+						bind:value={password}
+						placeholder="Enter password"
+						autocomplete="current-password"
+						required
+					/>
+				</div>
+			{/if}
 
 			{#if error}
 				<div class="error-msg">{error}</div>
 			{/if}
 
-			<button type="submit" class="signin-btn" disabled={loading}>
-				{loading ? 'Signing in…' : 'Sign in'}
-			</button>
+			{#if success}
+				<div class="success-msg">{success}</div>
+			{/if}
+
+			{#if !showForgot}
+				<button type="submit" class="signin-btn" disabled={loading}>
+					{loading ? 'Signing in…' : 'Sign in'}
+				</button>
+				<button type="button" class="forgot-link" onclick={() => { showForgot = true; error = ''; success = '' }}>
+					Forgot password?
+				</button>
+			{:else}
+				<button type="button" class="signin-btn" onclick={handleForgotPassword} disabled={loading}>
+					{loading ? 'Sending…' : 'Send reset email'}
+				</button>
+				<button type="button" class="forgot-link" onclick={() => { showForgot = false; error = ''; success = '' }}>
+					Back to sign in
+				</button>
+			{/if}
 		</form>
 	</div>
 </div>
@@ -166,6 +209,12 @@ input:focus {
 	margin-bottom: 12px;
 }
 
+.success-msg {
+	font-size: 13px;
+	color: var(--teal-primary);
+	margin-bottom: 12px;
+}
+
 .signin-btn {
 	width: 100%;
 	padding: 12px;
@@ -180,7 +229,29 @@ input:focus {
 	transition: background 0.15s;
 }
 
-.signin-btn:hover {
+.signin-btn:hover:not(:disabled) {
 	background: var(--teal-dark);
+}
+
+.signin-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.forgot-link {
+	display: block;
+	width: 100%;
+	margin-top: 12px;
+	background: none;
+	border: none;
+	color: var(--warm-text-secondary);
+	font-size: 13px;
+	text-align: center;
+	cursor: pointer;
+	padding: 4px;
+}
+
+.forgot-link:hover {
+	color: var(--teal-primary);
 }
 </style>
