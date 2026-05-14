@@ -6,6 +6,8 @@ import {
 	createUserWithEmailAndPassword,
 	signOut as firebaseSignOut,
 	sendPasswordResetEmail,
+	setPersistence,
+	inMemoryPersistence,
 	onAuthStateChanged,
 	type User as FirebaseUser,
 } from 'firebase/auth'
@@ -27,18 +29,15 @@ export class Auth {
 	user = $state<UserProfile | null>(null)
 	loading = $state(true)
 
-	// Offline cache
+	// Offline cache — still useful when Firestore is unreachable
 	private _cache = persistedState<UserProfile | null>('li.beeb.hydration.auth.v3.profile', null)
 
 	private constructor() {
 		if (browser) {
-			// Show cached data immediately while Firebase resolves
-			if (this._cache.current) {
-				this.user = this._cache.current
-			}
+			// Don't persist session across app restarts — users must log in each time
+			void setPersistence(firebaseAuth, inMemoryPersistence)
 
 			onAuthStateChanged(firebaseAuth, async (fbUser) => {
-				// Set _firebaseUser immediately so isLoggedIn is true before profile loads
 				this._firebaseUser = fbUser
 				this._uid = fbUser?.uid ?? null
 				if (fbUser) {
@@ -77,30 +76,32 @@ export class Auth {
 	}
 
 	async login(email: string, password: string): Promise<void> {
-		// Set loading so the auth guard waits while onAuthStateChanged fires
 		this.loading = true
 		try {
 			await signInWithEmailAndPassword(firebaseAuth, email, password)
-			// onAuthStateChanged will set loading = false once profile is loaded
-		} catch (signInErr: unknown) {
-			const code = (signInErr as { code?: string }).code
+		} catch (err: unknown) {
+			this.loading = false
+			const code = (err as { code?: string }).code ?? ''
 			if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
-				// New user — create account
-				try {
-					await createUserWithEmailAndPassword(firebaseAuth, email, password)
-					// onAuthStateChanged will fire and finish loading
-				} catch (createErr: unknown) {
-					this.loading = false
-					const createCode = (createErr as { code?: string }).code
-					if (createCode === 'auth/email-already-in-use') {
-						throw new Error('Incorrect email or password.')
-					}
-					throw createErr
-				}
-			} else {
-				this.loading = false
-				throw signInErr
+				throw new Error('INVALID_CREDENTIALS')
 			}
+			if (code === 'auth/invalid-email') throw new Error('Invalid email address.')
+			if (code === 'auth/too-many-requests') throw new Error('Too many attempts. Try again later.')
+			throw err
+		}
+	}
+
+	async register(email: string, password: string): Promise<void> {
+		this.loading = true
+		try {
+			await createUserWithEmailAndPassword(firebaseAuth, email, password)
+		} catch (err: unknown) {
+			this.loading = false
+			const code = (err as { code?: string }).code ?? ''
+			if (code === 'auth/email-already-in-use') throw new Error('EMAIL_IN_USE')
+			if (code === 'auth/invalid-email') throw new Error('Invalid email address.')
+			if (code === 'auth/weak-password') throw new Error('Password must be at least 6 characters.')
+			throw err
 		}
 	}
 
@@ -126,7 +127,6 @@ export class Auth {
 				await setDoc(ref, profile)
 			}
 
-			// Update streak if needed
 			const today = new Date().toISOString().slice(0, 10)
 			if (profile.lastActiveDate !== today) {
 				const last = profile.lastActiveDate
@@ -145,7 +145,6 @@ export class Auth {
 			this.user = profile
 			this._cache.current = profile
 		} catch {
-			// Offline: use cached profile if available
 			if (this._cache.current) {
 				this.user = this._cache.current
 			}
