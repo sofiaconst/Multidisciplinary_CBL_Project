@@ -1,4 +1,4 @@
-// Shared design tokens for Hydration Scale website.
+// Shared design tokens for Hydr8 website.
 // Primary brand color is #0087BD (deep sky blue), replacing the original green.
 
 window.HS = {

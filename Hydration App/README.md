@@ -1,6 +1,6 @@
-# Hydration Scale — Website
+# Hydr8 — Website
 
-A static multi-page website for the Hydration Scale smart coaster. Converted from the original app/prototype repo into a deployable site.
+A static multi-page website for the Hydr8 smart coaster. Converted from the original app/prototype repo into a deployable site.
 
 ## Pages
 
@@ -29,12 +29,12 @@ tealText:  '#004566',  // accessible text on light blue
 
 ## Tweaks
 
-Open `settings.html`. A small floating **Tweaks** button appears in the bottom-right corner — click it to open the Tweaks panel and switch the *Save behavior*:
+Open `settings.html`, toggle **Tweaks** in the toolbar, and you'll see the *Save behavior* segmented control:
 
-- **Per-section** (default): every settings card has its own Save button — independent save per section.
-- **Single bar**: a sticky bar at the bottom collects all unsaved changes into one Save action.
+- **Per-section** (default): every settings card has its own Save button — independent save per area.
+- **Single bar**: a sticky bar at the bottom that batches *all* unsaved changes into one Save action.
 
-The segmented toggle updates the live page instantly (React state). When running inside the design-tool host the panel also supports `__activate_edit_mode` / `__deactivate_edit_mode` postMessage events and rewrites the `EDITMODE` block in `app/settings.jsx` to persist the choice on disk.
+The tweak persists to disk by rewriting the `EDITMODE` block in `app/settings.jsx`.
 
 ## Running locally
 
@@ -43,7 +43,7 @@ This is a pure static site — no build step.
 ### Option 1 · Python (recommended, ships with macOS / Linux)
 
 ```bash
-python3 -m http.server --bind 127.0.0.1 3000
+python3 -m http.server 3000
 ```
 
 Open <http://localhost:3000>.

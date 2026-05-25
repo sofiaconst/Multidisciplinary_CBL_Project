@@ -1,4 +1,4 @@
-// Shared UI components for Hydration Scale website.
+// Shared UI components for Hydr8 website.
 // Exposed on window so each page's app script can pick them up.
 
 const HS = window.HS;
@@ -91,7 +91,7 @@ function Logo({ size = 32, dark = false }) {
           letterSpacing: -0.2,
         }}
       >
-        Hydration Scale
+        Hydr8
       </span>
     </a>
   );
@@ -328,8 +328,8 @@ function Footer() {
         fontFamily: HS.font,
       }}
     >
-      <span>© 2026 Hydration Scale</span>
-      <span>Built by the Hydration team · v1.0</span>
+      <span>© 2026 Hydr8</span>
+      <span>Built by the Hydr8 team · v1.0</span>
     </footer>
   );
 }

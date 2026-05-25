@@ -227,7 +227,7 @@ function Landing() {
               textWrap: 'pretty',
             }}
           >
-            The Hydration Scale coaster tracks your water intake automatically.
+            The Hydr8 coaster tracks your water intake automatically.
             No manual logging. Just drink.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>

@@ -253,35 +253,7 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     window.addEventListener('mouseup', up);
   };
 
-  if (!open) return (
-    <>
-      <style>{__TWEAKS_STYLE}</style>
-      <button
-        onClick={() => setOpen(true)}
-        style={{
-          position: 'fixed',
-          right: 16,
-          bottom: 16,
-          zIndex: 2147483645,
-          height: 28,
-          padding: '0 12px',
-          borderRadius: 8,
-          background: 'rgba(41,38,27,0.82)',
-          color: '#f6f4ef',
-          border: '.5px solid rgba(255,255,255,0.18)',
-          font: '11.5px/1 ui-sans-serif,system-ui,-apple-system,sans-serif',
-          fontWeight: 600,
-          cursor: 'pointer',
-          letterSpacing: '.01em',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.22)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-        }}
-      >
-        Tweaks
-      </button>
-    </>
-  );
+  if (!open) return null;
   return (
     <>
       <style>{__TWEAKS_STYLE}</style>

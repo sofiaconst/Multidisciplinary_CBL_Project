@@ -8,10 +8,10 @@ const HS = {
   text1: '#2C2C2A',
   text2: '#5F5E5A',
   text3: '#888780',
-  teal: '#1D9E75',
-  tealDark: '#0F6E56',
-  tealLight: '#E1F5EE',
-  tealMid: '#9FE1CB',
+  teal: '#0087BD',
+  tealDark: '#005C82',
+  tealLight: '#E0F2FA',
+  tealMid: '#7FC3DE',
   amberBg: '#FAEEDA',
   amberBorder: '#FAC775',
   amberText: '#854F0B',
@@ -561,8 +561,8 @@ function GoalsSection({ compact, withRecommend = false }) {
 function RemindersSection({ compact }) {
   const [adaptive, setAdaptive] = React.useState(true);
   const [pace, setPace] = React.useState(35);
-  const [color, setColor] = React.useState('#1D9E75');
-  const swatches = ['#1D9E75', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF'];
+  const [color, setColor] = React.useState('#0087BD');
+  const swatches = ['#0087BD', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF'];
   return (
     <Card padding={compact ? 20 : 28}>
       <SectionHeader title="Reminders" subtitle="When and how the coaster nudges you." />
@@ -861,7 +861,7 @@ function SettingsNavbar({ mobile }) {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1, letterSpacing: -0.1 }}>
-          Hydration Scale
+          Hydr8
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 28 }}>

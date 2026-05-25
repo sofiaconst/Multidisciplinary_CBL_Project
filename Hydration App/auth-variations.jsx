@@ -8,10 +8,10 @@ const HS = {
   text1: '#2C2C2A',
   text2: '#5F5E5A',
   text3: '#888780',
-  teal: '#1D9E75',
-  tealDark: '#0F6E56',
-  tealLight: '#E1F5EE',
-  tealMid: '#9FE1CB',
+  teal: '#0087BD',
+  tealDark: '#005C82',
+  tealLight: '#E0F2FA',
+  tealMid: '#7FC3DE',
   amberBg: '#FAEEDA',
   amberBorder: '#FAC775',
   amberText: '#854F0B',
@@ -303,7 +303,7 @@ function Logo({ size = 32, dark = false }) {
           letterSpacing: -0.2,
         }}
       >
-        Hydration Scale
+        Hydr8
       </span>
     </div>
   );
@@ -429,7 +429,7 @@ function AuthA({ children }) {
         {children}
       </div>
       <div style={{ fontSize: 12, color: HS.text3 }}>
-        © 2026 Hydration Scale
+        © 2026 Hydr8
       </div>
     </div>
   );
@@ -550,7 +550,7 @@ function AuthB({ children }) {
             color: 'rgba(255,255,255,0.6)',
           }}
         >
-          © 2026 Hydration Scale
+          © 2026 Hydr8
         </div>
       </div>
       {/* Right form panel */}
@@ -659,7 +659,7 @@ function AuthAMobile({ children }) {
       >
         {children}
       </div>
-      <div style={{ fontSize: 11, color: HS.text3 }}>© 2026 Hydration Scale</div>
+      <div style={{ fontSize: 11, color: HS.text3 }}>© 2026 Hydr8</div>
     </div>
   );
 }

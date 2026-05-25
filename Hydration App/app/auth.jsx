@@ -538,7 +538,7 @@ function AuthSplit({ children }) {
             color: 'rgba(255,255,255,0.6)',
           }}
         >
-          © 2026 Hydration Scale
+          © 2026 Hydr8
         </div>
       </div>
       {/* Right form panel */}

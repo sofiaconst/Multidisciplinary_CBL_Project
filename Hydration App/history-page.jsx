@@ -8,10 +8,10 @@ const HS = {
   text1: '#2C2C2A',
   text2: '#5F5E5A',
   text3: '#888780',
-  teal: '#1D9E75',
-  tealDark: '#0F6E56',
-  tealLight: '#E1F5EE',
-  tealMid: '#9FE1CB',
+  teal: '#0087BD',
+  tealDark: '#005C82',
+  tealLight: '#E0F2FA',
+  tealMid: '#7FC3DE',
   amberBg: '#FAEEDA',
   amberBorder: '#FAC775',
   amberText: '#854F0B',
@@ -155,7 +155,7 @@ function HistoryNavbar({ mobile }) {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1, letterSpacing: -0.1 }}>
-          Hydration Scale
+          Hydr8
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 28 }}>

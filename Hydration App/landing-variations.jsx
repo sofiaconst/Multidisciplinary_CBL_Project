@@ -1,4 +1,4 @@
-// Landing page variations for Hydration Scale
+// Landing page variations for Hydr8
 // Three independent layouts (A: split hero, B: centered bold, C: live demo)
 
 // -------- Design tokens (in-component, scoped) --------
@@ -9,10 +9,10 @@ const HS = {
   text1: '#2C2C2A',
   text2: '#5F5E5A',
   text3: '#888780',
-  teal: '#1D9E75',
-  tealDark: '#0F6E56',
-  tealLight: '#E1F5EE',
-  tealMid: '#9FE1CB',
+  teal: '#0087BD',
+  tealDark: '#005C82',
+  tealLight: '#E0F2FA',
+  tealMid: '#7FC3DE',
   amberBg: '#FAEEDA',
   amberBorder: '#FAC775',
   amberText: '#854F0B',
@@ -21,7 +21,7 @@ const HS = {
 };
 
 // -------- Mingcute icon via Iconify CDN --------
-// <Icon name="droplet-fill" size={20} color="#1D9E75" />
+// <Icon name="droplet-fill" size={20} color="#0087BD" />
 function Icon({ name, size = 20, color = 'currentColor', style }) {
   const url = `https://api.iconify.design/mingcute/${name}.svg?color=${encodeURIComponent(color)}`;
   return (
@@ -67,7 +67,7 @@ function Navbar({ guest = true }) {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1, letterSpacing: -0.1 }}>
-          Hydration Scale
+          Hydr8
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 28 }}>
@@ -138,8 +138,8 @@ function Footer() {
         color: HS.text3,
       }}
     >
-      <span>© 2026 Hydration Scale</span>
-      <span>Built by the Hydration team · v1.0</span>
+      <span>© 2026 Hydr8</span>
+      <span>Built by the Hydr8 team · v1.0</span>
     </footer>
   );
 }
@@ -215,7 +215,7 @@ function LandingA() {
               textWrap: 'pretty',
             }}
           >
-            The Hydration Scale coaster tracks your water intake automatically.
+            The Hydr8 coaster tracks your water intake automatically.
             No manual logging. Just drink.
           </p>
           <div style={{ display: 'flex', gap: 12 }}>
@@ -326,7 +326,7 @@ function CoasterMockup() {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: `repeating-linear-gradient(45deg, rgba(15,110,86,0.04) 0 8px, transparent 8px 16px)`,
+          backgroundImage: `repeating-linear-gradient(45deg, rgba(0, 92, 130,0.04) 0 8px, transparent 8px 16px)`,
         }}
       />
       {/* Cup */}
@@ -481,7 +481,7 @@ function LandingB() {
           }}
         >
           <Icon name="sparkles-line" size={12} color={HS.teal} />
-          Now shipping · Hydration Scale v1
+          Now shipping · Hydr8 v1
         </div>
         <h1
           style={{
@@ -976,7 +976,7 @@ function MobileNavbar() {
           <Icon name="drop-fill" size={14} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 14, color: HS.text1 }}>
-          Hydration Scale
+          Hydr8
         </span>
       </div>
       <button style={tealBtn({ height: 32, fontSize: 13, padding: '0 12px' })}>
@@ -1013,7 +1013,7 @@ function MobileFooter() {
         textAlign: 'center',
       }}
     >
-      © 2026 Hydration Scale · v1.0
+      © 2026 Hydr8 · v1.0
     </footer>
   );
 }
@@ -1070,7 +1070,7 @@ function MobileLandingA() {
             margin: '0 0 22px',
           }}
         >
-          The Hydration Scale coaster tracks your water intake automatically. No
+          The Hydr8 coaster tracks your water intake automatically. No
           manual logging. Just drink.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
