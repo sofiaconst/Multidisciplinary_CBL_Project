@@ -19,6 +19,7 @@ window.HS = {
   amberBg: '#FAEEDA',
   amberBorder: '#FAC775',
   amberText: '#854F0B',
+  success: '#22A861',
   danger: '#A32D2D',
   dangerBg: '#FFF0F0',
   dangerBorder: '#F5C6C6',

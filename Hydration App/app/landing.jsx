@@ -238,10 +238,10 @@ function Landing() {
               Create account
             </a>
             <a
-              href="dashboard.html"
+              href="signin.html"
               style={ghostBtn({ height: 48, fontSize: 15, padding: '0 20px' })}
             >
-              Try as guest
+              Sign in
             </a>
           </div>
           <div

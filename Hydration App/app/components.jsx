@@ -144,7 +144,7 @@ function PublicNavbar({ active }) {
 }
 
 // ---------- Authenticated navbar (with active state + sign out) ----------
-function AppNavbar({ active = 'Dashboard', connected = true }) {
+function AppNavbar({ active = 'Dashboard', connected = true, user = null }) {
   return (
     <nav
       style={{
@@ -196,7 +196,7 @@ function AppNavbar({ active = 'Dashboard', connected = true }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <ConnectionPill connected={connected} />
-        <AvatarPill />
+        <AvatarPill user={user} />
       </div>
     </nav>
   );
@@ -254,7 +254,12 @@ function ConnectionPill({ connected, compact }) {
   );
 }
 
-function AvatarPill({ initials = 'AR', name = 'Alex' }) {
+function AvatarPill({ user = null }) {
+  const fullName  = user?.name || user?.firstName || '';
+  const firstName = user?.firstName || fullName.split(' ')[0] || '';
+  const initials  = fullName
+    ? fullName.split(' ').filter(Boolean).map((w) => w[0]).slice(0, 2).join('').toUpperCase()
+    : '?';
   return (
     <a
       href="settings.html"
@@ -286,7 +291,7 @@ function AvatarPill({ initials = 'AR', name = 'Alex' }) {
       >
         {initials}
       </span>
-      <span style={{ fontSize: 13, color: HS.text1, fontWeight: 500 }}>{name}</span>
+      <span style={{ fontSize: 13, color: HS.text1, fontWeight: 500 }}>{firstName}</span>
     </a>
   );
 }
