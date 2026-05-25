@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hydration Scale — Logged-in dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons (Mingcute via Iconify) — bundler inlines each as data URL on window.__resources. -->
+    <meta name="ext-resource-dependency" data-resource-id="icon__drop-fill__1d9e75"        content="https://api.iconify.design/mingcute/drop-fill.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__bluetooth-line__ffffff"   content="https://api.iconify.design/mingcute/bluetooth-line.svg?color=%23FFFFFF" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__fire-fill__854f0b"        content="https://api.iconify.design/mingcute/fire-fill.svg?color=%23854F0B" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__arrow-up-line__1d9e75"    content="https://api.iconify.design/mingcute/arrow-up-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__drop-line__888780"        content="https://api.iconify.design/mingcute/drop-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__drink-line__888780"       content="https://api.iconify.design/mingcute/drink-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__chart-bar-line__888780"   content="https://api.iconify.design/mingcute/chart-bar-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__time-line__888780"        content="https://api.iconify.design/mingcute/time-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__time-line__1d9e75"        content="https://api.iconify.design/mingcute/time-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__notification-line__854f0b" content="https://api.iconify.design/mingcute/notification-line.svg?color=%23854F0B" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__scale-line__1d9e75"       content="https://api.iconify.design/mingcute/scale-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__refresh-1-line__2c2c2a"   content="https://api.iconify.design/mingcute/refresh-1-line.svg?color=%232C2C2A" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__qrcode-line__2c2c2a"      content="https://api.iconify.design/mingcute/qrcode-line.svg?color=%232C2C2A" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__home-4-line__0f6e56"      content="https://api.iconify.design/mingcute/home-4-line.svg?color=%230F6E56" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__home-4-line__5f5e5a"      content="https://api.iconify.design/mingcute/home-4-line.svg?color=%235F5E5A" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__history-line__5f5e5a"     content="https://api.iconify.design/mingcute/history-line.svg?color=%235F5E5A" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__settings-3-line__5f5e5a"  content="https://api.iconify.design/mingcute/settings-3-line.svg?color=%235F5E5A" />
+    <template id="__bundler_thumbnail">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <rect width="200" height="200" fill="#E1F5EE" />
+        <rect x="40" y="55" width="120" height="90" rx="14" fill="#FFFFFF" stroke="#1D9E75" stroke-width="2" />
+        <circle cx="100" cy="100" r="26" stroke="#9FE1CB" stroke-width="6" fill="none" />
+        <path d="M100 80 A20 20 0 0 1 120 100" stroke="#1D9E75" stroke-width="6" fill="none" stroke-linecap="round" />
+        <text x="100" y="106" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#0F6E56">58%</text>
+      </svg>
+    </template>
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        background: #f0eee9;
+      }
+      @keyframes hsPulse {
+        0%   { box-shadow: 0 0 0 0 rgba(29, 158, 117, 0.45); }
+        70%  { box-shadow: 0 0 0 8px rgba(29, 158, 117, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(29, 158, 117, 0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+    <script type="text/babel" src="design-canvas.jsx"></script>
+    <script type="text/babel" src="logged-in-dashboard.jsx"></script>
+    <script type="text/babel">
+      function App() {
+        return (
+          <DesignCanvas
+            projectTitle="Hydration Scale"
+            projectSubtitle="Screen 4 of 5 — Logged-in dashboard · 3 variations"
+          >
+            <DCSection
+              id="logged-desktop"
+              title="Logged-in dashboard"
+              subtitle="A: single column. B: sidebar + main. C: card grid with teal hero progress. One artboard shows the amber 'time to drink' reminder state."
+            >
+              <DCArtboard id="d-a" label="A · Single column" width={1280} height={1240}>
+                <LoggedA />
+              </DCArtboard>
+              <DCArtboard id="d-b" label="B · Sidebar + main" width={1280} height={860}>
+                <LoggedB />
+              </DCArtboard>
+              <DCArtboard id="d-b-due" label="B · Sidebar (reminder due)" width={1280} height={860}>
+                <LoggedB reminderDue />
+              </DCArtboard>
+              <DCArtboard id="d-c" label="C · Card grid + teal hero" width={1280} height={1080}>
+                <LoggedC />
+              </DCArtboard>
+            </DCSection>
+            <DCSection
+              id="logged-mobile"
+              title="Logged-in dashboard — Mobile"
+              subtitle="Stacked at 390px. Variation B turns the sidebar into a user strip at the top."
+            >
+              <DCArtboard id="m-a" label="A · Single column (mobile)" width={390} height={1340}>
+                <LoggedA mobile />
+              </DCArtboard>
+              <DCArtboard id="m-b" label="B · Sidebar (mobile)" width={390} height={1340}>
+                <LoggedB mobile />
+              </DCArtboard>
+              <DCArtboard id="m-c" label="C · Card grid (mobile)" width={390} height={1340}>
+                <LoggedC mobile />
+              </DCArtboard>
+            </DCSection>
+          </DesignCanvas>
+        );
+      }
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

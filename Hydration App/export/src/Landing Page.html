@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hydration Scale — Landing</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons (Mingcute via Iconify) — bundler inlines each as data URL on window.__resources. -->
+    <meta name="ext-resource-dependency" data-resource-id="icon__drop-fill__1d9e75"        content="https://api.iconify.design/mingcute/drop-fill.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__bluetooth-line__0f6e56"   content="https://api.iconify.design/mingcute/bluetooth-line.svg?color=%230F6E56" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__check-circle-line__888780" content="https://api.iconify.design/mingcute/check-circle-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__scale-line__1d9e75"       content="https://api.iconify.design/mingcute/scale-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__chart-line-line__1d9e75"  content="https://api.iconify.design/mingcute/chart-line-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__notification-line__1d9e75" content="https://api.iconify.design/mingcute/notification-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__sparkles-line__1d9e75"    content="https://api.iconify.design/mingcute/sparkles-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__fire-line__854f0b"        content="https://api.iconify.design/mingcute/fire-line.svg?color=%23854F0B" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__drop-line__1d9e75"        content="https://api.iconify.design/mingcute/drop-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__chart-bar-line__1d9e75"   content="https://api.iconify.design/mingcute/chart-bar-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__menu-line__2c2c2a"        content="https://api.iconify.design/mingcute/menu-line.svg?color=%232C2C2A" />
+    <template id="__bundler_thumbnail">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <rect width="200" height="200" fill="#E1F5EE" />
+        <path d="M100 50 C 70 90, 60 120, 100 160 C 140 120, 130 90, 100 50 Z" fill="#1D9E75" />
+        <circle cx="86" cy="110" r="8" fill="#9FE1CB" opacity=".75" />
+      </svg>
+    </template>
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        background: #f0eee9;
+      }
+      @keyframes hsPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(29, 158, 117, 0.45);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(29, 158, 117, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(29, 158, 117, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+    <script type="text/babel" src="design-canvas.jsx"></script>
+    <script type="text/babel" src="landing-variations.jsx"></script>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        return (
+          <DesignCanvas
+            projectTitle="Hydration Scale"
+            projectSubtitle="Screen 1 of 5 — Landing page · 3 desktop + 3 mobile variations"
+          >
+            <DCSection
+              id="landing"
+              title="Landing / Home"
+              subtitle="First page visitors see. Same content, three layout directions."
+            >
+              <DCArtboard
+                id="landing-a"
+                label="A · Split hero"
+                width={1280}
+                height={1100}
+              >
+                <LandingA />
+              </DCArtboard>
+              <DCArtboard
+                id="landing-b"
+                label="B · Centered bold"
+                width={1280}
+                height={1480}
+              >
+                <LandingB />
+              </DCArtboard>
+              <DCArtboard
+                id="landing-c"
+                label="C · Live demo feel"
+                width={1280}
+                height={900}
+              >
+                <LandingC />
+              </DCArtboard>
+            </DCSection>
+            <DCSection
+              id="landing-mobile"
+              title="Landing / Home — Mobile"
+              subtitle="Same three directions, stacked single column at 390px."
+            >
+              <DCArtboard
+                id="mobile-a"
+                label="A · Split hero (mobile)"
+                width={390}
+                height={1280}
+              >
+                <MobileLandingA />
+              </DCArtboard>
+              <DCArtboard
+                id="mobile-b"
+                label="B · Centered bold (mobile)"
+                width={390}
+                height={1320}
+              >
+                <MobileLandingB />
+              </DCArtboard>
+              <DCArtboard
+                id="mobile-c"
+                label="C · Live demo (mobile)"
+                width={390}
+                height={920}
+              >
+                <MobileLandingC />
+              </DCArtboard>
+            </DCSection>
+          </DesignCanvas>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hydration Scale — Guest dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons (Mingcute via Iconify) — bundler inlines each as data URL on window.__resources. -->
+    <meta name="ext-resource-dependency" data-resource-id="icon__drop-fill__1d9e75"          content="https://api.iconify.design/mingcute/drop-fill.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__information-line__0f6e56"    content="https://api.iconify.design/mingcute/information-line.svg?color=%230F6E56" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__information-line__1d9e75"    content="https://api.iconify.design/mingcute/information-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__bluetooth-line__1d9e75"      content="https://api.iconify.design/mingcute/bluetooth-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__bluetooth-line__ffffff"      content="https://api.iconify.design/mingcute/bluetooth-line.svg?color=%23FFFFFF" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__qrcode-line__2c2c2a"         content="https://api.iconify.design/mingcute/qrcode-line.svg?color=%232C2C2A" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__qrcode-line__1d9e75"         content="https://api.iconify.design/mingcute/qrcode-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__scale-line__1d9e75"          content="https://api.iconify.design/mingcute/scale-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__drop-line__888780"           content="https://api.iconify.design/mingcute/drop-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__drink-line__888780"          content="https://api.iconify.design/mingcute/drink-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__chart-bar-line__888780"      content="https://api.iconify.design/mingcute/chart-bar-line.svg?color=%23888780" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__gift-line__1d9e75"           content="https://api.iconify.design/mingcute/gift-line.svg?color=%231D9E75" />
+    <meta name="ext-resource-dependency" data-resource-id="icon__check-circle-fill__1d9e75"   content="https://api.iconify.design/mingcute/check-circle-fill.svg?color=%231D9E75" />
+    <template id="__bundler_thumbnail">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <rect width="200" height="200" fill="#E1F5EE" />
+        <rect x="45" y="55" width="110" height="90" rx="14" fill="#FFFFFF" stroke="#1D9E75" stroke-width="2" />
+        <circle cx="100" cy="92" r="14" fill="#9FE1CB" />
+        <rect x="62" y="116" width="76" height="6" rx="3" fill="#9FE1CB" />
+        <rect x="74" y="130" width="52" height="6" rx="3" fill="#1D9E75" />
+      </svg>
+    </template>
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        background: #f0eee9;
+      }
+      @keyframes hsPulse {
+        0%   { box-shadow: 0 0 0 0 rgba(29, 158, 117, 0.45); }
+        70%  { box-shadow: 0 0 0 8px rgba(29, 158, 117, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(29, 158, 117, 0); }
+      }
+      @keyframes hsRing {
+        0%   { transform: scale(0.85); opacity: 0.7; }
+        100% { transform: scale(1.25); opacity: 0; }
+      }
+      @keyframes hsScan {
+        0%   { top: 14px; opacity: 0; }
+        15%  { opacity: 1; }
+        50%  { top: calc(100% - 16px); opacity: 1; }
+        85%  { opacity: 1; }
+        100% { top: 14px; opacity: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+    <script type="text/babel" src="design-canvas.jsx"></script>
+    <script type="text/babel" src="guest-dashboard.jsx"></script>
+    <script type="text/babel">
+      function App() {
+        return (
+          <DesignCanvas
+            projectTitle="Hydration Scale"
+            projectSubtitle="Screen 3 of 5 — Guest dashboard · before / after pairing"
+          >
+            <DCSection
+              id="guest-desktop"
+              title="Guest dashboard"
+              subtitle="Two layouts × two states. A: single column. B: main + side rail. Banner persists across both."
+            >
+              <DCArtboard id="d-a-before" label="A · Before connect" width={1280} height={780}>
+                <GuestA connected={false} />
+              </DCArtboard>
+              <DCArtboard id="d-a-after" label="A · After connect (live)" width={1280} height={780}>
+                <GuestA connected={true} />
+              </DCArtboard>
+              <DCArtboard id="d-b-before" label="B · Before connect" width={1280} height={780}>
+                <GuestB connected={false} />
+              </DCArtboard>
+              <DCArtboard id="d-b-after" label="B · After connect (live)" width={1280} height={780}>
+                <GuestB connected={true} />
+              </DCArtboard>
+            </DCSection>
+            <DCSection
+              id="guest-mobile"
+              title="Guest dashboard — Mobile"
+              subtitle="Stacked single column at 390px. Variation B side rail moves below the main content."
+            >
+              <DCArtboard id="m-a-before" label="A · Before connect (mobile)" width={390} height={760}>
+                <GuestA connected={false} mobile />
+              </DCArtboard>
+              <DCArtboard id="m-a-after" label="A · After connect (mobile)" width={390} height={820}>
+                <GuestA connected={true} mobile />
+              </DCArtboard>
+              <DCArtboard id="m-b-before" label="B · Before connect (mobile)" width={390} height={1080}>
+                <GuestB connected={false} mobile />
+              </DCArtboard>
+              <DCArtboard id="m-b-after" label="B · After connect (mobile)" width={390} height={1120}>
+                <GuestB connected={true} mobile />
+              </DCArtboard>
+            </DCSection>
+            <DCSection
+              id="qr-modal"
+              title="QR pairing flow"
+              subtitle="Modal shown when the user picks 'Scan QR code'. Same modal used by guests and logged-in users."
+            >
+              <DCArtboard id="qr-desktop" label="QR scan modal · desktop" width={1280} height={780}>
+                <QRPairingModal />
+              </DCArtboard>
+              <DCArtboard id="qr-mobile" label="QR scan modal · mobile" width={390} height={780}>
+                <QRPairingModal />
+              </DCArtboard>
+            </DCSection>
+          </DesignCanvas>
+        );
+      }
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>
