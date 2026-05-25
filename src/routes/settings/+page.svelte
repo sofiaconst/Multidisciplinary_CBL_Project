@@ -185,7 +185,7 @@ const signOut = async () => {
 <Toaster />
 
 <svelte:head>
-	<title>Settings — Hydration Scale</title>
+	<title>Settings — Hydr8 Scale</title>
 </svelte:head>
 
 <style>

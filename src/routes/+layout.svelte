@@ -54,22 +54,24 @@ if (browser) {
 }
 
 const isPublicPage = $derived(
-	page.url.pathname === '/login' || page.url.pathname === '/signup'
+	page.url.pathname === '/login' ||
+	page.url.pathname === '/signup' ||
+	page.url.pathname === '/welcome'
 )
 
 $effect(() => {
 	if (!auth.loading && !auth.isLoggedIn && !isPublicPage) {
-		void goto('/login')
+		void goto('/welcome')
 	}
 })
 </script>
 
-{#if auth.loading && !isPublicPage}
+{#if isPublicPage}
+	{@render children()}
+{:else if auth.loading || !auth.isLoggedIn}
 	<div class="splash">
 		<div class="splash-dot"></div>
 	</div>
-{:else if isPublicPage}
-	{@render children()}
 {:else}
 	<div class="app-shell">
 		<div class="app-content">

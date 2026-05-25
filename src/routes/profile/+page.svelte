@@ -63,7 +63,7 @@ const scale = Scale.getInstance()
 </div>
 
 <svelte:head>
-	<title>Profile — Hydration Scale</title>
+	<title>Profile — Hydr8 Scale</title>
 </svelte:head>
 
 <style>

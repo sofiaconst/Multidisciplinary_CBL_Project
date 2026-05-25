@@ -142,7 +142,7 @@ const handleSignUp = async (e: Event) => {
 </div>
 
 <svelte:head>
-	<title>Sign up — Hydration Scale</title>
+	<title>Sign up — Hydr8 Scale</title>
 </svelte:head>
 
 <style>

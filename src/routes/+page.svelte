@@ -129,7 +129,7 @@ const tare = async () => {
 <Toaster />
 
 <svelte:head>
-	<title>Hydration Scale</title>
+	<title>Hydr8 Scale</title>
 </svelte:head>
 
 <style>

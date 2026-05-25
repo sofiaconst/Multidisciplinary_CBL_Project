@@ -62,7 +62,7 @@ const handleForgotPassword = async () => {
 					<path d="M12 6v6l4 2" />
 				</svg>
 			</div>
-			<h1>Hydration Scale</h1>
+			<h1>Hydr8 Scale</h1>
 			<p>{showForgot ? 'Reset your password' : 'Sign in to your account'}</p>
 		</div>
 

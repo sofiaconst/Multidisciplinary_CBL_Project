@@ -40,21 +40,76 @@ const connect = async () => {
 </script>
 
 {#if scale.bt.enabled && scale.bt.connected}
-  <div class="btn btn-primary btn-outline btn-sm sm:btn-md pointer-events-none">
-    <Check class="h-6 w-6" /> Connected
-  </div>
+	<div class="ble-pill connected">
+		<Check width="18" height="18" /> Connected
+	</div>
 {:else if scale.bt.enabled}
-  <button type="button" class="btn btn-warning btn-sm sm:btn-md" onclick={connect}>
-    <Link class="h-6 w-6" /> Connect scale
-  </button>
+	<button type="button" class="ble-btn" onclick={connect}>
+		<Link width="18" height="18" /> Connect scale
+	</button>
 {:else}
-  <div class="alert alert-error">
-    <Cross class="h-6 w-6" />
-    <span>
-      Bluetooth not available. Try enabling Bluetooth or switching to a
-      <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API#browser_compatibility">
-        supported browser
-      </a>
-    </span>
-  </div>
+	<div class="ble-error">
+		<Cross width="18" height="18" style="flex-shrink:0" />
+		<span>
+			Bluetooth not available. Try enabling Bluetooth or switching to a
+			<a class="ble-link" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API#browser_compatibility">
+				supported browser
+			</a>
+		</span>
+	</div>
 {/if}
+
+<style>
+.ble-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 10px 20px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.ble-pill.connected {
+	background: var(--teal-light);
+	color: var(--teal-dark);
+	border: 1px solid var(--teal-primary);
+}
+
+.ble-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 10px 20px;
+	background: var(--amber-bg);
+	color: var(--amber-text);
+	border: 1px solid var(--amber-border);
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.ble-btn:hover {
+	background: var(--amber-border);
+}
+
+.ble-error {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 12px 16px;
+	background: #fee2e2;
+	border: 1px solid #fca5a5;
+	border-radius: 8px;
+	font-size: 13px;
+	color: #dc2626;
+	max-width: 340px;
+}
+
+.ble-link {
+	color: var(--teal-primary);
+	text-decoration: underline;
+}
+</style>

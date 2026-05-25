@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
   appId: 'com.group5.hydrationscale',
-  appName: 'Hydration Scale',
+  appName: 'Hydr8 Scale',
   webDir: 'build',
   android: {
     allowMixedContent: true,

@@ -38,7 +38,7 @@ const goalPct = (session: ReturnType<typeof history.weekSessions>[0]) => {
 							class="chart-bar"
 							style="height: {Math.max(pct, 2)}%; background: {isToday
 								? 'var(--teal-primary)'
-								: '#88cdb3'}; border: 1px solid {isToday ? 'var(--teal-dark)' : 'var(--teal-primary)'}"
+								: 'var(--warm-border)'}; border: 1px solid {isToday ? 'var(--teal-dark)' : 'var(--warm-border)'}"
 						></div>
 					</div>
 					<div class="chart-label" class:today={isToday}>{getDayLabel(session.date)}</div>
@@ -77,7 +77,7 @@ const goalPct = (session: ReturnType<typeof history.weekSessions>[0]) => {
 </div>
 
 <svelte:head>
-	<title>History — Hydration Scale</title>
+	<title>History — Hydr8 Scale</title>
 </svelte:head>
 
 <style>
