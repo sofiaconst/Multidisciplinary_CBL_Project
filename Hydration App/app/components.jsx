@@ -1,4 +1,4 @@
-// Shared UI components for Hydr8 website.
+// Shared UI components for Sippy website.
 // Exposed on window so each page's app script can pick them up.
 
 const HS = window.HS;
@@ -59,7 +59,38 @@ function ghostBtn(extra = {}) {
 }
 
 // ---------- Logo / wordmark ----------
-function Logo({ size = 32, dark = false }) {
+// Uses the real Sippy brand assets:
+//   - app/logo-icon.png       — standalone app icon (used in the navbar mark)
+//   - app/logo-wordmark.png   — full "sippy" lockup (used as wordmark)
+// If you want the full lockup as a single image, pass `wordmarkOnly`.
+function Logo({ size = 32, dark = false, wordmarkOnly = false }) {
+  if (wordmarkOnly) {
+    return (
+      <a
+        href="index.html"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          textDecoration: 'none',
+          color: 'inherit',
+        }}
+      >
+        <img
+          src="app/logo-wordmark.png"
+          alt="Sippy"
+          height={size * 1.1}
+          style={{
+            height: size * 1.1,
+            width: 'auto',
+            display: 'block',
+            mixBlendMode: dark ? 'screen' : 'multiply',
+            filter: dark ? 'invert(1)' : 'none',
+          }}
+          draggable={false}
+        />
+      </a>
+    );
+  }
   return (
     <a
       href="index.html"
@@ -71,27 +102,28 @@ function Logo({ size = 32, dark = false }) {
         color: 'inherit',
       }}
     >
-      <div
+      <img
+        src="app/logo-icon.png"
+        alt=""
+        width={size}
+        height={size}
         style={{
           width: size,
           height: size,
-          borderRadius: 10,
-          background: dark ? 'rgba(255,255,255,0.14)' : HS.tealLight,
-          display: 'grid',
-          placeItems: 'center',
+          display: 'block',
+          borderRadius: size * 0.22,
         }}
-      >
-        <Icon name="drop-fill" size={size * 0.55} color={dark ? '#FFFFFF' : HS.tealDark} />
-      </div>
+        draggable={false}
+      />
       <span
         style={{
           fontWeight: 500,
-          fontSize: size * 0.48,
+          fontSize: size * 0.5,
           color: dark ? '#FFFFFF' : HS.text1,
-          letterSpacing: -0.2,
+          letterSpacing: -0.3,
         }}
       >
-        Hydr8
+        Sippy
       </span>
     </a>
   );
@@ -144,7 +176,7 @@ function PublicNavbar({ active }) {
 }
 
 // ---------- Authenticated navbar (with active state + sign out) ----------
-function AppNavbar({ active = 'Dashboard', connected = true, user = null }) {
+function AppNavbar({ active = 'Dashboard', connected = true }) {
   return (
     <nav
       style={{
@@ -196,7 +228,7 @@ function AppNavbar({ active = 'Dashboard', connected = true, user = null }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <ConnectionPill connected={connected} />
-        <AvatarPill user={user} />
+        <AvatarPill />
       </div>
     </nav>
   );
@@ -254,12 +286,7 @@ function ConnectionPill({ connected, compact }) {
   );
 }
 
-function AvatarPill({ user = null }) {
-  const fullName  = user?.name || user?.firstName || '';
-  const firstName = user?.firstName || fullName.split(' ')[0] || '';
-  const initials  = fullName
-    ? fullName.split(' ').filter(Boolean).map((w) => w[0]).slice(0, 2).join('').toUpperCase()
-    : '?';
+function AvatarPill({ initials = 'AR', name = 'Alex' }) {
   return (
     <a
       href="settings.html"
@@ -291,7 +318,7 @@ function AvatarPill({ user = null }) {
       >
         {initials}
       </span>
-      <span style={{ fontSize: 13, color: HS.text1, fontWeight: 500 }}>{firstName}</span>
+      <span style={{ fontSize: 13, color: HS.text1, fontWeight: 500 }}>{name}</span>
     </a>
   );
 }
@@ -333,8 +360,8 @@ function Footer() {
         fontFamily: HS.font,
       }}
     >
-      <span>© 2026 Hydr8</span>
-      <span>Built by the Hydr8 team · v1.0</span>
+      <span>© 2026 Sippy</span>
+      <span>Built by the Sippy team · v1.0</span>
     </footer>
   );
 }

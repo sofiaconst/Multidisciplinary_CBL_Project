@@ -188,6 +188,18 @@ function Landing() {
         }}
       >
         <div>
+          <img
+            src="app/logo-wordmark.png"
+            alt="Sippy"
+            style={{
+              height: 64,
+              width: 'auto',
+              display: 'block',
+              marginBottom: 24,
+              mixBlendMode: 'multiply',
+            }}
+            draggable={false}
+          />
           <div
             style={{
               display: 'inline-flex',
@@ -227,7 +239,7 @@ function Landing() {
               textWrap: 'pretty',
             }}
           >
-            The Hydr8 coaster tracks your water intake automatically.
+            The Sippy coaster tracks your water intake automatically.
             No manual logging. Just drink.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -238,10 +250,10 @@ function Landing() {
               Create account
             </a>
             <a
-              href="signin.html"
+              href="dashboard.html"
               style={ghostBtn({ height: 48, fontSize: 15, padding: '0 20px' })}
             >
-              Sign in
+              Try as guest
             </a>
           </div>
           <div
