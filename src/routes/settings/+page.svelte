@@ -89,13 +89,34 @@ const previewLed = async (hex: string) => {
 // ── Advanced thresholds toggle ───────────────────────────────────
 let showAdvanced = $state(false)
 
-// ── LED color swatches ───────────────────────────────────────────
+// ── LED color ────────────────────────────────────────────────────
 const swatches = ['#0087BD', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF']
+let hexInput = $state(scale.sipDueLedColor.current)
 
-// ── Sign out ─────────────────────────────────────────────────────
+const applyHex = async () => {
+	const val = hexInput.trim()
+	if (!/^#[0-9A-Fa-f]{6}$/.test(val)) return
+	scale.sipDueLedColor.current = val
+	markDirty('reminders')
+	try { await scale.previewSipDueLedColor(val) } catch { /* ignore */ }
+}
+
+// ── Account ──────────────────────────────────────────────────────
+let deleteConfirm = $state(false)
+
 const signOut = async () => {
 	await auth.logout()
 	await goto('/login')
+}
+
+const deleteAccount = async () => {
+	try {
+		await auth.deleteAccount()
+		await goto('/welcome')
+	} catch (err) {
+		toast.error(`Could not delete account: ${(err as Error).message}`)
+		deleteConfirm = false
+	}
 }
 </script>
 
@@ -205,7 +226,7 @@ const signOut = async () => {
 					<div class="label">LED reminder color</div>
 					<div class="label-hint">The coaster pulses this color when it's time to drink.</div>
 				</div>
-				<div class="led-row">
+				<div class="led-col">
 					<div class="swatches">
 						{#each swatches as swatch}
 							<button
@@ -214,24 +235,30 @@ const signOut = async () => {
 								class:swatch-active={scale.sipDueLedColor.current === swatch}
 								style="background: {swatch};"
 								aria-label={swatch}
-								onclick={() => previewLed(swatch)}
+								onclick={() => { previewLed(swatch); hexInput = swatch }}
 							></button>
 						{/each}
 					</div>
-					<input
-						type="color"
-						bind:value={scale.sipDueLedColor.current}
-						oninput={(e) => previewLed((e.currentTarget as HTMLInputElement).value)}
-						class="color-input"
-					/>
-					<button
-						type="button"
-						class="ghost-sm"
-						onclick={async () => { try { await scale.stopSipDueLedPreview() } catch {} }}
-						disabled={!scale.bt.connected}
-					>
-						Test LED
-					</button>
+					<div class="hex-row">
+						<div class="hex-preview" style="background:{scale.sipDueLedColor.current}"></div>
+						<input
+							type="text"
+							bind:value={hexInput}
+							placeholder="#0087BD"
+							maxlength="7"
+							class="hex-input"
+							oninput={() => { if (/^#[0-9A-Fa-f]{6}$/.test(hexInput)) scale.sipDueLedColor.current = hexInput }}
+						/>
+						<button type="button" class="ghost-sm" onclick={applyHex}>Add hex</button>
+						<button
+							type="button"
+							class="ghost-sm"
+							onclick={async () => { try { await scale.stopSipDueLedPreview() } catch {} }}
+							disabled={!scale.bt.connected}
+						>
+							Test LED
+						</button>
+					</div>
 				</div>
 			</div>
 
@@ -435,6 +462,32 @@ const signOut = async () => {
 				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
 				Sign out
 			</button>
+
+			<div class="divider"></div>
+
+			<!-- Delete account -->
+			<div class="danger-zone">
+				<div class="danger-label">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+					Danger zone
+				</div>
+				<p class="danger-desc">Permanently deletes your account and all data. This cannot be undone.</p>
+
+				{#if !deleteConfirm}
+					<button type="button" class="delete-btn" onclick={() => deleteConfirm = true}>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+						Delete account
+					</button>
+				{:else}
+					<div class="delete-confirm">
+						<p>Are you sure? This will delete all your history and goals.</p>
+						<div class="delete-confirm-btns">
+							<button type="button" class="ghost-sm" onclick={() => deleteConfirm = false}>Cancel</button>
+							<button type="button" class="delete-btn-confirm" onclick={deleteAccount}>Yes, delete my account</button>
+						</div>
+					</div>
+				{/if}
+			</div>
 		</div>
 
 	</main>
@@ -619,31 +672,62 @@ h2 {
 /* Divider */
 .divider { height: 1px; background: var(--warm-border); opacity: 0.6; margin: 20px 0; }
 
-/* LED swatches */
-.led-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.swatches { display: flex; gap: 6px; }
+/* LED color */
+.led-col { display: flex; flex-direction: column; gap: 12px; }
+.swatches { display: flex; gap: 6px; flex-wrap: wrap; }
 .swatch {
-	width: 28px;
-	height: 28px;
-	border-radius: 50%;
+	width: 28px; height: 28px; border-radius: 50%;
 	border: 0.5px solid var(--warm-border);
-	cursor: pointer;
-	padding: 0;
-	transition: all 0.12s;
+	cursor: pointer; padding: 0; transition: all 0.12s;
 }
 .swatch.swatch-active {
 	border: 2px solid var(--teal-primary);
 	box-shadow: 0 0 0 3px var(--teal-light);
 }
-.color-input {
-	width: 40px;
-	height: 36px;
-	padding: 2px;
-	border: 0.5px solid var(--warm-border);
-	border-radius: 8px;
-	background: var(--warm-bg);
-	cursor: pointer;
+.hex-row {
+	display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
+.hex-preview {
+	width: 32px; height: 32px; border-radius: 8px;
+	border: 0.5px solid var(--warm-border); flex-shrink: 0;
+}
+.hex-input {
+	width: 110px; height: 36px; padding: 0 10px;
+	border: 0.5px solid var(--warm-border); border-radius: 8px;
+	background: var(--warm-bg); color: var(--warm-text);
+	font-size: 13px; font-family: ui-monospace, monospace;
+	outline: none; box-sizing: border-box;
+	transition: border-color 0.12s;
+}
+.hex-input:focus { border-color: var(--teal-primary); }
+
+/* Danger zone */
+.danger-zone {
+	background: #fff5f5; border: 0.5px solid #fca5a5;
+	border-radius: 12px; padding: 18px;
+}
+.danger-label {
+	display: flex; align-items: center; gap: 6px;
+	color: #dc2626; font-weight: 600; font-size: 13px; margin-bottom: 6px;
+}
+.danger-desc { font-size: 13px; color: var(--warm-text-secondary); margin: 0 0 14px; line-height: 1.5; }
+.delete-btn {
+	display: inline-flex; align-items: center; gap: 6px;
+	height: 34px; padding: 0 14px; border-radius: 10px;
+	background: transparent; color: #dc2626;
+	border: 0.5px solid #fca5a5; font-size: 13px; font-weight: 500;
+	font-family: inherit; cursor: pointer; transition: background 0.15s;
+}
+.delete-btn:hover { background: #fee2e2; }
+.delete-confirm p { font-size: 13px; color: var(--warm-text); margin: 0 0 12px; font-weight: 500; }
+.delete-confirm-btns { display: flex; gap: 8px; }
+.delete-btn-confirm {
+	height: 34px; padding: 0 14px; border-radius: 10px;
+	background: #dc2626; color: #fff; border: none;
+	font-size: 13px; font-weight: 600; font-family: inherit;
+	cursor: pointer; transition: background 0.15s;
+}
+.delete-btn-confirm:hover { background: #b91c1c; }
 
 /* Button rows */
 .btn-row { display: flex; gap: 8px; }

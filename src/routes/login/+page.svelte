@@ -10,34 +10,36 @@ let showPwd = $state(false)
 let error = $state('')
 let success = $state('')
 let loading = $state(false)
+let guestLoading = $state(false)
 let showForgot = $state(false)
+
+const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
 
 const handleSignIn = async (e: Event) => {
 	e.preventDefault()
-	error = ''
-	success = ''
+	error = ''; success = ''
+	if (!email.trim()) { error = 'Please enter your email address.'; return }
+	if (!isValidEmail(email)) { error = 'Please enter a valid email address.'; return }
+	if (!password) { error = 'Please enter your password.'; return }
 	loading = true
 	try {
 		await auth.login(email, password)
 		await goto('/')
 	} catch (err: unknown) {
 		const msg = (err as Error).message ?? ''
-		if (msg === 'INVALID_CREDENTIALS') {
-			error = 'INVALID_CREDENTIALS'
-		} else if (msg.includes('too-many-requests')) {
-			error = 'Too many attempts. Try again later.'
-		} else {
-			error = msg || 'Sign in failed. Try again.'
-		}
+		if (msg === 'INVALID_CREDENTIALS') error = 'INVALID_CREDENTIALS'
+		else if (msg.includes('too-many-requests')) error = 'Too many attempts. Try again later.'
+		else error = msg || 'Sign in failed. Try again.'
 	} finally {
 		loading = false
 	}
 }
 
-const handleForgotPassword = async () => {
-	error = ''
-	success = ''
-	if (!email) { error = 'Enter your email address above first.'; return }
+const handleForgotPassword = async (e: Event) => {
+	e.preventDefault()
+	error = ''; success = ''
+	if (!email.trim()) { error = 'Enter your email address above first.'; return }
+	if (!isValidEmail(email)) { error = 'Please enter a valid email address.'; return }
 	loading = true
 	try {
 		await auth.sendPasswordReset(email)
@@ -47,6 +49,16 @@ const handleForgotPassword = async () => {
 		error = 'Could not send reset email. Check the address and try again.'
 	} finally {
 		loading = false
+	}
+}
+
+const continueAsGuest = async () => {
+	guestLoading = true
+	try {
+		await auth.signInAsGuest()
+		await goto('/')
+	} catch {
+		guestLoading = false
 	}
 }
 </script>
@@ -86,13 +98,19 @@ const handleForgotPassword = async () => {
 		<div class="form-inner">
 			<div class="form-head">
 				<h1>{showForgot ? 'Reset password' : 'Welcome back'}</h1>
-				<p class="form-sub">{showForgot ? "We'll email you a reset link." : 'Sign in to see your hydration history.'}</p>
+				<p class="form-sub">{showForgot ? "We'll email you a reset link." : 'Sign in to your Sippy account.'}</p>
 			</div>
 
-			<form onsubmit={showForgot ? (e) => { e.preventDefault(); void handleForgotPassword() } : handleSignIn}>
+			<form novalidate onsubmit={showForgot ? handleForgotPassword : handleSignIn}>
 				<div class="field">
 					<label for="email">Email</label>
-					<input id="email" type="email" bind:value={email} placeholder="you@example.com" autocomplete="email" required />
+					<input
+						id="email"
+						type="email"
+						bind:value={email}
+						placeholder="you@example.com"
+						autocomplete="email"
+					/>
 				</div>
 
 				{#if !showForgot}
@@ -105,7 +123,6 @@ const handleForgotPassword = async () => {
 								bind:value={password}
 								placeholder="Enter your password"
 								autocomplete="current-password"
-								required
 							/>
 							<button type="button" class="eye-btn" onclick={() => showPwd = !showPwd} aria-label={showPwd ? 'Hide' : 'Show'}>
 								{#if showPwd}
@@ -115,16 +132,16 @@ const handleForgotPassword = async () => {
 								{/if}
 							</button>
 						</div>
-						<div class="forgot-row">
-							<button type="button" class="text-link" onclick={() => { showForgot = true; error = ''; success = '' }}>Forgot password?</button>
-						</div>
+						<button type="button" class="link-sm" onclick={() => { showForgot = true; error = ''; success = '' }}>
+							Forgot password?
+						</button>
 					</div>
 				{/if}
 
 				{#if error === 'INVALID_CREDENTIALS'}
 					<div class="error-box">
 						<div class="error-title">Incorrect email or password.</div>
-						<div class="error-hint">Don't have an account yet? <a href="/signup" class="inline-link">Sign up here</a></div>
+						<div class="error-hint">Don't have an account? <a href="/signup" class="inline-link">Sign up here</a></div>
 					</div>
 				{:else if error}
 					<div class="error-msg">{error}</div>
@@ -138,9 +155,17 @@ const handleForgotPassword = async () => {
 				</button>
 
 				{#if showForgot}
-					<button type="button" class="text-link center" onclick={() => { showForgot = false; error = ''; success = '' }}>Back to sign in</button>
+					<button type="button" class="link-sm center" onclick={() => { showForgot = false; error = ''; success = '' }}>
+						← Back to sign in
+					</button>
 				{:else}
-					<div class="signup-row">Don't have an account? <a href="/signup" class="inline-link">Create one</a></div>
+					<div class="divider"><span></span><span class="or">or</span><span></span></div>
+					<button type="button" class="ghost-btn" disabled={guestLoading} onclick={continueAsGuest}>
+						{guestLoading ? 'Loading…' : 'Continue as guest'}
+					</button>
+					<div class="row-links">
+						<span>No account? <a href="/signup" class="inline-link">Create one</a></span>
+					</div>
 				{/if}
 			</form>
 		</div>
@@ -165,292 +190,142 @@ const handleForgotPassword = async () => {
 	position: relative;
 	overflow: hidden;
 }
-
 .panel-bg {
-	position: absolute;
-	inset: 0;
+	position: absolute; inset: 0;
 	background-image:
 		radial-gradient(circle at 20% 80%, rgba(0,135,189,0.22) 0, transparent 40%),
 		radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0, transparent 35%);
 	pointer-events: none;
 }
-
 .panel-content {
-	position: relative;
-	z-index: 1;
-	height: 100%;
+	position: relative; z-index: 1; height: 100%;
 	padding: 56px 48px;
-	display: flex;
-	flex-direction: column;
-	gap: 0;
+	display: flex; flex-direction: column;
 }
-
 .back-link {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-	color: rgba(255,255,255,0.72);
-	font-size: 13px;
-	font-weight: 500;
-	text-decoration: none;
-	margin-bottom: 28px;
-	transition: color 0.15s;
+	display: inline-flex; align-items: center; gap: 4px;
+	color: rgba(255,255,255,0.72); font-size: 13px; font-weight: 500;
+	text-decoration: none; margin-bottom: 28px; transition: color 0.15s;
 }
 .back-link:hover { color: #fff; }
-
-.panel-wordmark {
-	margin-bottom: 32px;
-}
-
+.panel-wordmark { margin-bottom: 32px; }
 .wordmark-img {
-	height: 32px;
-	width: auto;
-	display: block;
+	height: 32px; width: auto; display: block;
 	filter: brightness(0) invert(1);
 }
-
-.panel-foot {
-	margin-top: auto;
-}
-
+.panel-foot { margin-top: auto; }
 .panel-headline {
-	font-size: 32px;
-	font-weight: 500;
-	line-height: 1.15;
-	letter-spacing: -0.6px;
-	color: #fff;
-	margin-bottom: 14px;
-	max-width: 360px;
+	font-size: 32px; font-weight: 500; line-height: 1.15;
+	letter-spacing: -0.6px; color: #fff; margin-bottom: 14px; max-width: 360px;
 }
-
 .panel-sub {
-	font-size: 15px;
-	line-height: 1.55;
-	color: rgba(255,255,255,0.78);
-	margin: 0 0 28px;
-	max-width: 380px;
+	font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.78);
+	margin: 0 0 28px; max-width: 380px;
 }
-
 .panel-list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	font-size: 14px;
-	color: rgba(255,255,255,0.92);
+	list-style: none; padding: 0; margin: 0;
+	display: flex; flex-direction: column; gap: 12px;
+	font-size: 14px; color: rgba(255,255,255,0.92);
 }
-
-.panel-list li {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-
+.panel-list li { display: flex; align-items: center; gap: 10px; }
 .check-dot {
-	width: 18px;
-	height: 18px;
-	border-radius: 50%;
-	background: var(--teal-primary);
-	display: grid;
-	place-items: center;
-	flex-shrink: 0;
+	width: 18px; height: 18px; border-radius: 50%;
+	background: var(--teal-primary); display: grid; place-items: center; flex-shrink: 0;
 }
-
-.panel-copy {
-	margin-top: 40px;
-	font-size: 12px;
-	color: rgba(255,255,255,0.6);
-}
+.panel-copy { margin-top: 40px; font-size: 12px; color: rgba(255,255,255,0.6); }
 
 /* ── Right form panel ── */
 .form-panel {
 	background: var(--warm-surface);
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	display: flex; align-items: center; justify-content: center;
 	padding: 64px 48px;
 }
-
-.form-inner {
-	width: 100%;
-	max-width: 380px;
-}
-
-.form-head {
-	margin-bottom: 28px;
-}
-
+.form-inner { width: 100%; max-width: 380px; }
+.form-head { margin-bottom: 28px; }
 h1 {
-	font-size: 26px;
-	font-weight: 500;
-	letter-spacing: -0.5px;
-	margin: 0 0 4px;
-	color: var(--warm-text);
+	font-size: 26px; font-weight: 500; letter-spacing: -0.5px;
+	margin: 0 0 4px; color: var(--warm-text);
 }
+.form-sub { font-size: 14px; color: var(--warm-text-secondary); margin: 0; }
 
-.form-sub {
-	font-size: 14px;
-	color: var(--warm-text-secondary);
-	margin: 0;
-}
+form { display: flex; flex-direction: column; gap: 14px; }
 
-form {
-	display: flex;
-	flex-direction: column;
-	gap: 14px;
-}
+.field { display: flex; flex-direction: column; gap: 6px; }
 
-.field {
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-}
-
-label {
-	font-size: 13px;
-	font-weight: 500;
-	color: var(--warm-text-secondary);
-}
+label { font-size: 13px; font-weight: 500; color: var(--warm-text-secondary); }
 
 input[type='email'],
 input[type='password'],
 input[type='text'] {
-	width: 100%;
-	height: 44px;
-	padding: 0 12px;
-	border: 0.5px solid var(--warm-border);
-	border-radius: 10px;
-	background: var(--warm-surface);
-	color: var(--warm-text);
-	font-size: 14px;
-	font-family: inherit;
-	outline: none;
+	width: 100%; height: 44px; padding: 0 12px;
+	border: 0.5px solid var(--warm-border); border-radius: 10px;
+	background: var(--warm-surface); color: var(--warm-text);
+	font-size: 14px; font-family: inherit; outline: none;
 	box-sizing: border-box;
 	transition: border-color 0.12s, box-shadow 0.12s;
 }
-
 input:focus {
 	border-color: var(--teal-primary);
 	box-shadow: 0 0 0 3px var(--teal-light);
 }
 
-.pwd-wrap {
-	position: relative;
-	display: flex;
-	align-items: center;
-}
-
-.pwd-wrap input {
-	padding-right: 40px;
-}
-
+.pwd-wrap { position: relative; }
+.pwd-wrap input { padding-right: 40px; }
 .eye-btn {
-	position: absolute;
-	right: 0;
-	width: 40px;
-	height: 44px;
-	border: none;
-	background: transparent;
-	display: grid;
-	place-items: center;
-	cursor: pointer;
-	color: var(--warm-text-tertiary);
-	padding: 0;
+	position: absolute; right: 0; top: 0;
+	width: 40px; height: 44px; border: none; background: transparent;
+	display: grid; place-items: center;
+	cursor: pointer; color: var(--warm-text-tertiary); padding: 0;
 }
 
-.forgot-row {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 4px;
+.link-sm {
+	background: none; border: none; color: var(--teal-text);
+	font-size: 12px; font-weight: 500; cursor: pointer;
+	padding: 0; font-family: inherit; text-align: left;
 }
+.link-sm.center { text-align: center; width: 100%; }
+.link-sm:hover { text-decoration: underline; }
 
 .error-box {
-	background: #fee2e2;
-	border: 0.5px solid #fca5a5;
-	border-radius: 10px;
-	padding: 10px 12px;
+	background: #fee2e2; border: 0.5px solid #fca5a5;
+	border-radius: 10px; padding: 10px 12px;
 }
 .error-title { font-size: 13px; font-weight: 600; color: #dc2626; }
-.error-hint  { font-size: 12px; color: #7f1d1d; margin-top: 4px; }
-.error-msg   { font-size: 13px; color: #ef4444; }
+.error-hint { font-size: 12px; color: #7f1d1d; margin-top: 4px; }
+.error-msg { font-size: 13px; color: #ef4444; }
 .success-msg { font-size: 13px; color: var(--teal-primary); }
 
-.inline-link {
-	color: var(--teal-text);
-	font-weight: 500;
-	text-decoration: none;
-}
+.inline-link { color: var(--teal-text); font-weight: 500; text-decoration: none; }
 .inline-link:hover { text-decoration: underline; }
 
 .primary-btn {
-	width: 100%;
-	height: 44px;
-	background: var(--teal-primary);
-	color: #fff;
-	border: none;
-	border-radius: 12px;
-	font-size: 15px;
-	font-weight: 600;
-	font-family: inherit;
-	cursor: pointer;
-	transition: background 0.15s;
+	width: 100%; height: 44px;
+	background: var(--teal-primary); color: #fff; border: none;
+	border-radius: 12px; font-size: 15px; font-weight: 600;
+	font-family: inherit; cursor: pointer; transition: background 0.15s;
 }
 .primary-btn:hover:not(:disabled) { background: var(--teal-dark); }
 .primary-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 
 .divider {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	color: var(--warm-text-tertiary);
-	font-size: 12px;
+	display: flex; align-items: center; gap: 10px;
+	color: var(--warm-text-tertiary); font-size: 12px;
 }
-.divider span:first-child,
-.divider span:last-child {
-	flex: 1;
-	height: 1px;
-	background: var(--warm-border);
+.divider span:first-child, .divider span:last-child {
+	flex: 1; height: 1px; background: var(--warm-border);
 }
 
 .ghost-btn {
-	width: 100%;
-	height: 44px;
-	background: transparent;
-	color: var(--warm-text);
-	border: 0.5px solid var(--warm-border);
-	border-radius: 12px;
-	font-size: 15px;
-	font-weight: 500;
-	font-family: inherit;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
-	transition: border-color 0.15s;
+	width: 100%; height: 44px;
+	background: transparent; color: var(--warm-text);
+	border: 0.5px solid var(--warm-border); border-radius: 12px;
+	font-size: 15px; font-weight: 500; font-family: inherit;
+	cursor: pointer; transition: border-color 0.15s, color 0.15s;
 }
-.ghost-btn:hover { border-color: var(--teal-primary); color: var(--teal-primary); }
+.ghost-btn:hover:not(:disabled) { border-color: var(--teal-primary); color: var(--teal-primary); }
+.ghost-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.signup-row {
-	text-align: center;
-	font-size: 13px;
-	color: var(--warm-text-secondary);
-	margin-top: 2px;
+.row-links {
+	text-align: center; font-size: 13px; color: var(--warm-text-secondary);
 }
-
-.text-link {
-	background: none;
-	border: none;
-	color: var(--warm-text-secondary);
-	font-size: 13px;
-	cursor: pointer;
-	padding: 0;
-	font-family: inherit;
-	text-decoration: none;
-	transition: color 0.15s;
-}
-.text-link:hover { color: var(--teal-primary); }
-.text-link.center { display: block; text-align: center; width: 100%; }
 </style>

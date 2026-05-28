@@ -4,6 +4,8 @@ import { auth as firebaseAuth, db } from './firebase'
 import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	signInAnonymously,
+	deleteUser,
 	signOut as firebaseSignOut,
 	sendPasswordResetEmail,
 	setPersistence,
@@ -64,6 +66,10 @@ export class Auth {
 		return this._firebaseUser !== null
 	}
 
+	get isAnonymous(): boolean {
+		return this._firebaseUser?.isAnonymous ?? false
+	}
+
 	get greeting(): string {
 		const hour = new Date().getHours()
 		if (hour < 12) return 'Good morning'
@@ -91,6 +97,22 @@ export class Auth {
 		}
 	}
 
+	async signInAsGuest(): Promise<void> {
+		this.loading = true
+		try {
+			await signInAnonymously(firebaseAuth)
+		} catch (err: unknown) {
+			this.loading = false
+			throw err
+		}
+	}
+
+	async deleteAccount(): Promise<void> {
+		if (!this._firebaseUser) throw new Error('Not signed in.')
+		await deleteUser(this._firebaseUser)
+		this._cache.current = null
+	}
+
 	async register(email: string, password: string): Promise<void> {
 		this.loading = true
 		try {
@@ -115,6 +137,11 @@ export class Auth {
 	}
 
 	private async _loadOrCreateProfile(fbUser: FirebaseUser): Promise<void> {
+		// Anonymous users get a local-only guest profile — no Firestore round-trip
+		if (fbUser.isAnonymous) {
+			this.user = { name: 'Guest', email: '', avatarInitials: 'GU', streakDays: 0, lastActiveDate: null }
+			return
+		}
 		try {
 			const ref = doc(db, 'users', fbUser.uid)
 			const snap = await getDoc(ref)

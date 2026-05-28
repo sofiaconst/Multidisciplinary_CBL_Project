@@ -15,6 +15,12 @@ Changes to `.svelte` files **never** affect port 5273, and vice versa. The Hydra
 
 ---
 
+## Viewing the app on a phone
+
+Open Chrome DevTools (`F12`), click the device-toolbar icon (top-left of DevTools panel), or press `Ctrl+Shift+M`. Select a preset like "iPhone 12" or type a custom size (e.g. `390 × 844`). The SvelteKit app at `http://localhost:5176` reflows to that viewport immediately.
+
+To test on a real Android device: `pnpm build && npx cap sync android && npx cap open android` (requires Android Studio).
+
 ## Default target
 
 All code changes go to the SvelteKit app (`src/`) only.
