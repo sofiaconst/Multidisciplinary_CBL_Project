@@ -6,10 +6,12 @@ Single source of truth for all Claude agents working in this repo. Read this fir
 
 ## Two servers — do not confuse them
 
-| Server | Command | Port | What it is |
+| Server | Command | Preferred port | What it is |
 |---|---|---|---|
-| SvelteKit app | `pnpm dev` (in repo root) | **5175** | The real app. All Svelte edits show here. |
+| SvelteKit app | `pnpm dev` (in repo root) | **5173** | The real app. All Svelte edits show here. |
 | Static HTML site | `cd "Hydration App" && npm run dev` | **5273** | Design reference only. Read it; don't edit it. |
+
+> **Port note:** Vite tries `5173` first and auto-increments if it's taken (`5174`, `5175`, …). Always read the port from the terminal output — don't hardcode it.
 
 Changes to `.svelte` files **never** affect port 5273, and vice versa.
 
@@ -17,9 +19,14 @@ Changes to `.svelte` files **never** affect port 5273, and vice versa.
 
 ## Viewing the app on a phone
 
-Open Chrome DevTools (`F12`) → device-toolbar icon (top-left) or `Ctrl+Shift+M`. Pick "iPhone 12" or type a custom size (e.g. `390 × 844`). The SvelteKit app at `http://localhost:5176` reflows immediately.
+**Browser emulation:** Open DevTools (`F12`) → device-toolbar icon or `Ctrl+Shift+M`. Pick "iPhone 12" or type `390 × 844`. Navigate to `http://localhost:<port>/m/` for the phone layout.
 
-To test on a real Android device:
+**Physical device:** Phone and laptop must be on the same WiFi. Use the **Network** URL printed by the terminal (e.g. `http://192.168.1.42:5173/m/`). If blocked, allow the port through Windows Firewall:
+```powershell
+netsh advfirewall firewall add rule name="Sippy Dev" dir=in action=allow protocol=TCP localport=5173
+```
+
+**Android device (native):**
 ```bash
 pnpm build && npx cap sync android && npx cap open android
 ```
@@ -90,7 +97,7 @@ node scripts/remove-bg.mjs
 
 **Commands:**
 ```bash
-pnpm dev          # HMR dev server → http://localhost:5175
+pnpm dev          # HMR dev server → http://localhost:5173 (port may vary — read terminal)
 pnpm build        # production build → build/
 pnpm check        # svelte-check type checking
 pnpm lint         # biome lint
@@ -225,4 +232,4 @@ Plain HTML + React 18 via Babel CDN. No build step.
 
 ## No automated tests
 
-Verify changes by running `pnpm dev` and opening `http://localhost:5175` (or the port shown in terminal output).
+Verify changes by running `pnpm dev` and opening the **Local** URL printed in the terminal (preferred `http://localhost:5173`, but port auto-increments if taken).
