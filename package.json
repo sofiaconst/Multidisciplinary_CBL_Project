@@ -25,7 +25,7 @@
 		"daisyui": "^5.5.19",
 		"postcss": "^8.5.8",
 		"sharp": "^0.34.5",
-		"svelte": "^5.53.9",
+		"svelte": "^5.55.10",
 		"svelte-check": "^4.4.5",
 		"svelte-french-toast": "2.0.0-alpha.0",
 		"svelte-persisted-state": "^1.4.0",
