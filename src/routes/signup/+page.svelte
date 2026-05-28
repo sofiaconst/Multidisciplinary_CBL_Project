@@ -25,7 +25,7 @@ const strengthColor = $derived(
 	metCount === 0 ? '#D9D9D2'
 	: metCount === 1 ? '#A32D2D'
 	: metCount === 2 ? '#D88742'
-	: '#0087BD'
+	: '#16a34a'
 )
 const strengthLabel = $derived(['Add a password', 'Weak', 'Almost there', 'Strong'][metCount])
 const strengthFill = $derived([0, 1, 2, 4][metCount])
@@ -33,6 +33,7 @@ const strengthFill = $derived([0, 1, 2, 4][metCount])
 const handleSignUp = async (e: Event) => {
 	e.preventDefault()
 	error = ''
+	if (!email.includes('@') || !email.includes('.')) { error = 'Please enter a valid email address.'; return }
 	if (password.length < 6) { error = 'Password must be at least 6 characters.'; return }
 	if (!passwordsMatch) { error = 'Passwords do not match.'; return }
 	loading = true

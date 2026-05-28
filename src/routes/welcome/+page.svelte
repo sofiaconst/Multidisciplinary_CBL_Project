@@ -181,7 +181,7 @@
 }
 
 .wordmark {
-	height: 44px;
+	height: 60px;
 	width: auto;
 	display: block;
 }
