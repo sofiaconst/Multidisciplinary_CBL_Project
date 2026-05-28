@@ -138,7 +138,6 @@ const navTabs = [
 .nav-logo {
 	width: 28px;
 	height: 28px;
-	border-radius: 7px;
 	object-fit: contain;
 }
 

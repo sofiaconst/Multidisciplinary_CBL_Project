@@ -9,7 +9,7 @@ Single source of truth for all Claude agents working in this repo. Read this fir
 | Server | Command | Port | What it is |
 |---|---|---|---|
 | SvelteKit app | `pnpm dev` (in `hydration-scale-app/`) | **5175** | The real app. All Svelte edits show here. |
-| Static HTML site | `npx serve -p 5273` (in `Hydration App/`) | **5273** | Design reference only. Separate codebase. |
+| Static HTML site | `cd "Hydration App" && npm run dev` | **5273** | Design reference. Vite serves the 5-page static site. |
 
 Changes to `.svelte` files **never** affect port 5273, and vice versa. The Hydration App folder is the visual reference; the SvelteKit `src/` folder is the deliverable.
 
@@ -42,10 +42,27 @@ Changes to `.svelte` files **never** affect port 5273, and vice versa. The Hydra
 
 ### Logo files
 
+Both logo PNGs have **transparent backgrounds** (no white or beige box). Do not add `border-radius` in CSS — there is no rounded-square container to clip.
+
 | File | Use |
 |---|---|
-| `static/logo-icon.png` | Favicon, navbar mark, welcome splash |
-| `Hydration App/app/logo-wordmark.png` | Auth split-panel only (static site reference) |
+| `static/logo-icon.png` | Navbar mark (28 px drop mark), welcome splash, favicons |
+| `static/logo-wordmark.png` | Auth split-panel dark header — rendered with `filter: brightness(0) invert(1)` to appear white on teal |
+| `Hydration App/app/logo-icon.png` | Mirror of `static/logo-icon.png` for the static site |
+| `Hydration App/app/logo-wordmark.png` | Mirror of `static/logo-wordmark.png` for the static site |
+
+**Source originals** (never edit these, they're inputs to the processing script):
+
+| Upload file | What it is |
+|---|---|
+| `Hydration App/uploads/Sipopy new app logo.png` | App icon source (drop mark in rounded square) |
+| `Hydration App/uploads/Sippy new main logo.png` | Wordmark source ("sippy" text, white bg) |
+
+**To regenerate transparent PNGs** (e.g. after uploading new logo assets):
+```bash
+node scripts/remove-bg.mjs
+```
+The script reads from uploads, strips backgrounds (saturation-cut for the icon, white-matte for the wordmark), and writes to both `static/` and `Hydration App/app/`.
 
 ---
 

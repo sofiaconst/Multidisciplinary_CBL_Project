@@ -110,7 +110,6 @@ function Logo({ size = 32, dark = false, wordmarkOnly = false }) {
           width: size,
           height: size,
           display: 'block',
-          borderRadius: size * 0.22,
         }}
         draggable={false}
       />
