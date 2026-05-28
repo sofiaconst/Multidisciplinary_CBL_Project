@@ -13,7 +13,7 @@
 		"format": "biome format --write ./src"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.6",
+		"@biomejs/biome": "^2.4.15",
 		"@iconify-json/mingcute": "^1.2.7",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.53.4",
