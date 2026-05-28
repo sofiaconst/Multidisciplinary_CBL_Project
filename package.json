@@ -26,7 +26,7 @@
 		"postcss": "^8.5.8",
 		"sharp": "^0.34.5",
 		"svelte": "^5.53.9",
-		"svelte-check": "^4.4.5",
+		"svelte-check": "^4.4.8",
 		"svelte-french-toast": "2.0.0-alpha.0",
 		"svelte-persisted-state": "^1.4.0",
 		"tailwindcss": "^4.2.1",
