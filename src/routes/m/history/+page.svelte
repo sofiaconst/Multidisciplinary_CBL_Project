@@ -54,7 +54,7 @@ const goalPct = (s: (typeof history.weekSessions)[0]) => s.goalMl === 0 ? 0 : Ma
 <svelte:head><title>History · Sippy</title></svelte:head>
 
 <style>
-.page { padding: 16px 16px 24px; display: flex; flex-direction: column; gap: 14px; }
+.page { padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 16px; }
 .page-head { padding: 4px 0; }
 h1 { font-size: 24px; font-weight: 500; letter-spacing: -0.4px; color: var(--warm-text); margin: 0 0 4px; }
 .sub { font-size: 13px; color: var(--warm-text-secondary); margin: 0; }

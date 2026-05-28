@@ -123,7 +123,7 @@ const tare = async () => {
 	100% { box-shadow: 0 0 0 0 rgba(0,135,189,0); }
 }
 
-.page { padding: 16px 16px 24px; display: flex; flex-direction: column; gap: 14px; }
+.page { padding: 20px 16px 32px; display: flex; flex-direction: column; gap: 16px; }
 
 .greeting { display: flex; justify-content: space-between; align-items: center; }
 .greeting-sub { font-size: 13px; color: var(--warm-text-tertiary); }

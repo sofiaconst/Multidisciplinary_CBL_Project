@@ -52,7 +52,7 @@ const scale   = Scale.getInstance()
 <svelte:head><title>Profile · Sippy</title></svelte:head>
 
 <style>
-.page { padding: 16px 16px 24px; display: flex; flex-direction: column; gap: 14px; }
+.page { padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 16px; }
 
 .identity-card {
 	background: var(--warm-surface); border: 0.5px solid var(--warm-border);

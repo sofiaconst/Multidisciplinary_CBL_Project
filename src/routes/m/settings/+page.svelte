@@ -180,7 +180,7 @@ const deleteAccount = async () => {
 <svelte:head><title>Settings · Sippy</title></svelte:head>
 
 <style>
-.page { padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 14px; }
+.page { padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 16px; }
 .page-head { padding: 4px 0; }
 h1 { font-size: 24px; font-weight: 500; letter-spacing: -0.4px; color: var(--warm-text); margin: 0 0 4px; }
 h2 { font-size: 17px; font-weight: 500; letter-spacing: -0.3px; color: var(--warm-text); margin: 0; }
@@ -191,23 +191,23 @@ h2 { font-size: 17px; font-weight: 500; letter-spacing: -0.3px; color: var(--war
 .hint { font-size: 12px; color: var(--warm-text-tertiary); margin-top: 2px; }
 
 /* Stepper */
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .field { display: flex; flex-direction: column; gap: 8px; }
-.stepper { display: flex; align-items: center; height: 44px; border: 0.5px solid var(--warm-border); border-radius: 10px; overflow: hidden; }
-.sp-btn { width: 40px; height: 100%; border: none; background: transparent; font-size: 18px; font-weight: 400; cursor: pointer; color: var(--warm-text-secondary); }
-.sp-val { flex: 1; text-align: center; font-size: 14px; font-weight: 500; color: var(--warm-text); border-left: 0.5px solid var(--warm-border); border-right: 0.5px solid var(--warm-border); height: 100%; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
-.sp-unit { font-size: 10px; color: var(--warm-text-tertiary); margin-left: 2px; font-weight: 400; }
+.stepper { display: flex; align-items: center; height: 52px; border: 0.5px solid var(--warm-border); border-radius: 12px; overflow: hidden; }
+.sp-btn { width: 52px; height: 100%; border: none; background: transparent; font-size: 22px; font-weight: 300; cursor: pointer; color: var(--warm-text-secondary); }
+.sp-val { flex: 1; text-align: center; font-size: 15px; font-weight: 500; color: var(--warm-text); border-left: 0.5px solid var(--warm-border); border-right: 0.5px solid var(--warm-border); height: 100%; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.sp-unit { font-size: 11px; color: var(--warm-text-tertiary); margin-left: 2px; font-weight: 400; }
 
 /* Number input */
-.input-wrap { display: flex; height: 44px; border: 0.5px solid var(--warm-border); border-radius: 10px; overflow: hidden; max-width: 160px; }
-.text-input { flex: 1; height: 100%; border: none; outline: none; background: transparent; color: var(--warm-text); font-size: 14px; font-family: inherit; padding: 0 12px; }
-.unit { padding: 0 10px; font-size: 13px; color: var(--warm-text-secondary); border-left: 0.5px solid var(--warm-border); display: grid; place-items: center; background: var(--warm-bg); }
+.input-wrap { display: flex; height: 52px; border: 0.5px solid var(--warm-border); border-radius: 12px; overflow: hidden; max-width: 100%; }
+.text-input { flex: 1; height: 100%; border: none; outline: none; background: transparent; color: var(--warm-text); font-size: 16px; font-family: inherit; padding: 0 14px; }
+.unit { padding: 0 12px; font-size: 14px; color: var(--warm-text-secondary); border-left: 0.5px solid var(--warm-border); display: grid; place-items: center; background: var(--warm-bg); }
 
 /* Toggle */
-.toggle { width: 40px; height: 22px; border-radius: 20px; border: none; background: #C7C5BC; position: relative; cursor: pointer; padding: 0; transition: background 0.15s; flex-shrink: 0; }
+.toggle { width: 50px; height: 28px; border-radius: 28px; border: none; background: #C7C5BC; position: relative; cursor: pointer; padding: 0; transition: background 0.15s; flex-shrink: 0; }
 .toggle.on { background: var(--teal-primary); }
-.knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.15); transition: left 0.15s; }
-.toggle.on .knob { left: 20px; }
+.knob { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.15); transition: left 0.15s; }
+.toggle.on .knob { left: 25px; }
 
 /* Row item */
 .row-item { display: flex; align-items: center; gap: 12px; }

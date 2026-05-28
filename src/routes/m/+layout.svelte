@@ -119,16 +119,19 @@ const tabs = [
 	flex: 1;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
+	/* Extra bottom padding so last card clears the bottom nav on all devices */
+	padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* ── Bottom nav ── */
 .bottom-nav {
-	height: 64px;
 	background: var(--warm-surface);
 	border-top: 0.5px solid var(--warm-border);
 	display: flex;
 	align-items: stretch;
 	flex-shrink: 0;
+	/* 64px nav + safe area for iPhone home indicator */
+	padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .tab {
 	flex: 1;
@@ -136,13 +139,15 @@ const tabs = [
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 3px;
+	gap: 4px;
+	padding: 10px 0;
 	text-decoration: none;
 	color: var(--warm-text-tertiary);
 	transition: color 0.15s;
+	min-height: 60px;
 }
 .tab.tab-active { color: var(--teal-primary); }
-.tab-label { font-size: 10px; font-weight: 500; }
+.tab-label { font-size: 11px; font-weight: 500; }
 
 /* ── Splash ── */
 .splash {
