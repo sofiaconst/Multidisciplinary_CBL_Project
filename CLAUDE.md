@@ -15,6 +15,14 @@ Changes to `.svelte` files **never** affect port 5273, and vice versa. The Hydra
 
 ---
 
+## Default target
+
+All code changes go to the SvelteKit app (`src/`) only.
+Do not edit files under `Hydration App/` unless explicitly asked.
+`Hydration App/` is read-only design reference.
+
+---
+
 ## Brand
 
 **App name:** Sippy (never "Hydr8" — that name is retired)
