@@ -11,6 +11,9 @@ const config: UserConfig = {
 		}),
 		tailwindcss(),
 	],
+	server: {
+		host: true, // expose on local network so phones on the same WiFi can connect
+	},
 }
 
 export default config
