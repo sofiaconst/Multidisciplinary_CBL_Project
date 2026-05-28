@@ -13,21 +13,17 @@ const formatDate = (dateStr: string) => {
 	return new Date(dateStr).toLocaleDateString('en', { month: 'short', day: 'numeric' })
 }
 
-const goalPct = (session: ReturnType<typeof history.weekSessions>[0]) => {
+const goalPct = (session: (typeof history.weekSessions)[0]) => {
 	if (session.goalMl === 0) return 0
 	return Math.min(100, Math.round((session.consumedMl / session.goalMl) * 100))
 }
 </script>
 
 <div class="page">
+	<main class="content">
 	<div class="page-header">
-		<a href="/" class="back-btn">
-			<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 4L6 10l6 6"/></svg>
-		</a>
-		<div>
-			<h1>History</h1>
-			<p>{history.totalSessions} sessions recorded</p>
-		</div>
+		<h1>History</h1>
+		<p class="page-sub">{history.totalSessions} sessions recorded</p>
 	</div>
 
 	<!-- Weekly bar chart -->
@@ -79,6 +75,7 @@ const goalPct = (session: ReturnType<typeof history.weekSessions>[0]) => {
 			</div>
 		{/if}
 	</div>
+	</main>
 </div>
 
 <svelte:head>
@@ -87,52 +84,44 @@ const goalPct = (session: ReturnType<typeof history.weekSessions>[0]) => {
 
 <style>
 .page {
-	padding: 16px;
+	background: var(--warm-bg);
+	min-height: 100%;
+}
+
+.content {
+	width: 100%;
+	max-width: 1180px;
+	margin: 0 auto;
+	padding: 28px 24px 56px;
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 16px;
+	box-sizing: border-box;
 }
 
 .page-header {
-	padding: 8px 0 4px;
-	display: flex;
-	align-items: center;
-	gap: 10px;
+	padding: 4px 0 8px;
 }
-
-.back-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 34px;
-	height: 34px;
-	border-radius: 10px;
-	background: var(--teal-light);
-	color: var(--teal-dark);
-	text-decoration: none;
-	flex-shrink: 0;
-	transition: background 0.15s;
-}
-.back-btn:hover { background: var(--teal-primary); color: #fff; }
 
 .page-header h1 {
-	font-size: 22px;
-	font-weight: 700;
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: -0.5px;
 	color: var(--warm-text);
-	margin: 0 0 2px;
+	margin: 0 0 4px;
 }
 
-.page-header p {
-	font-size: 13px;
+.page-sub {
+	font-size: 14px;
 	color: var(--warm-text-secondary);
 	margin: 0;
 }
 
 .card {
 	background: var(--warm-surface);
-	border: 1px solid var(--warm-border);
-	border-radius: 12px;
-	padding: 16px;
+	border: 0.5px solid var(--warm-border);
+	border-radius: 16px;
+	padding: 22px 24px;
 }
 
 .section-label {

@@ -49,4 +49,5 @@ html {
 	height: 100%;
 	background-color: var(--warm-bg);
 	color: var(--warm-text);
+	font-family: 'DM Sans', system-ui, sans-serif;
 }

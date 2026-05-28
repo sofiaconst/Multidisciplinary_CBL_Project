@@ -6,7 +6,6 @@ import { Auth } from '$lib/auth.svelte'
 import { browser } from '$app/environment'
 import { goto } from '$app/navigation'
 import { page } from '$app/state'
-import BottomNav from './BottomNav.svelte'
 
 const { children } = $props()
 
@@ -17,9 +16,7 @@ const scale = Scale.getInstance()
 const sessionId = browser ? `sess-${Date.now()}-${Math.random().toString(36).slice(2, 8)}` : 'server'
 
 const logClientEvent = async (type: string, payload: Record<string, unknown> = {}) => {
-	if (!browser) {
-		return
-	}
+	if (!browser) return
 	try {
 		void fetch('/api/tracking-log', {
 			method: 'POST',
@@ -33,23 +30,12 @@ const logClientEvent = async (type: string, payload: Record<string, unknown> = {
 }
 
 if (browser) {
-	void logClientEvent('page_loaded', {
-		href: window.location.href,
-		userAgent: navigator.userAgent,
+	void logClientEvent('page_loaded', { href: window.location.href, userAgent: navigator.userAgent })
+	window.addEventListener('error', (e) => {
+		void logClientEvent('window_error', { message: e.message, filename: e.filename, lineno: e.lineno, colno: e.colno })
 	})
-	window.addEventListener('error', (event) => {
-		void logClientEvent('window_error', {
-			message: event.message,
-			filename: event.filename,
-			lineno: event.lineno,
-			colno: event.colno,
-		})
-	})
-	window.addEventListener('unhandledrejection', (event) => {
-		const reason =
-			event.reason instanceof Error
-				? { message: event.reason.message, stack: event.reason.stack }
-				: { value: String(event.reason) }
+	window.addEventListener('unhandledrejection', (e) => {
+		const reason = e.reason instanceof Error ? { message: e.reason.message, stack: e.reason.stack } : { value: String(e.reason) }
 		void logClientEvent('unhandled_rejection', reason)
 	})
 }
@@ -65,6 +51,13 @@ $effect(() => {
 		void goto('/welcome')
 	}
 })
+
+const navTabs = [
+	{ label: 'Dashboard', href: '/' },
+	{ label: 'History', href: '/history' },
+	{ label: 'Profile', href: '/profile' },
+	{ label: 'Settings', href: '/settings' },
+]
 </script>
 
 {#if isPublicPage}
@@ -75,23 +68,32 @@ $effect(() => {
 	</div>
 {:else}
 	<div class="app-shell">
-		<header class="app-header">
-			<div class="header-brand">
-				<img src="/logo-icon.png" alt="Sippy" class="header-logo" />
-				<span class="header-name">Sippy</span>
+		<!-- Snap-exact navbar -->
+		<nav class="app-nav">
+			<a href="/" class="nav-brand">
+				<img src="/logo-icon.png" alt="Sippy" class="nav-logo" />
+				<span class="nav-name">Sippy</span>
+			</a>
+			<div class="nav-tabs">
+				{#each navTabs as tab}
+					<a
+						href={tab.href}
+						class="nav-tab"
+						class:nav-tab-active={page.url.pathname === tab.href}
+					>{tab.label}</a>
+				{/each}
 			</div>
-			<div class="header-right">
-				<div class="header-ble" class:header-ble-on={scale.bt.connected}>
-					<span class="header-ble-dot"></span>
-					{scale.bt.connected ? 'Scale connected' : 'Offline'}
+			<div class="nav-right">
+				<div class="conn-pill" class:conn-pill-on={scale.bt.connected}>
+					<span class="conn-dot"></span>
+					{scale.bt.connected ? 'Scale connected' : 'Scale offline'}
 				</div>
-				<div class="header-avatar">{auth.user?.avatarInitials ?? '?'}</div>
+				<div class="nav-avatar">{auth.user?.avatarInitials ?? '?'}</div>
 			</div>
-		</header>
+		</nav>
 		<div class="app-content">
 			{@render children()}
 		</div>
-		<BottomNav />
 	</div>
 {/if}
 
@@ -99,84 +101,124 @@ $effect(() => {
 .app-shell {
 	display: flex;
 	flex-direction: column;
-	height: 100dvh;
+	min-height: 100dvh;
 	background: var(--warm-bg);
 }
 
-.app-header {
+/* ── Navbar ── */
+.app-nav {
+	height: 64px;
+	background: var(--warm-surface);
+	border-bottom: 0.5px solid var(--warm-border);
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding: 0 16px;
-	height: 52px;
-	background: var(--warm-surface);
-	border-bottom: 1px solid var(--warm-border);
+	padding: 0 32px;
+	gap: 32px;
+	position: sticky;
+	top: 0;
+	z-index: 20;
 	flex-shrink: 0;
 }
 
-.header-brand {
+.nav-brand {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 10px;
+	text-decoration: none;
+	flex-shrink: 0;
 }
 
-.header-logo {
+.nav-logo {
 	width: 28px;
 	height: 28px;
 	border-radius: 7px;
 	object-fit: contain;
 }
 
-.header-name {
-	font-size: 16px;
+.nav-name {
+	font-size: 15px;
 	font-weight: 700;
 	color: var(--warm-text);
-	letter-spacing: -0.3px;
+	letter-spacing: -0.2px;
 }
 
-.header-right {
+.nav-tabs {
+	flex: 1;
 	display: flex;
-	align-items: center;
-	gap: 8px;
+	justify-content: center;
+	gap: 28px;
 }
 
-.header-ble {
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	font-size: 11px;
+.nav-tab {
+	font-size: 14px;
+	color: var(--warm-text-secondary);
+	text-decoration: none;
+	font-weight: 400;
+	position: relative;
+	padding-bottom: 2px;
+}
+
+.nav-tab.nav-tab-active {
+	color: var(--warm-text);
 	font-weight: 500;
-	color: var(--warm-text-tertiary);
-	background: var(--warm-bg);
-	border: 1px solid var(--warm-border);
-	border-radius: 20px;
-	padding: 4px 10px;
 }
 
-.header-ble-dot {
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background: var(--warm-border);
+.nav-tab.nav-tab-active::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -22px;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--teal-primary);
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 	flex-shrink: 0;
 }
 
-.header-ble.header-ble-on {
-	color: var(--teal-dark);
-	background: var(--teal-light);
-	border-color: var(--teal-primary);
+.conn-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	border-radius: 20px;
+	border: 0.5px solid var(--warm-border);
+	background: var(--warm-surface);
+	font-size: 12px;
+	color: var(--warm-text-secondary);
+	font-weight: 500;
 }
 
-.header-ble.header-ble-on .header-ble-dot {
-	background: var(--teal-primary);
-}
-
-.header-avatar {
-	width: 32px;
-	height: 32px;
+.conn-dot {
+	width: 6px;
+	height: 6px;
 	border-radius: 50%;
+	background: var(--warm-text-tertiary);
+	flex-shrink: 0;
+}
+
+.conn-pill.conn-pill-on {
+	border-color: var(--teal-primary);
+	background: var(--teal-light);
+	color: var(--teal-dark);
+}
+
+.conn-pill.conn-pill-on .conn-dot {
 	background: var(--teal-primary);
-	color: #fff;
+}
+
+.nav-avatar {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: var(--teal-light);
+	border: 1.5px solid var(--teal-primary);
+	color: var(--teal-dark);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -185,12 +227,14 @@ $effect(() => {
 	flex-shrink: 0;
 }
 
+/* ── Content ── */
 .app-content {
 	flex: 1;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
 
+/* ── Splash ── */
 .splash {
 	height: 100dvh;
 	background: var(--warm-bg);
