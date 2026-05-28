@@ -184,6 +184,30 @@ const continueAsGuest = async () => {
 	background: var(--warm-bg);
 }
 
+@media (max-width: 768px) {
+	.page {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
+	}
+
+	.panel-content {
+		padding: 28px 24px 24px;
+	}
+
+	.panel-foot { display: none; }
+
+	.panel-copy { display: none; }
+
+	.panel-headline { font-size: 18px; margin-bottom: 0; }
+
+	.form-panel {
+		padding: 28px 24px 40px;
+		align-items: flex-start;
+	}
+
+	.form-inner { max-width: 100%; }
+}
+
 /* ── Left dark panel ── */
 .brand-panel {
 	background: var(--teal-dark);

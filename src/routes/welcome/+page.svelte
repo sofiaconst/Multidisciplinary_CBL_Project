@@ -421,10 +421,21 @@ h1 {
 }
 
 /* ── Responsive adjustments ── */
+@media (max-width: 860px) {
+	.hero {
+		grid-template-columns: 1fr;
+		padding: 48px 24px 40px;
+	}
+	.hero-right { display: none; }
+	.hero-left { align-items: center; text-align: center; }
+	.cta-row { justify-content: center; }
+	.hero-tag { justify-content: center; }
+}
+
 @media (max-width: 480px) {
 	h1 { font-size: 44px; letter-spacing: -1.5px; }
 	.hero-body { font-size: 16px; }
 	.wordmark { height: 44px; }
-	.hero { padding: 40px 20px 36px; }
+	.nav { padding: 0 16px; }
 }
 </style>
