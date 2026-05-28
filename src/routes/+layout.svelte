@@ -96,6 +96,10 @@ const navTabs = [
 		</nav>
 		<div class="app-content">
 			{@render children()}
+			<footer class="app-footer">
+				<span>© 2026 Sippy</span>
+				<span>Built by the Sippy team · v1.0</span>
+			</footer>
 		</div>
 	</div>
 {/if}
@@ -252,6 +256,20 @@ const navTabs = [
 	flex: 1;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ── Footer ── */
+.app-footer {
+	margin-top: auto;
+	padding: 24px 32px;
+	border-top: 0.5px solid var(--warm-border);
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	color: var(--warm-text-tertiary);
+	font-family: 'DM Sans', system-ui, sans-serif;
 }
 
 /* ── Splash ── */

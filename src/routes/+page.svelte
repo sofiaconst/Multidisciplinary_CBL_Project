@@ -122,16 +122,24 @@ const tare = async () => {
 
 			{#if scale.bt.connected}
 				<div class="card scale-card">
-					<div class="card-icon-wrap">
-						<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="2" y="7" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+					<div class="scale-header">
+						<svg viewBox="0 0 24 24" fill="none" width="16" height="16" color="var(--teal-dark)"><rect x="2" y="7" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+						<span class="scale-label">Live scale reading</span>
+						<span class="live-pill">
+							<span class="live-dot"></span>
+							live
+						</span>
 					</div>
-					<div class="card-body">
-						<div class="card-title">Live scale reading</div>
+					<div class="scale-reading">
 						<div class="scale-weight">{scale.bt.currentWeight.toFixed(1)} <span class="stat-unit">g</span></div>
+						<span class="cup-label">cup detected</span>
 					</div>
-					<button type="button" class="tare-btn" onclick={tare} disabled={scale.bt.calibrationBusy}>
-						Tare
-					</button>
+					<div class="scale-actions">
+						<button type="button" class="tare-btn" onclick={tare} disabled={scale.bt.calibrationBusy}>
+							<svg viewBox="0 0 24 24" fill="none" width="13" height="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+							Tare
+						</button>
+					</div>
 				</div>
 			{:else}
 				<div class="card connect-card">
@@ -396,8 +404,52 @@ const tare = async () => {
 
 .scale-card {
 	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.scale-header {
+	display: flex;
 	align-items: center;
-	gap: 14px;
+	gap: 8px;
+}
+
+.scale-label {
+	font-size: 13px;
+	color: var(--warm-text-secondary);
+	font-weight: 500;
+	flex: 1;
+}
+
+.live-pill {
+	margin-left: auto;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 11px;
+	color: var(--teal-dark);
+	font-weight: 600;
+}
+
+.live-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: var(--teal-primary);
+	box-shadow: 0 0 0 0 rgba(0,135,189,0.55);
+	animation: scalePulse 1.6s ease-out infinite;
+}
+
+@keyframes scalePulse {
+	0%   { box-shadow: 0 0 0 0 rgba(0,135,189,0.55); }
+	70%  { box-shadow: 0 0 0 6px rgba(0,135,189,0); }
+	100% { box-shadow: 0 0 0 0 rgba(0,135,189,0); }
+}
+
+.scale-reading {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
 }
 
 .scale-weight {
@@ -407,24 +459,36 @@ const tare = async () => {
 	color: var(--warm-text);
 	font-variant-numeric: tabular-nums;
 	line-height: 1;
+}
+
+.cup-label {
+	font-size: 12px;
+	color: var(--warm-text-tertiary);
+}
+
+.scale-actions {
+	display: flex;
+	gap: 8px;
 	margin-top: 4px;
 }
 
 .tare-btn {
-	margin-left: auto;
-	padding: 8px 18px;
-	background: var(--teal-light);
-	color: var(--teal-dark);
-	border: 0.5px solid var(--teal-primary);
-	border-radius: 10px;
+	height: 34px;
+	padding: 0 12px;
+	background: transparent;
+	color: var(--warm-text);
+	border: 0.5px solid var(--warm-border);
+	border-radius: 12px;
 	font-size: 13px;
 	font-weight: 500;
 	cursor: pointer;
 	font-family: inherit;
-	transition: background 0.15s;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	transition: border-color 0.15s;
 }
-
-.tare-btn:hover:not(:disabled) { background: var(--teal-primary); color: #fff; }
+.tare-btn:hover:not(:disabled) { border-color: var(--teal-primary); color: var(--teal-primary); }
 .tare-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .connect-card {
