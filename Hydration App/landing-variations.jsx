@@ -1,4 +1,4 @@
-// Landing page variations for Hydr8
+// Landing page variations for Sippy
 // Three independent layouts (A: split hero, B: centered bold, C: live demo)
 
 // -------- Design tokens (in-component, scoped) --------
@@ -67,7 +67,7 @@ function Navbar({ guest = true }) {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1, letterSpacing: -0.1 }}>
-          Hydr8
+          Sippy
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 28 }}>
@@ -138,8 +138,8 @@ function Footer() {
         color: HS.text3,
       }}
     >
-      <span>© 2026 Hydr8</span>
-      <span>Built by the Hydr8 team · v1.0</span>
+      <span>© 2026 Sippy</span>
+      <span>Built by the Sippy team · v1.0</span>
     </footer>
   );
 }
@@ -215,7 +215,7 @@ function LandingA() {
               textWrap: 'pretty',
             }}
           >
-            The Hydr8 coaster tracks your water intake automatically.
+            The Sippy coaster tracks your water intake automatically.
             No manual logging. Just drink.
           </p>
           <div style={{ display: 'flex', gap: 12 }}>
@@ -481,7 +481,7 @@ function LandingB() {
           }}
         >
           <Icon name="sparkles-line" size={12} color={HS.teal} />
-          Now shipping · Hydr8 v1
+          Now shipping · Sippy v1
         </div>
         <h1
           style={{
@@ -976,7 +976,7 @@ function MobileNavbar() {
           <Icon name="drop-fill" size={14} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 14, color: HS.text1 }}>
-          Hydr8
+          Sippy
         </span>
       </div>
       <button style={tealBtn({ height: 32, fontSize: 13, padding: '0 12px' })}>
@@ -1013,7 +1013,7 @@ function MobileFooter() {
         textAlign: 'center',
       }}
     >
-      © 2026 Hydr8 · v1.0
+      © 2026 Sippy · v1.0
     </footer>
   );
 }
@@ -1070,7 +1070,7 @@ function MobileLandingA() {
             margin: '0 0 22px',
           }}
         >
-          The Hydr8 coaster tracks your water intake automatically. No
+          The Sippy coaster tracks your water intake automatically. No
           manual logging. Just drink.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

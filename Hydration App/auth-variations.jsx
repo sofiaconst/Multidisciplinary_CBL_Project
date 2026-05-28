@@ -303,7 +303,7 @@ function Logo({ size = 32, dark = false }) {
           letterSpacing: -0.2,
         }}
       >
-        Hydr8
+        Sippy
       </span>
     </div>
   );
@@ -429,7 +429,7 @@ function AuthA({ children }) {
         {children}
       </div>
       <div style={{ fontSize: 12, color: HS.text3 }}>
-        © 2026 Hydr8
+        © 2026 Sippy
       </div>
     </div>
   );
@@ -550,7 +550,7 @@ function AuthB({ children }) {
             color: 'rgba(255,255,255,0.6)',
           }}
         >
-          © 2026 Hydr8
+          © 2026 Sippy
         </div>
       </div>
       {/* Right form panel */}
@@ -659,7 +659,7 @@ function AuthAMobile({ children }) {
       >
         {children}
       </div>
-      <div style={{ fontSize: 11, color: HS.text3 }}>© 2026 Hydr8</div>
+      <div style={{ fontSize: 11, color: HS.text3 }}>© 2026 Sippy</div>
     </div>
   );
 }

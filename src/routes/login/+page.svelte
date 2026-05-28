@@ -54,17 +54,19 @@ const handleForgotPassword = async () => {
 </script>
 
 <div class="login-page">
-	<div class="login-card">
-		<div class="login-header">
-			<div class="logo-circle">
-				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-					<path d="M12 6v6l4 2" />
-				</svg>
-			</div>
-			<h1>Hydr8 Scale</h1>
-			<p>{showForgot ? 'Reset your password' : 'Sign in to your account'}</p>
-		</div>
+	<div class="brand-panel">
+		<a href="/welcome" class="back-link">
+			<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 4L6 10l6 6"/></svg>
+			Back
+		</a>
+		<img src="/logo-icon.png" alt="Sippy" class="brand-logo" />
+		<div class="brand-name">Sippy</div>
+		<p class="brand-tagline">The scale watches.<br/>You drink. We do the rest.</p>
+	</div>
+
+	<div class="form-panel">
+		<h1>{showForgot ? 'Reset password' : 'Welcome back'}</h1>
+		<p class="form-sub">{showForgot ? 'We\'ll email you a reset link.' : 'Sign in to see your hydration history.'}</p>
 
 		<form onsubmit={showForgot ? (e) => { e.preventDefault(); void handleForgotPassword() } : handleSignIn}>
 			<div class="field">
@@ -133,58 +135,79 @@ const handleForgotPassword = async () => {
 	</div>
 </div>
 
+<svelte:head>
+	<title>Sign in · Sippy</title>
+</svelte:head>
+
 <style>
 .login-page {
 	min-height: 100dvh;
 	background: var(--warm-bg);
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 24px;
+	flex-direction: column;
 }
 
-.login-card {
-	background: var(--warm-surface);
-	border: 1px solid var(--warm-border);
-	border-radius: 16px;
-	padding: 32px 28px;
-	width: 100%;
-	max-width: 380px;
-}
-
-.login-header {
-	text-align: center;
-	margin-bottom: 28px;
-}
-
-.logo-circle {
-	width: 56px;
-	height: 56px;
-	border-radius: 50%;
-	background: var(--teal-light);
+.brand-panel {
+	background: var(--teal-dark);
+	padding: 40px 28px 32px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0 auto 12px;
-	color: var(--teal-primary);
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
 }
 
-.logo-circle svg {
-	width: 28px;
-	height: 28px;
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	color: rgba(255,255,255,0.75);
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	margin-bottom: 12px;
+	transition: color 0.15s;
+}
+.back-link:hover { color: #fff; }
+
+.brand-logo {
+	width: 48px;
+	height: 48px;
+	border-radius: 12px;
+	object-fit: contain;
+	margin-bottom: 4px;
+}
+
+.brand-name {
+	font-size: 22px;
+	font-weight: 700;
+	color: #fff;
+	letter-spacing: -0.3px;
+}
+
+.brand-tagline {
+	font-size: 15px;
+	color: rgba(255,255,255,0.75);
+	margin: 0;
+	line-height: 1.5;
+}
+
+.form-panel {
+	flex: 1;
+	background: var(--warm-surface);
+	padding: 32px 28px 40px;
 }
 
 h1 {
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 700;
 	color: var(--warm-text);
-	margin: 0 0 6px;
+	margin: 0 0 4px;
 }
 
-p {
+.form-sub {
 	font-size: 14px;
 	color: var(--warm-text-secondary);
-	margin: 0;
+	margin: 0 0 28px;
 }
 
 .field {
@@ -201,7 +224,7 @@ label {
 
 input {
 	width: 100%;
-	padding: 10px 12px;
+	padding: 11px 12px;
 	border: 1px solid var(--warm-border);
 	border-radius: 8px;
 	background: var(--warm-bg);
@@ -256,7 +279,7 @@ input:focus {
 
 .primary-btn {
 	width: 100%;
-	padding: 12px;
+	padding: 13px;
 	background: var(--teal-primary);
 	color: #fff;
 	border: none;
@@ -279,7 +302,7 @@ input:focus {
 .row-links {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 14px;
+	margin-top: 16px;
 }
 
 .text-link {

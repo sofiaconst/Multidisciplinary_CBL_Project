@@ -145,7 +145,7 @@ function LoggedNavbar({ mobile, active = 'Dashboard', connected = true }) {
             <Icon name="drop-fill" size={14} color={HS.teal} />
           </div>
           <span style={{ fontWeight: 500, fontSize: 14, color: HS.text1 }}>
-            Hydr8
+            Sippy
           </span>
         </div>
         <ConnectionPill connected={connected} compact />
@@ -182,7 +182,7 @@ function LoggedNavbar({ mobile, active = 'Dashboard', connected = true }) {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1, letterSpacing: -0.1 }}>
-          Hydr8
+          Sippy
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 28 }}>
@@ -705,7 +705,7 @@ function Sidebar() {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1 }}>
-          Hydr8
+          Sippy
         </span>
       </div>
       {/* User block */}

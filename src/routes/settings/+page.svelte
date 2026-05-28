@@ -52,6 +52,9 @@ const signOut = async () => {
 
 <div class="page">
 	<div class="page-header">
+		<a href="/" class="back-btn">
+			<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 4L6 10l6 6"/></svg>
+		</a>
 		<h1>Settings</h1>
 	</div>
 
@@ -185,7 +188,7 @@ const signOut = async () => {
 <Toaster />
 
 <svelte:head>
-	<title>Settings — Hydr8 Scale</title>
+	<title>Settings — Sippy</title>
 </svelte:head>
 
 <style>
@@ -198,7 +201,25 @@ const signOut = async () => {
 
 .page-header {
 	padding: 8px 0 4px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
+
+.back-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	border-radius: 10px;
+	background: var(--teal-light);
+	color: var(--teal-dark);
+	text-decoration: none;
+	flex-shrink: 0;
+	transition: background 0.15s;
+}
+.back-btn:hover { background: var(--teal-primary); color: #fff; }
 
 .page-header h1 {
 	font-size: 22px;

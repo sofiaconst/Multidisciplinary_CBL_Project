@@ -1,12 +1,8 @@
 <div class="page">
 	<div class="hero">
-		<div class="logo-wrap">
-			<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path d="M12 2C9.5 6 6 11 6 15a6 6 0 0012 0c0-4-2.5-9-6-13z"/>
-			</svg>
-		</div>
-		<h1>Hydr8 Scale</h1>
-		<p class="tagline">Stay hydrated, one sip at a time</p>
+		<img src="/logo-icon.png" alt="Sippy" class="logo-img" />
+		<h1>Sippy</h1>
+		<p class="tagline">Know every sip.</p>
 	</div>
 
 	<div class="ctas">
@@ -16,7 +12,7 @@
 </div>
 
 <svelte:head>
-	<title>Hydr8 Scale</title>
+	<title>Sippy</title>
 </svelte:head>
 
 <style>
@@ -39,22 +35,12 @@
 	text-align: center;
 }
 
-.logo-wrap {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	background: var(--teal-light);
-	border: 2px solid var(--teal-primary);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--teal-primary);
+.logo-img {
+	width: 88px;
+	height: 88px;
+	border-radius: 22px;
+	object-fit: contain;
 	margin-bottom: 8px;
-}
-
-.logo-wrap svg {
-	width: 44px;
-	height: 44px;
 }
 
 h1 {

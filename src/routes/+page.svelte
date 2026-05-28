@@ -17,7 +17,7 @@ const reminderLabels = {
 
 const formatMinutes = (ms: number | null) => {
 	if (ms === null) return '—'
-	return `${Math.max(1, Math.round(ms / 60000))} min`
+	return `${Math.max(1, Math.round(ms / 60000))} m`
 }
 
 const goalPct = $derived(
@@ -40,48 +40,55 @@ const tare = async () => {
 <div class="page">
 	<!-- Greeting bar -->
 	<div class="greeting-bar">
-		<div class="avatar">{auth.user?.avatarInitials ?? '?'}</div>
-		<div class="greeting-text">
+		<div>
 			<div class="greeting-label">{auth.greeting}</div>
 			<div class="greeting-name">{auth.user?.name ?? ''}</div>
 		</div>
 		<div class="badges">
-			<div class="streak-badge">{auth.streakDays}d streak</div>
+			<div class="streak-badge">🔥 {auth.streakDays}d streak</div>
 			<div class="ble-badge" class:ble-connected={scale.bt.connected}>
-				{scale.bt.connected ? 'Connected' : 'Offline'}
+				<span class="ble-dot"></span>
+				{scale.bt.connected ? 'Scale connected' : 'Offline'}
 			</div>
 		</div>
 	</div>
 
-	<!-- Daily goal progress -->
-	<div class="card">
-		<div class="card-row">
-			<span class="card-label">Daily Goal</span>
-			<span class="goal-pct">{goalPct.toFixed(0)}%</span>
+	<!-- Hero progress card -->
+	<div class="hero-card">
+		<div class="hero-bg-orbs"></div>
+		<div class="hero-label">TODAY</div>
+		<div class="hero-pct">
+			{Math.round(goalPct)}<span class="hero-pct-sign">%</span>
 		</div>
-		<div class="progress-track">
-			<div class="progress-fill" style="width: {goalPct}%"></div>
+		<div class="hero-ml">
+			{scale.consumedMl.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} / {scale.dailyTargetIntake.current.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} ml
 		</div>
-		<div class="goal-values">{scale.consumedMl.toFixed(0)} / {scale.dailyTargetIntake.current.toFixed(0)} ml</div>
+		<div class="hero-track">
+			<div class="hero-fill" style="width: {goalPct}%"></div>
+		</div>
 	</div>
 
-	<!-- Stats grid -->
+	<!-- Stats row -->
 	<div class="stats-grid">
 		<div class="stat-card">
-			<div class="stat-value">{scale.sipCount}</div>
 			<div class="stat-label">Sips</div>
+			<div class="stat-value">{scale.sipCount}</div>
+			<div class="stat-sub">today</div>
 		</div>
 		<div class="stat-card">
-			<div class="stat-value">{scale.consumedMl.toFixed(0)}<span class="stat-unit">ml</span></div>
 			<div class="stat-label">Consumed</div>
+			<div class="stat-value">{scale.consumedMl.toFixed(0)}<span class="stat-unit">ml</span></div>
+			<div class="stat-sub">vs goal</div>
 		</div>
 		<div class="stat-card">
-			<div class="stat-value">{scale.averageSipSizeMl.toFixed(0)}<span class="stat-unit">ml</span></div>
 			<div class="stat-label">Avg sip</div>
+			<div class="stat-value">{scale.averageSipSizeMl.toFixed(0)}<span class="stat-unit">ml</span></div>
+			<div class="stat-sub">last 7 days</div>
 		</div>
 		<div class="stat-card">
+			<div class="stat-label">Next sip</div>
 			<div class="stat-value">{formatMinutes(scale.nextSipDueInMs)}</div>
-			<div class="stat-label">Next sip in</div>
+			<div class="stat-sub">adaptive pace</div>
 		</div>
 	</div>
 
@@ -129,7 +136,7 @@ const tare = async () => {
 <Toaster />
 
 <svelte:head>
-	<title>Hydr8 Scale</title>
+	<title>Sippy</title>
 </svelte:head>
 
 <style>
@@ -142,27 +149,9 @@ const tare = async () => {
 
 .greeting-bar {
 	display: flex;
-	align-items: center;
-	gap: 12px;
+	align-items: flex-start;
+	justify-content: space-between;
 	padding: 12px 0 4px;
-}
-
-.avatar {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background: var(--teal-primary);
-	color: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 14px;
-	font-weight: 700;
-	flex-shrink: 0;
-}
-
-.greeting-text {
-	flex: 1;
 }
 
 .greeting-label {
@@ -171,36 +160,48 @@ const tare = async () => {
 }
 
 .greeting-name {
-	font-size: 16px;
-	font-weight: 600;
+	font-size: 22px;
+	font-weight: 700;
 	color: var(--warm-text);
+	letter-spacing: -0.3px;
 }
 
 .badges {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: 5px;
 	align-items: flex-end;
 }
 
 .streak-badge {
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: 600;
-	color: var(--teal-dark);
-	background: var(--teal-light);
-	border: 1px solid var(--teal-primary);
+	color: var(--amber-text);
+	background: var(--amber-bg);
+	border: 1px solid var(--amber-border);
 	border-radius: 20px;
-	padding: 2px 8px;
+	padding: 3px 10px;
 }
 
 .ble-badge {
-	font-size: 11px;
-	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 12px;
+	font-weight: 500;
 	color: var(--warm-text-tertiary);
 	background: var(--warm-bg);
 	border: 1px solid var(--warm-border);
 	border-radius: 20px;
-	padding: 2px 8px;
+	padding: 3px 10px;
+}
+
+.ble-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--warm-border);
+	flex-shrink: 0;
 }
 
 .ble-badge.ble-connected {
@@ -209,18 +210,128 @@ const tare = async () => {
 	border-color: var(--teal-primary);
 }
 
+.ble-badge.ble-connected .ble-dot {
+	background: var(--teal-primary);
+}
+
+/* Hero gradient card */
+.hero-card {
+	border-radius: 20px;
+	padding: 28px 24px 22px;
+	background: linear-gradient(135deg, var(--teal-dark) 0%, #2a7ab9 60%, var(--teal-primary) 100%);
+	color: #fff;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.hero-bg-orbs {
+	position: absolute;
+	inset: 0;
+	background-image:
+		radial-gradient(circle at 18% 75%, rgba(255,255,255,0.12) 0, transparent 35%),
+		radial-gradient(circle at 85% 20%, rgba(255,255,255,0.08) 0, transparent 35%);
+	pointer-events: none;
+}
+
+.hero-label {
+	position: relative;
+	font-size: 12px;
+	color: rgba(255,255,255,0.75);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-bottom: 8px;
+}
+
+.hero-pct {
+	position: relative;
+	font-size: 76px;
+	font-weight: 500;
+	letter-spacing: -3px;
+	line-height: 1;
+	margin-bottom: 6px;
+	font-variant-numeric: tabular-nums;
+}
+
+.hero-pct-sign {
+	font-size: 32px;
+	color: rgba(255,255,255,0.6);
+}
+
+.hero-ml {
+	position: relative;
+	font-size: 15px;
+	color: rgba(255,255,255,0.85);
+	margin-bottom: 18px;
+	font-variant-numeric: tabular-nums;
+}
+
+.hero-track {
+	position: relative;
+	width: 100%;
+	height: 6px;
+	background: rgba(255,255,255,0.25);
+	border-radius: 99px;
+	overflow: hidden;
+}
+
+.hero-fill {
+	height: 100%;
+	background: rgba(255,255,255,0.9);
+	border-radius: 99px;
+	transition: width 0.4s ease;
+	min-width: 3px;
+}
+
+/* Stats */
+.stats-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.stat-card {
+	background: var(--warm-surface);
+	border: 1px solid var(--warm-border);
+	border-radius: 14px;
+	padding: 14px 16px;
+}
+
+.stat-label {
+	font-size: 12px;
+	color: var(--warm-text-tertiary);
+	margin-bottom: 6px;
+}
+
+.stat-value {
+	font-size: 26px;
+	font-weight: 700;
+	color: var(--warm-text);
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+
+.stat-unit {
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--warm-text-secondary);
+	margin-left: 2px;
+}
+
+.stat-sub {
+	font-size: 11px;
+	color: var(--warm-text-tertiary);
+	margin-top: 4px;
+}
+
+/* Reminder */
 .card {
 	background: var(--warm-surface);
 	border: 1px solid var(--warm-border);
-	border-radius: 12px;
+	border-radius: 14px;
 	padding: 16px;
-}
-
-.card-row {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 8px;
 }
 
 .card-label {
@@ -231,68 +342,7 @@ const tare = async () => {
 	letter-spacing: 0.05em;
 }
 
-.goal-pct {
-	font-size: 14px;
-	font-weight: 700;
-	color: var(--teal-primary);
-}
-
-.progress-track {
-	height: 8px;
-	background: var(--warm-bg);
-	border-radius: 99px;
-	overflow: hidden;
-	margin-bottom: 6px;
-}
-
-.progress-fill {
-	height: 100%;
-	background: var(--teal-primary);
-	border-radius: 99px;
-	transition: width 0.4s ease;
-	min-width: 2px;
-}
-
-.goal-values {
-	font-size: 13px;
-	color: var(--warm-text-secondary);
-}
-
-.stats-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 10px;
-}
-
-.stat-card {
-	background: var(--warm-surface);
-	border: 1px solid var(--warm-border);
-	border-radius: 12px;
-	padding: 14px 16px;
-}
-
-.stat-value {
-	font-size: 24px;
-	font-weight: 700;
-	color: var(--warm-text);
-	line-height: 1.1;
-}
-
-.stat-unit {
-	font-size: 13px;
-	font-weight: 400;
-	color: var(--warm-text-secondary);
-	margin-left: 2px;
-}
-
-.stat-label {
-	font-size: 12px;
-	color: var(--warm-text-tertiary);
-	margin-top: 2px;
-}
-
 .reminder-card {
-	border-color: var(--warm-border);
 	transition: background 0.2s, border-color 0.2s;
 }
 
@@ -331,9 +381,7 @@ const tare = async () => {
 	flex-shrink: 0;
 }
 
-.scale-card {
-}
-
+/* Scale */
 .scale-row {
 	display: flex;
 	justify-content: space-between;

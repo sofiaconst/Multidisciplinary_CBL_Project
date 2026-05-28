@@ -109,7 +109,7 @@ function GuestNavbar({ mobile = false }) {
             <Icon name="drop-fill" size={14} color={HS.teal} />
           </div>
           <span style={{ fontWeight: 500, fontSize: 14, color: HS.text1 }}>
-            Hydr8
+            Sippy
           </span>
         </div>
         <button style={tealBtn({ height: 32, fontSize: 13, padding: '0 12px' })}>
@@ -147,7 +147,7 @@ function GuestNavbar({ mobile = false }) {
           <Icon name="drop-fill" size={16} color={HS.teal} />
         </div>
         <span style={{ fontWeight: 500, fontSize: 15, color: HS.text1, letterSpacing: -0.1 }}>
-          Hydr8
+          Sippy
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 28 }}>
@@ -696,7 +696,7 @@ function GuestA({ connected = false, mobile = false }) {
           textAlign: 'center',
         }}
       >
-        © 2026 Hydr8
+        © 2026 Sippy
       </footer>
     </div>
   );
@@ -785,7 +785,7 @@ function GuestB({ connected = false, mobile = false }) {
           textAlign: 'center',
         }}
       >
-        © 2026 Hydr8
+        © 2026 Sippy
       </footer>
     </div>
   );

@@ -1,4 +1,4 @@
-// Shared design tokens for Hydr8 website.
+// Shared design tokens for Sippy website.
 // Primary brand color is #0087BD (deep sky blue), replacing the original green.
 
 window.HS = {
@@ -19,7 +19,6 @@ window.HS = {
   amberBg: '#FAEEDA',
   amberBorder: '#FAC775',
   amberText: '#854F0B',
-  success: '#22A861',
   danger: '#A32D2D',
   dangerBg: '#FFF0F0',
   dangerBorder: '#F5C6C6',
