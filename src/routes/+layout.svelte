@@ -98,6 +98,10 @@ const navTabs = [
 			{@render children()}
 			<footer class="app-footer">
 				<span>© 2026 Sippy</span>
+				<a href="/m" class="phone-link">
+					<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+					Phone view
+				</a>
 				<span>Built by the Sippy team · v1.0</span>
 			</footer>
 		</div>
@@ -266,10 +270,25 @@ const navTabs = [
 	border-top: 0.5px solid var(--warm-border);
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	font-size: 12px;
 	color: var(--warm-text-tertiary);
 	font-family: 'DM Sans', system-ui, sans-serif;
 }
+
+.phone-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	color: var(--warm-text-tertiary);
+	text-decoration: none;
+	font-size: 12px;
+	padding: 4px 10px;
+	border-radius: 8px;
+	border: 0.5px solid var(--warm-border);
+	transition: color 0.15s, border-color 0.15s;
+}
+.phone-link:hover { color: var(--teal-primary); border-color: var(--teal-primary); }
 
 /* ── Splash ── */
 .splash {
