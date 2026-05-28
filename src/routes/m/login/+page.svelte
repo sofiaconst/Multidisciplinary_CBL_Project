@@ -113,6 +113,7 @@ const signInAsGuest = async () => {
 .header {
 	background: var(--teal-dark); padding: 28px 24px 24px;
 	display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden;
+	flex-shrink: 0;
 }
 .header::before {
 	content: ''; position: absolute; inset: 0;

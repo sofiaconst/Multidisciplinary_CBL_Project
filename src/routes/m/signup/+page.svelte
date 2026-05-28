@@ -117,12 +117,12 @@ const handleSignUp = async (e: Event) => {
 
 <style>
 .page { min-height: 100dvh; background: var(--warm-bg); display: flex; flex-direction: column; font-family: 'DM Sans', system-ui, sans-serif; }
-.header { background: var(--teal-dark); padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; }
+.header { background: var(--teal-dark); padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; flex-shrink: 0; }
 .header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(0,135,189,0.22) 0, transparent 40%); pointer-events: none; }
 .back { display: inline-flex; align-items: center; gap: 4px; width: fit-content; color: rgba(255,255,255,0.72); font-size: 14px; font-weight: 500; text-decoration: none; position: relative; z-index: 1; }
 .wordmark { height: 30px; width: auto; filter: brightness(0) invert(1); position: relative; z-index: 1; }
 .tagline { font-size: 14px; color: rgba(255,255,255,0.72); margin: 0; position: relative; z-index: 1; }
-.form-card { flex: 1; background: var(--warm-surface); padding: 24px 24px 40px; overflow-y: auto; }
+.form-card { flex: 1; background: var(--warm-surface); padding: 24px 24px 48px; }
 h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.4px; margin: 0 0 4px; color: var(--warm-text); }
 .form-sub { font-size: 14px; color: var(--warm-text-secondary); margin: 0 0 20px; }
 form { display: flex; flex-direction: column; gap: 14px; }

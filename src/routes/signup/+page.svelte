@@ -223,21 +223,25 @@ const handleSignUp = async (e: Event) => {
 
 @media (max-width: 768px) {
 	.page {
-		grid-template-columns: 1fr;
-		grid-template-rows: auto 1fr;
+		display: flex;
+		flex-direction: column;
+		min-height: 100dvh;
 	}
 
+	.brand-panel { flex-shrink: 0; }
+
 	.panel-content {
-		padding: 28px 24px 24px;
+		padding: 24px 20px 20px;
 	}
 
 	.panel-foot { display: none; }
-
 	.panel-copy { display: none; }
 
 	.form-panel {
-		padding: 24px 24px 40px;
+		flex: 1;
+		padding: 24px 20px 48px;
 		align-items: flex-start;
+		overflow-y: visible;
 	}
 
 	.form-inner { max-width: 100%; }
