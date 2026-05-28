@@ -45,7 +45,7 @@ export class Scale {
 	recommendedSipIntervalMs = $state<number | null>(null)
 	nextSipDueInMs = $state<number | null>(null)
 	trackingDebugLog = $state<string[]>([])
-	debugLoggingEnabled = persistedState('li.beeb.hydration.v2.debugLoggingEnabled', true)
+	debugLoggingEnabled = persistedState('li.beeb.hydration.v2.debugLoggingEnabled', import.meta.env.DEV)
 
 	interval: ReturnType<typeof setInterval> | undefined
 	private stableSamples: Array<{ time: number; weight: number }> = []

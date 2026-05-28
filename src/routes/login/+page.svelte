@@ -140,8 +140,6 @@ const handleForgotPassword = async () => {
 				{#if showForgot}
 					<button type="button" class="text-link center" onclick={() => { showForgot = false; error = ''; success = '' }}>Back to sign in</button>
 				{:else}
-					<div class="divider"><span></span><span class="divider-label">or</span><span></span></div>
-					<a href="/" class="ghost-btn">Continue as guest</a>
 					<div class="signup-row">Don't have an account? <a href="/signup" class="inline-link">Create one</a></div>
 				{/if}
 			</form>

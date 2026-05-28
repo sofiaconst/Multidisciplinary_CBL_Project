@@ -30,7 +30,7 @@
 			</p>
 			<div class="cta-row">
 				<a href="/signup" class="teal-btn-lg">Create account</a>
-				<a href="/login" class="ghost-btn-lg">Try as guest</a>
+				<a href="/login" class="ghost-btn-lg">Sign in</a>
 			</div>
 			<div class="hero-tag">
 				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>

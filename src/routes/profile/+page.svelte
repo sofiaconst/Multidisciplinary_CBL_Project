@@ -44,7 +44,7 @@ const scale = Scale.getInstance()
 					{scale.bt.connected ? 'Connected' : 'Not connected'}
 				</div>
 				{#if scale.bt.connected}
-					<div class="scale-detail">Battery: {scale.bt.batteryLevel}%</div>
+					<div class="scale-detail">Battery: {scale.bt.batteryLevel != null ? scale.bt.batteryLevel + '%' : 'Unknown'}</div>
 					<div class="scale-detail">Factor: {scale.bt.calibrationFactor.toFixed(3)}</div>
 				{/if}
 			</div>

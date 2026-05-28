@@ -127,7 +127,8 @@ export class Auth {
 				await setDoc(ref, profile)
 			}
 
-			const today = new Date().toISOString().slice(0, 10)
+			// Use local calendar date so users behind UTC don't get a false streak break
+			const today = new Intl.DateTimeFormat('en-CA').format(new Date())
 			if (profile.lastActiveDate !== today) {
 				const last = profile.lastActiveDate
 				const diffDays =
@@ -159,7 +160,7 @@ export class Auth {
 			email,
 			avatarInitials: name.slice(0, 2).toUpperCase(),
 			streakDays: 1,
-			lastActiveDate: new Date().toISOString().slice(0, 10),
+			lastActiveDate: new Intl.DateTimeFormat('en-CA').format(new Date()),
 		}
 	}
 }

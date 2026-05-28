@@ -25,17 +25,21 @@ export class History {
 	// Offline cache
 	private _cache = persistedState<Session[]>('li.beeb.hydration.history.v3.sessions', [])
 
+	private _unsubscribeAuth: (() => void) | null = null
+
 	private constructor() {
 		if (browser) {
-			// Load from cache immediately
+			// Load from cache immediately while Firestore resolves
 			this.sessions = this._cache.current
 
-			onAuthStateChanged(firebaseAuth, async (fbUser) => {
+			this._unsubscribeAuth = onAuthStateChanged(firebaseAuth, async (fbUser) => {
 				this._uid = fbUser?.uid ?? null
 				if (fbUser) {
 					await this._loadSessions(fbUser.uid)
 				} else {
+					// Clear both state and cache so stale data doesn't leak to the next user
 					this.sessions = []
+					this._cache.current = []
 				}
 			})
 		}
