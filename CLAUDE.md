@@ -8,24 +8,29 @@ Single source of truth for all Claude agents working in this repo. Read this fir
 
 | Server | Command | Port | What it is |
 |---|---|---|---|
-| SvelteKit app | `pnpm dev` (in `hydration-scale-app/`) | **5175** | The real app. All Svelte edits show here. |
-| Static HTML site | `cd "Hydration App" && npm run dev` | **5273** | Design reference. Vite serves the 5-page static site. |
+| SvelteKit app | `pnpm dev` (in repo root) | **5175** | The real app. All Svelte edits show here. |
+| Static HTML site | `cd "Hydration App" && npm run dev` | **5273** | Design reference only. Read it; don't edit it. |
 
-Changes to `.svelte` files **never** affect port 5273, and vice versa. The Hydration App folder is the visual reference; the SvelteKit `src/` folder is the deliverable.
+Changes to `.svelte` files **never** affect port 5273, and vice versa.
 
 ---
 
 ## Viewing the app on a phone
 
-Open Chrome DevTools (`F12`), click the device-toolbar icon (top-left of DevTools panel), or press `Ctrl+Shift+M`. Select a preset like "iPhone 12" or type a custom size (e.g. `390 × 844`). The SvelteKit app at `http://localhost:5176` reflows to that viewport immediately.
+Open Chrome DevTools (`F12`) → device-toolbar icon (top-left) or `Ctrl+Shift+M`. Pick "iPhone 12" or type a custom size (e.g. `390 × 844`). The SvelteKit app at `http://localhost:5176` reflows immediately.
 
-To test on a real Android device: `pnpm build && npx cap sync android && npx cap open android` (requires Android Studio).
+To test on a real Android device:
+```bash
+pnpm build && npx cap sync android && npx cap open android
+```
+(Requires Android Studio.)
+
+---
 
 ## Default target
 
-All code changes go to the SvelteKit app (`src/`) only.
-Do not edit files under `Hydration App/` unless explicitly asked.
-`Hydration App/` is read-only design reference.
+**All code changes go to `src/` only.**
+Do not edit files under `Hydration App/` unless explicitly asked — it is read-only design reference.
 
 ---
 
@@ -50,33 +55,32 @@ Do not edit files under `Hydration App/` unless explicitly asked.
 | Amber border | `#FAC775` | `--amber-border` | Reminder alert border |
 | Amber text | `#854F0B` | `--amber-text` | Reminder alert text |
 
-**No green anywhere.** Banned: `#1d9e75`, `#059669`, any `green-*` Tailwind class.
+**No green anywhere** (UI accent). Exception: password-strength "Strong" indicator uses `#16a34a` — that is intentional and not a brand color.
 
 **Font:** DM Sans only (Google Fonts, weights 400/500/600/700). Loaded in `src/app.html`.
 
 ### Logo files
 
-Both logo PNGs have **transparent backgrounds** (no white or beige box). Do not add `border-radius` in CSS — there is no rounded-square container to clip.
+Both PNGs have **transparent backgrounds** — no white or beige box. Do not add `border-radius` in CSS.
 
 | File | Use |
 |---|---|
-| `static/logo-icon.png` | Navbar mark (28 px drop mark), welcome splash, favicons |
-| `static/logo-wordmark.png` | Auth split-panel dark header — rendered with `filter: brightness(0) invert(1)` to appear white on teal |
-| `Hydration App/app/logo-icon.png` | Mirror of `static/logo-icon.png` for the static site |
-| `Hydration App/app/logo-wordmark.png` | Mirror of `static/logo-wordmark.png` for the static site |
+| `static/logo-icon.png` | Navbar drop mark (28 px), welcome splash, favicons |
+| `static/logo-wordmark.png` | Auth split-panel dark header — `filter: brightness(0) invert(1)` makes it white |
+| `Hydration App/app/logo-icon.png` | Mirror for the static site |
+| `Hydration App/app/logo-wordmark.png` | Mirror for the static site |
 
-**Source originals** (never edit these, they're inputs to the processing script):
+**Source originals (never edit):**
 
-| Upload file | What it is |
+| File | What it is |
 |---|---|
-| `Hydration App/uploads/Sipopy new app logo.png` | App icon source (drop mark in rounded square) |
-| `Hydration App/uploads/Sippy new main logo.png` | Wordmark source ("sippy" text, white bg) |
+| `Hydration App/uploads/Sipopy new app logo.png` | App icon source |
+| `Hydration App/uploads/Sippy new main logo.png` | Wordmark source |
 
-**To regenerate transparent PNGs** (e.g. after uploading new logo assets):
+**Regenerate transparent PNGs** after uploading new logo assets:
 ```bash
 node scripts/remove-bg.mjs
 ```
-The script reads from uploads, strips backgrounds (saturation-cut for the icon, white-matte for the wordmark), and writes to both `static/` and `Hydration App/app/`.
 
 ---
 
@@ -86,95 +90,139 @@ The script reads from uploads, strips backgrounds (saturation-cut for the icon, 
 
 **Commands:**
 ```bash
-pnpm dev               # dev server with HMR → http://localhost:5175
-pnpm build             # production build → build/
-pnpm check             # svelte-check type checking
-pnpm lint              # biome lint
-pnpm format            # biome format --write
-npx cap sync android   # after pnpm build — syncs to Android project
-npx cap open android   # open Android Studio
+pnpm dev          # HMR dev server → http://localhost:5175
+pnpm build        # production build → build/
+pnpm check        # svelte-check type checking
+pnpm lint         # biome lint
+pnpm format       # biome format --write
 ```
 
 **Adapter:** `@sveltejs/adapter-static` with `fallback: 'index.html'` (SPA mode).
 
-### Layout and navigation
-
-The app shell lives in `src/routes/+layout.svelte`. Authenticated pages render inside a sticky top navbar + scrollable content area — **no BottomNav** (removed).
-
-**Top navbar (`app-nav`):** 64px, sticky, `--warm-surface` background, `0.5px solid --warm-border` bottom border. Three zones:
-- **Left:** Logo mark (`static/logo-icon.png`, 28px, radius 7px) + "Sippy" wordmark (15px, weight 700)
-- **Center:** Nav tabs with active tab underline (2px `--teal-primary`, `bottom: -22px`)
-- **Right:** ConnectionPill + AvatarPill
-
-**ConnectionPill:** When offline — surface bg, `--warm-border` border, `--warm-text-tertiary` dot. When connected — `--teal-light` bg, `0.5px solid --teal-mid` border, `--teal-text` text, animated `--teal-primary` dot.
-
-**AvatarPill:** Pill-shaped `<a href="/profile">`, height 36, padding `0 12px 0 4px`, border-radius 20px, `0.5px solid --warm-border`, `--warm-surface` bg. Contains a 28px circle (initials, `--teal-light` bg, `--teal-text` color, font-size 11, weight 600) + name text (13px, weight 500, `--warm-text`).
-
-**Auth page back arrows** (login/signup only — not on main app pages):
-```svelte
-<a href="/welcome" class="back-link">
-  <svg viewBox="0 0 20 20" ...><path d="M12 4L6 10l6 6"/></svg>
-  Back
-</a>
-```
-
 ### Routes
 
-| Route | Page | Max-width |
+| Route | Page | Notes |
 |---|---|---|
-| `/` | Dashboard — hero gradient, 4-col stat grid, reminder + scale cards | 1180px |
-| `/history` | Weekly bar chart + session list | 1180px |
-| `/profile` | Avatar, streak, stat cards, linked scale info | 1180px |
-| `/settings` | Goals, reminders, calibration, sign out | **920px** |
-| `/login` | Dark brand panel + sign-in form | full width |
-| `/signup` | Dark brand panel + create account form | full width |
-| `/welcome` | Onboarding splash (logo + Sign in / Create account CTAs) | full width |
+| `/welcome` | Landing — centered hero, feature cards, footer | Public. "Continue as guest" signs in anonymously. |
+| `/login` | Sign in — 50/50 split panel (dark left, form right) | Public. `novalidate` + JS validation. Guest button. |
+| `/signup` | Create account — same split panel + password strength bar | Public. `novalidate` + full inline validation. |
+| `/` | Dashboard — hero %, 4-col stat grid, reminder + scale cards | Auth-gated. |
+| `/history` | Weekly bar chart + session list | Auth-gated. |
+| `/profile` | Avatar, streak, stat cards, linked scale info | Auth-gated. |
+| `/settings` | Goals, reminders, scale, account — per-section save | Auth-gated. Max-width 920px. |
 
-### State — singleton pattern with Svelte 5 runes
+### Layout & navigation
 
-- `Scale` (`src/lib/scale.svelte.ts`) — sip-tracking engine. All persisted settings via `persistedState('li.beeb.hydration.v2.<key>', default)`. Read/write via `.current`.
-- `Bluetooth` (`src/lib/bt.svelte.ts`) — BLE wrapper (Web Bluetooth + `@capacitor-community/bluetooth-le`). Commands: `tare`, `cal:{g}`, `led:{r},{g},{b}`, `led:off`.
-- `Auth` (`src/lib/auth.svelte.ts`) — Firebase Auth + Firestore profile, streak tracking.
-- `History` (`src/lib/history.svelte.ts`) — session history, persisted to localStorage.
+Shell lives in `src/routes/+layout.svelte`. Unauthenticated visits to auth-gated routes redirect to `/welcome`.
 
-**Scale tracking loop:** 350 ms `setInterval` in `Scale.init()`. State machine: `tracking_off → no_cup_detected → cup_settling → cup_placed → cup_lifted`. Sip fires when cup returns with weight delta > `sipThresholdG`.
+**Top navbar:** 64 px sticky, three zones: Logo mark + "Sippy" wordmark | Nav tabs with teal underline on active | ConnectionPill + AvatarPill.
 
-**BLE protocol (ESP32):**
-- Standard Weight Scale `0x181d` + Battery `0x180f` — weight notifications, battery reads
-- Custom NUS control service `6e400001-...` — JSON status RX, text commands TX
+**Footer:** rendered inside `.app-content` on all authenticated pages — `© 2026 Sippy · Built by the Sippy team · v1.0`.
+
+### Auth (`src/lib/auth.svelte.ts`)
+
+Firebase Auth + Firestore profile. Singleton: `Auth.getInstance()`.
+
+| Method / getter | What it does |
+|---|---|
+| `login(email, password)` | `signInWithEmailAndPassword`. Maps Firebase error codes to user-friendly messages. |
+| `register(email, password)` | `createUserWithEmailAndPassword`. |
+| `signInAsGuest()` | `signInAnonymously`. Creates a local-only Guest profile — no Firestore write. |
+| `logout()` | Signs out, clears profile cache. |
+| `deleteAccount()` | `deleteUser(currentUser)`. Clears cache. Redirects caller to `/welcome`. |
+| `sendPasswordReset(email)` | Sends Firebase password-reset email. |
+| `isLoggedIn` | `true` for both real and anonymous users. |
+| `isAnonymous` | `true` for guest (anonymous) sessions. |
+| `streakDays` | Day-streak count from Firestore profile. Uses **local calendar date** (`Intl.DateTimeFormat('en-CA')`), not UTC. |
+
+**Profile fields:** `name`, `email`, `avatarInitials`, `streakDays`, `lastActiveDate`.
+Anonymous users get `name: 'Guest', avatarInitials: 'GU', streakDays: 0`.
+
+### Form validation rules
+
+All auth forms use `novalidate` to suppress browser-native popups. JS validates on submit:
+
+**Login:**
+1. Empty email → "Please enter your email address."
+2. Invalid format → "Please enter a valid email address."
+3. Empty password → "Please enter your password."
+4. Firebase `INVALID_CREDENTIALS` → error box with sign-up link.
+
+**Signup:**
+1. Empty / invalid email → message shown.
+2. Empty / short password → message shown.
+3. Not all 3 strength reqs met → "Your password does not meet all the requirements yet."
+4. Confirm empty or mismatched → inline "Passwords do not match." below the confirm field (live).
+5. Firebase `EMAIL_IN_USE` → error box with sign-in link.
+
+**Password strength bar** (signup): 4-segment bar, red → amber → green (`#16a34a`). Three reqs: 6+ chars, uppercase, special symbol.
+
+### Settings page (`/settings`)
+
+Five sections, each with its own **per-section save block** (dashed border top, amber "Unsaved changes" / teal "Saved" status, Discard + Save buttons):
+
+| Section | Controls |
+|---|---|
+| Goals | NumberStepper for daily target (100 ml step) and hourly target (10 ml step) |
+| Reminders | Adaptive toggle + LED color (6 swatches, hex text input with live preview, "Add hex" button, "Test LED") |
+| Scale | Reference weight input + Tare / Calibrate buttons + collapsible advanced thresholds + debug toggle |
+| Account | Sign out button + Delete account (2-step confirm → Firebase `deleteUser`) |
+
+### Scale (`src/lib/scale.svelte.ts`)
+
+Sip-tracking engine. All settings persisted via `persistedState('li.beeb.hydration.v2.<key>', default)`.
+
+- **Debug logging** defaults to `import.meta.env.DEV` (off in production builds).
+- **State machine:** `tracking_off → no_cup_detected → cup_settling → cup_placed → cup_lifted`
+- **Sip fires** when cup returns with weight delta > `sipThresholdG`.
+- **Loop:** 350 ms `setInterval` in `Scale.init()`.
+
+### History (`src/lib/history.svelte.ts`)
+
+Session history persisted to localStorage + Firestore (`users/{uid}/sessions`). On logout, both in-memory state and localStorage cache are cleared to prevent data leaking to the next user.
+
+### BLE (`src/lib/bt.svelte.ts`)
+
+Web Bluetooth + `@capacitor-community/bluetooth-le`. Commands: `tare`, `cal:{g}`, `led:{r},{g},{b}`, `led:off`. Calibration weight clamped to `Math.round(Math.max(1, Math.min(9999, value)))` before building the command string.
+
+**Protocol (ESP32):**
+- Weight Scale service `0x181d` + Battery `0x180f`
+- Custom NUS control service `6e400001-...` — JSON status RX, text TX
 
 **Icons:** `unplugin-icons` + `@iconify-json/mingcute`. Import: `import IconName from 'virtual:icons/mingcute/icon-name'`.
 
-**Styling:** Tailwind v4 + DaisyUI v5 ("light" theme overridden). CSS variables defined in `src/app.css`. All components use scoped `<style>` blocks with those variables — no hardcoded hex.
+**Styling:** Tailwind v4 + DaisyUI v5 ("light" theme overridden). CSS variables in `src/app.css`. Components use scoped `<style>` blocks — no hardcoded hex.
+
+---
+
+## Security & bug status
+
+See `TEST-REPORT.md` in the repo root for the full audit (20 findings). Summary of open items requiring external action:
+
+1. **Firebase config in source** — move to `$env/static/public` SvelteKit env vars; verify Firestore rules restrict `users/{uid}` to the owning user.
+2. **Firestore rules** — ensure `users/{uid}/sessions` write requires `request.auth.uid == uid`.
+3. **Password reset rate-limit** — add a 60 s client-side cooldown after a successful send.
+4. **CSP header/meta** — add before any web-hosted deployment.
+5. **Terms / Privacy Policy pages** — required before public distribution.
 
 ---
 
 ## Static HTML site (`Hydration App/`) — design reference only
 
-Plain HTML + React 18 via Babel Standalone CDN. No build step. **Do not port features here; use it only to read design intent and copy visual specs into Svelte.**
+Plain HTML + React 18 via Babel CDN. No build step.
 
-**Run:** `npx serve -p 5273` (from repo root, serves `Hydration App/` folder)
+**Run:** `cd "Hydration App" && npm run dev` → `http://localhost:5273`
 
-**Live pages:**
+**Live pages:** `index.html` (landing), `signin.html`, `signup.html`, `dashboard.html`, `settings.html`
 
-| File | Screen |
-|---|---|
-| `index.html` | Landing — split hero |
-| `signin.html` | Auth — dark split panel |
-| `signup.html` | Auth — dark split panel |
-| `dashboard.html` | Dashboard — hero progress + stat grid |
-| `settings.html` | Settings — scrollable, per-section save |
-
-**Key files to read when matching design:**
-- `app/theme.js` — all color tokens (`window.HS`)
-- `app/components.jsx` — `AppNavbar`, `AvatarPill`, `ConnectionPill`, `StreakPill`, `Logo`
-- `app/dashboard.jsx` — hero card, stat grid, reminder card layout
-- `app/settings.jsx` — form layout, card structure, max-width 920
-
-**Conventions:** Colors via `HS.*` — never hardcode hex. DM Sans only. Icons via `<Icon name="..." />` (Iconify CDN, mingcute set).
+**Key design files:**
+- `app/theme.js` — color tokens (`window.HS`)
+- `app/components.jsx` — `AppNavbar`, `AvatarPill`, `ConnectionPill`, `Logo`
+- `app/dashboard.jsx` — hero card, stat grid, reminder + scale card layout
+- `app/settings.jsx` — per-section save, NumberStepper, LED swatches, Toggle
 
 ---
 
 ## No automated tests
 
-There are no test suites. Verify changes by running `pnpm dev` and opening `http://localhost:5175`.
+Verify changes by running `pnpm dev` and opening `http://localhost:5175` (or the port shown in terminal output).

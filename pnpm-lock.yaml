@@ -20,6 +20,9 @@ importers:
       '@capacitor/core':
         specifier: ^8.3.4
         version: 8.3.4
+      esm-env:
+        specifier: ^1.2.2
+        version: 1.2.2
       firebase:
         specifier: ^12.13.0
         version: 12.13.0
