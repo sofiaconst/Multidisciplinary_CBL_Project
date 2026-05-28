@@ -4,58 +4,107 @@ Single source of truth for all Claude agents working in this repo. Read this fir
 
 ---
 
+## Two servers — do not confuse them
+
+| Server | Command | Port | What it is |
+|---|---|---|---|
+| SvelteKit app | `pnpm dev` (in `hydration-scale-app/`) | **5175** | The real app. All Svelte edits show here. |
+| Static HTML site | `npx serve -p 5273` (in `Hydration App/`) | **5273** | Design reference only. Separate codebase. |
+
+Changes to `.svelte` files **never** affect port 5273, and vice versa. The Hydration App folder is the visual reference; the SvelteKit `src/` folder is the deliverable.
+
+---
+
 ## Brand
 
 **App name:** Sippy (never "Hydr8" — that name is retired)
 
-| Token | Hex | Use |
-|---|---|---|
-| Primary | `#0087BD` | Buttons, accents, progress fills |
-| Dark | `#005C82` | Hero panels, gradients, hover states |
-| Light tint | `#E0F2FA` | Badges, soft backgrounds |
-| Warm bg | `#F1EFE8` | Page background |
+| Token | Hex | CSS variable | Use |
+|---|---|---|---|
+| Primary | `#0087BD` | `--teal-primary` | Buttons, accents, progress fills |
+| Dark | `#005C82` | `--teal-dark` | Hero panels, gradients, hover states |
+| Mid tint | `#7FC3DE` | `--teal-mid` | Connected pill border, highlights |
+| Light tint | `#E0F2FA` | `--teal-light` | Badges, soft backgrounds |
+| Text on light blue | `#004566` | `--teal-text` | Accessible text on teal-light surfaces |
+| Warm bg | `#F1EFE8` | `--warm-bg` | Page background |
+| Surface | `#FFFFFF` | `--warm-surface` | Cards, navbar |
+| Border | `#D3D1C7` | `--warm-border` | Card/input borders |
+| Text primary | `#2C2C2A` | `--warm-text` | Body text |
+| Text secondary | `#5F5E5A` | `--warm-text-secondary` | Labels, descriptions |
+| Text tertiary | `#888780` | `--warm-text-tertiary` | Hints, stat sub-labels |
+| Amber bg | `#FAEEDA` | `--amber-bg` | Reminder alert background |
+| Amber border | `#FAC775` | `--amber-border` | Reminder alert border |
+| Amber text | `#854F0B` | `--amber-text` | Reminder alert text |
 
-CSS variable names: `--teal-primary`, `--teal-dark`, `--teal-light`, `--warm-bg`, `--warm-surface`, `--warm-border`, `--warm-text`, `--warm-text-secondary`, `--warm-text-tertiary`.
+**No green anywhere.** Banned: `#1d9e75`, `#059669`, any `green-*` Tailwind class.
 
-**No green colors anywhere.** All of these are banned: `#1d9e75`, `#059669`, any `green-*` Tailwind classes.
+**Font:** DM Sans only (Google Fonts, weights 400/500/600/700). Loaded in `src/app.html`.
 
 ### Logo files
 
 | File | Use |
 |---|---|
-| `static/logo-icon.png` (SvelteKit) / `Hydration App/app/logo-icon.png` (HTML site) | Favicon, Android icon, navbar mark, small surfaces |
-| `Hydration App/app/logo-wordmark.png` | Auth split-panel, landing hero, splash — full "Sippy" lockup only |
-
-Source: `Hydration App/uploads/Sipopy new app logo.png` (icon) and `Hydration App/uploads/Sippy new main logo.png` (wordmark).
+| `static/logo-icon.png` | Favicon, navbar mark, welcome splash |
+| `Hydration App/app/logo-wordmark.png` | Auth split-panel only (static site reference) |
 
 ---
 
-## This repo contains two separate apps
-
-### 1. SvelteKit mobile app (`src/`)
+## SvelteKit app (`src/`)
 
 **Target:** Android via Capacitor. SvelteKit builds to `build/`; Capacitor serves it as a WebView.
 
 **Commands:**
 ```bash
-pnpm dev        # dev server (HMR)
-pnpm build      # production build → build/
-pnpm check      # svelte-check type checking
-pnpm lint       # biome lint
-pnpm format     # biome format --write
-npx cap sync android   # after pnpm build
+pnpm dev               # dev server with HMR → http://localhost:5175
+pnpm build             # production build → build/
+pnpm check             # svelte-check type checking
+pnpm lint              # biome lint
+pnpm format            # biome format --write
+npx cap sync android   # after pnpm build — syncs to Android project
 npx cap open android   # open Android Studio
 ```
 
 **Adapter:** `@sveltejs/adapter-static` with `fallback: 'index.html'` (SPA mode).
 
-**State — singleton pattern with Svelte 5 runes:**
-- `Scale` (`src/lib/scale.svelte.ts`) — sip-tracking engine, all persisted settings via `persistedState('li.beeb.hydration.v2.<key>', default)`. Read/write via `.current`.
-- `Bluetooth` (`src/lib/bt.svelte.ts`) — BLE wrapper (Web Bluetooth + `@capacitor-community/bluetooth-le`). Commands: `tare`, `cal:{g}`, `led:{r},{g},{b}`, `led:off`.
-- `Auth` (`src/lib/auth.svelte.ts`) — user identity, streak, persisted to localStorage.
-- `History` (`src/lib/history.svelte.ts`) — session history, persisted to localStorage.
+### Layout and navigation
 
-**Routing:** `+layout.svelte` initializes singletons, runs auth guard (`$effect` → `/login`). Authenticated pages wrap in app shell with `BottomNav` (Home / History / Profile / Settings).
+The app shell lives in `src/routes/+layout.svelte`. Authenticated pages render inside a sticky top navbar + scrollable content area — **no BottomNav** (removed).
+
+**Top navbar (`app-nav`):** 64px, sticky, `--warm-surface` background, `0.5px solid --warm-border` bottom border. Three zones:
+- **Left:** Logo mark (`static/logo-icon.png`, 28px, radius 7px) + "Sippy" wordmark (15px, weight 700)
+- **Center:** Nav tabs with active tab underline (2px `--teal-primary`, `bottom: -22px`)
+- **Right:** ConnectionPill + AvatarPill
+
+**ConnectionPill:** When offline — surface bg, `--warm-border` border, `--warm-text-tertiary` dot. When connected — `--teal-light` bg, `0.5px solid --teal-mid` border, `--teal-text` text, animated `--teal-primary` dot.
+
+**AvatarPill:** Pill-shaped `<a href="/profile">`, height 36, padding `0 12px 0 4px`, border-radius 20px, `0.5px solid --warm-border`, `--warm-surface` bg. Contains a 28px circle (initials, `--teal-light` bg, `--teal-text` color, font-size 11, weight 600) + name text (13px, weight 500, `--warm-text`).
+
+**Auth page back arrows** (login/signup only — not on main app pages):
+```svelte
+<a href="/welcome" class="back-link">
+  <svg viewBox="0 0 20 20" ...><path d="M12 4L6 10l6 6"/></svg>
+  Back
+</a>
+```
+
+### Routes
+
+| Route | Page | Max-width |
+|---|---|---|
+| `/` | Dashboard — hero gradient, 4-col stat grid, reminder + scale cards | 1180px |
+| `/history` | Weekly bar chart + session list | 1180px |
+| `/profile` | Avatar, streak, stat cards, linked scale info | 1180px |
+| `/settings` | Goals, reminders, calibration, sign out | **920px** |
+| `/login` | Dark brand panel + sign-in form | full width |
+| `/signup` | Dark brand panel + create account form | full width |
+| `/welcome` | Onboarding splash (logo + Sign in / Create account CTAs) | full width |
+
+### State — singleton pattern with Svelte 5 runes
+
+- `Scale` (`src/lib/scale.svelte.ts`) — sip-tracking engine. All persisted settings via `persistedState('li.beeb.hydration.v2.<key>', default)`. Read/write via `.current`.
+- `Bluetooth` (`src/lib/bt.svelte.ts`) — BLE wrapper (Web Bluetooth + `@capacitor-community/bluetooth-le`). Commands: `tare`, `cal:{g}`, `led:{r},{g},{b}`, `led:off`.
+- `Auth` (`src/lib/auth.svelte.ts`) — Firebase Auth + Firestore profile, streak tracking.
+- `History` (`src/lib/history.svelte.ts`) — session history, persisted to localStorage.
 
 **Scale tracking loop:** 350 ms `setInterval` in `Scale.init()`. State machine: `tracking_off → no_cup_detected → cup_settling → cup_placed → cup_lifted`. Sip fires when cup returns with weight delta > `sipThresholdG`.
 
@@ -65,73 +114,36 @@ npx cap open android   # open Android Studio
 
 **Icons:** `unplugin-icons` + `@iconify-json/mingcute`. Import: `import IconName from 'virtual:icons/mingcute/icon-name'`.
 
-**Styling:** Tailwind v4 + DaisyUI v5 ("light" theme). CSS variables in `src/app.css`. Components use `<style>` blocks with those variables.
-
-**Navigation — back arrows:** All non-home pages have a back button in the top-left:
-```svelte
-<a href="/" class="back-btn">
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"
-       stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
-    <path d="M12 4L6 10l6 6"/>
-  </svg>
-</a>
-```
-CSS: `width:34px; height:34px; border-radius:10px; background:var(--teal-light); color:var(--teal-dark)`. Hover: `background:var(--teal-primary); color:#fff`.
-
-**Routes:**
-- `/` — Dashboard (hero gradient card, stat grid, sip controls)
-- `/history` — Weekly bar chart + session list
-- `/profile` — Avatar, streak, stats, linked scale card
-- `/settings` — Goals, reminders (LED color, adaptive), calibration, sign out
-- `/login` — Split: dark brand panel + form (back → `/welcome`)
-- `/signup` — Split: dark brand panel + form (back → `/login`)
-- `/welcome` — Onboarding splash
+**Styling:** Tailwind v4 + DaisyUI v5 ("light" theme overridden). CSS variables defined in `src/app.css`. All components use scoped `<style>` blocks with those variables — no hardcoded hex.
 
 ---
 
-### 2. Static HTML site (`Hydration App/`)
+## Static HTML site (`Hydration App/`) — design reference only
 
-Plain HTML + React 18 via Babel Standalone CDN. No build step.
+Plain HTML + React 18 via Babel Standalone CDN. No build step. **Do not port features here; use it only to read design intent and copy visual specs into Svelte.**
 
-**Run:** `npx serve -p 5273` from `Hydration App/` (or `python3 -m http.server 5273`)
+**Run:** `npx serve -p 5273` (from repo root, serves `Hydration App/` folder)
 
 **Live pages:**
 
 | File | Screen |
 |---|---|
-| `index.html` | Landing — Variation A (split hero) |
-| `signin.html` | Auth — Variation B (dark split panel) |
-| `signup.html` | Auth — Variation B (dark split panel) |
-| `dashboard.html` | Dashboard — Variation C (hero progress + stat grid) |
-| `settings.html` | Settings — Variation B (scrollable, per-section save) |
+| `index.html` | Landing — split hero |
+| `signin.html` | Auth — dark split panel |
+| `signup.html` | Auth — dark split panel |
+| `dashboard.html` | Dashboard — hero progress + stat grid |
+| `settings.html` | Settings — scrollable, per-section save |
 
-**File layout:**
-```
-Hydration App/
-├── index.html, signin.html, signup.html, dashboard.html, settings.html
-├── app/
-│   ├── theme.js          — color tokens (window.HS), single source of truth
-│   ├── components.jsx    — Logo, PublicNavbar, AppNavbar, Footer, tealBtn, ghostBtn, Icon
-│   ├── landing.jsx       — Landing A
-│   ├── auth.jsx          — Auth B (SignInPage + SignUpPage) — has back arrow → index.html
-│   ├── dashboard.jsx     — Dashboard C
-│   ├── settings.jsx      — Settings B
-│   └── tweaks-panel.jsx  — Floating tweak shell
-└── uploads/              — Source logo assets (do not modify)
-```
+**Key files to read when matching design:**
+- `app/theme.js` — all color tokens (`window.HS`)
+- `app/components.jsx` — `AppNavbar`, `AvatarPill`, `ConnectionPill`, `StreakPill`, `Logo`
+- `app/dashboard.jsx` — hero card, stat grid, reminder card layout
+- `app/settings.jsx` — form layout, card structure, max-width 920
 
-**Exploration files** (legacy, do not link from live pages, keep as reference):
-- `Landing Page.html`, `Sign In and Create Account.html`, `Guest Dashboard.html`, `Logged-in Dashboard.html`, `Settings Page.html`, `History Page.html`, `Sign In and Create Account.html`
-- `export/` — old snapshots, ignore
-
-**Conventions:**
-- All colors via `HS.*` from `app/theme.js` — never hardcode hex in components
-- DM Sans font only (Google Fonts)
-- Icons via `<Icon name="..." />` (Iconify CDN, mingcute set)
-- No build pipeline — Babel Standalone in browser
+**Conventions:** Colors via `HS.*` — never hardcode hex. DM Sans only. Icons via `<Icon name="..." />` (Iconify CDN, mingcute set).
 
 ---
 
 ## No automated tests
 
-There are no test suites. Verify changes by running the dev server.
+There are no test suites. Verify changes by running `pnpm dev` and opening `http://localhost:5175`.

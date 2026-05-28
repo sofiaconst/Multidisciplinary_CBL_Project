@@ -465,7 +465,7 @@ function AuthSplit({ children }) {
           }}
         />
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <Logo size={28} dark />
+          <Logo size={32} dark wordmarkOnly />
         </div>
         <div style={{ position: 'relative', zIndex: 1, marginTop: 'auto' }}>
           <div
@@ -550,28 +550,8 @@ function AuthSplit({ children }) {
           flexDirection: 'column',
           justifyContent: 'center',
           minWidth: 0,
-          position: 'relative',
         }}
       >
-        <a
-          href="index.html"
-          style={{
-            position: 'absolute',
-            top: 28,
-            left: 48,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            fontSize: 13,
-            color: HS.text2,
-            textDecoration: 'none',
-            fontWeight: 500,
-            padding: '4px 0',
-          }}
-        >
-          <Icon name="arrow-left-line" size={15} color={HS.text2} />
-          Back
-        </a>
         <div style={{ width: '100%', maxWidth: 380, margin: '0 auto' }}>{children}</div>
       </div>
     </div>

@@ -83,8 +83,7 @@ function Logo({ size = 32, dark = false, wordmarkOnly = false }) {
             height: size * 1.1,
             width: 'auto',
             display: 'block',
-            mixBlendMode: dark ? 'screen' : 'multiply',
-            filter: dark ? 'invert(1)' : 'none',
+            filter: dark ? 'brightness(0) invert(1)' : 'none',
           }}
           draggable={false}
         />

@@ -188,18 +188,9 @@ function Landing() {
         }}
       >
         <div>
-          <img
-            src="app/logo-wordmark.png"
-            alt="Sippy"
-            style={{
-              height: 64,
-              width: 'auto',
-              display: 'block',
-              marginBottom: 24,
-              mixBlendMode: 'multiply',
-            }}
-            draggable={false}
-          />
+          <div style={{ marginBottom: 28 }}>
+            <Logo wordmarkOnly size={40} />
+          </div>
           <div
             style={{
               display: 'inline-flex',

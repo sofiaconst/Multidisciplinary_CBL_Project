@@ -199,7 +199,7 @@ const signOut = async () => {
 
 .content {
 	width: 100%;
-	max-width: 1180px;
+	max-width: 920px;
 	margin: 0 auto;
 	padding: 28px 24px 56px;
 	display: flex;
@@ -213,9 +213,9 @@ const signOut = async () => {
 }
 
 .page-header h1 {
-	font-size: 28px;
+	font-size: 30px;
 	font-weight: 500;
-	letter-spacing: -0.5px;
+	letter-spacing: -0.6px;
 	color: var(--warm-text);
 	margin: 0 0 4px;
 }

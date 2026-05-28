@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sippy — Page layouts board</title>
+    <meta name="viewport" content="width=3200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #F1EFE8;
+        --surface: #FFFFFF;
+        --border: #D3D1C7;
+        --text1: #2C2C2A;
+        --text2: #5F5E5A;
+        --text3: #888780;
+        --teal: #0087BD;
+        --tealDark: #005C82;
+        --tealLight: #E0F2FA;
+        --tealMid: #7FC3DE;
+        --tealText: #004566;
+        --amberBg: #FAEEDA;
+        --amberBorder: #FAC775;
+        --amberText: #854F0B;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; font-family: 'DM Sans', system-ui, sans-serif; color: var(--text1); background: var(--bg); }
+      .board {
+        width: 3200px;
+        padding: 100px 120px 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+      }
+
+      /* ===== Header ===== */
+      .header {
+        display: flex; justify-content: space-between; align-items: flex-end; gap: 60px;
+        padding-bottom: 36px;
+        border-bottom: 1px solid var(--border);
+      }
+      .head-left { display: flex; align-items: center; gap: 28px; }
+      .logo-mark {
+        width: 88px; height: 88px; border-radius: 24px;
+        background: var(--tealLight);
+        display: grid; place-items: center;
+      }
+      .logo-mark svg { width: 50px; height: 50px; }
+      .head-text { display: flex; flex-direction: column; gap: 4px; }
+      .wordmark { font-size: 36px; font-weight: 500; letter-spacing: -0.6px; line-height: 1; }
+      .head-title {
+        font-size: 56px; font-weight: 500; letter-spacing: -1.4px;
+        line-height: 1; color: var(--text1); margin-top: 4px;
+      }
+      .head-sub { font-size: 22px; color: var(--text2); line-height: 1.4; margin-top: 6px; }
+      .swatches { display: flex; gap: 16px; }
+      .swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+      .swatch .chip { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
+      .swatch .hex { font-family: ui-monospace, monospace; font-size: 13px; color: var(--text2); }
+
+      /* ===== Section labels ===== */
+      .section-label {
+        display: flex; align-items: baseline; gap: 18px;
+        font-size: 32px; font-weight: 500; letter-spacing: -0.6px; color: var(--text1);
+        margin-top: 30px;
+      }
+      .section-label .meta {
+        font-size: 14px; letter-spacing: 1.2px; text-transform: uppercase;
+        color: var(--text3); font-weight: 600;
+      }
+      .section-label .rule { flex: 1; height: 1px; background: var(--border); margin-bottom: 6px; }
+
+      /* ===== Row layout — desktops ===== */
+      .desktop-row {
+        display: grid; grid-template-columns: repeat(5, 1fr);
+        gap: 60px;
+      }
+      .desktop-item { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+      .desktop-item .label-block {
+        display: flex; flex-direction: column; gap: 4px;
+      }
+      .desktop-item .num {
+        font-size: 14px; font-weight: 600; letter-spacing: 1.4px;
+        color: var(--text3); text-transform: uppercase;
+      }
+      .desktop-item .name {
+        font-size: 26px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.1;
+      }
+      .desktop-item .variation {
+        font-size: 15px; color: var(--tealText); font-weight: 500;
+      }
+      .browser-frame {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 30px 50px -28px rgba(0,92,130,0.28), 0 10px 22px -12px rgba(0,0,0,0.08);
+      }
+      .browser-bar {
+        height: 32px;
+        background: #F7F5EE;
+        border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; gap: 8px; padding: 0 16px;
+      }
+      .browser-bar .dots { display: flex; gap: 7px; }
+      .browser-bar .dots span { width: 11px; height: 11px; border-radius: 50%; }
+      .browser-bar .dots span:nth-child(1) { background: #FE5F57; }
+      .browser-bar .dots span:nth-child(2) { background: #FDBC2D; }
+      .browser-bar .dots span:nth-child(3) { background: #27C840; }
+      .browser-bar .url {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 7px; padding: 4px 12px;
+        font-family: ui-monospace, monospace; font-size: 11px; color: var(--text2);
+        max-width: 280px;
+      }
+      .desktop-img {
+        width: 100%; display: block;
+        aspect-ratio: 16 / 10;
+        object-fit: cover; object-position: top center;
+        background: var(--bg);
+      }
+
+      /* ===== Row layout — mobiles ===== */
+      .mobile-row {
+        display: grid; grid-template-columns: repeat(5, 1fr);
+        gap: 60px;
+        margin-top: 12px;
+      }
+      .mobile-item {
+        display: flex; flex-direction: column; align-items: center; gap: 22px;
+      }
+      .mobile-item .label-block {
+        text-align: center; display: flex; flex-direction: column; gap: 4px;
+      }
+      .mobile-item .num {
+        font-size: 14px; font-weight: 600; letter-spacing: 1.4px;
+        color: var(--text3); text-transform: uppercase;
+      }
+      .mobile-item .name {
+        font-size: 24px; font-weight: 500; letter-spacing: -0.4px; line-height: 1.1;
+      }
+      .mobile-item .variation {
+        font-size: 14px; color: var(--tealText); font-weight: 500;
+      }
+
+      .phone {
+        width: 380px;
+        height: 780px;
+        border-radius: 48px;
+        background: #0E0E10;
+        padding: 12px;
+        box-shadow: 0 30px 50px -25px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.4);
+        position: relative;
+      }
+      .phone .screen {
+        width: 100%; height: 100%;
+        border-radius: 38px;
+        background: var(--bg);
+        overflow: hidden;
+        position: relative;
+      }
+      .phone .notch {
+        position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+        width: 96px; height: 24px; border-radius: 16px;
+        background: #0E0E10; z-index: 10;
+      }
+      .phone .status-bar {
+        height: 44px; display: flex; align-items: center; justify-content: space-between;
+        padding: 20px 26px 0; font-size: 13px; font-weight: 600; color: var(--text1);
+      }
+
+      .ph-nav {
+        height: 50px; padding: 0 16px;
+        display: flex; align-items: center; justify-content: space-between;
+        background: var(--surface); border-bottom: 0.5px solid var(--border);
+      }
+      .ph-logo {
+        display: flex; align-items: center; gap: 7px;
+        font-size: 13px; font-weight: 500; color: var(--text1);
+      }
+      .ph-logo .mark {
+        width: 24px; height: 24px; border-radius: 7px; background: var(--tealLight);
+        display: grid; place-items: center;
+      }
+      .ph-logo .mark svg { width: 13px; height: 13px; fill: var(--tealDark); }
+      .ph-nav-right { font-size: 13px; color: var(--text2); }
+
+      .ph-btn-primary {
+        background: var(--teal); color: #fff; border: none;
+        padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 600;
+        width: 100%; text-align: center; display: block;
+      }
+      .ph-btn-ghost {
+        background: transparent; color: var(--text1);
+        padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 500;
+        width: 100%; text-align: center; display: block;
+        border: 0.5px solid var(--border);
+      }
+      .ph-input {
+        width: 100%; height: 38px;
+        border: 0.5px solid var(--border); border-radius: 9px;
+        background: var(--surface); padding: 0 12px;
+        font-size: 13px; color: var(--text1);
+        display: flex; align-items: center;
+      }
+      .ph-input.placeholder { color: var(--text3); }
+      .ph-label { font-size: 11px; color: var(--text2); font-weight: 500; margin-bottom: 5px; }
+      .ph-chip {
+        display: inline-flex; align-items: center; gap: 5px;
+        padding: 5px 11px; border-radius: 18px;
+        font-size: 11px; font-weight: 500;
+        background: var(--tealLight); color: var(--tealText);
+        border: 0.5px solid var(--tealMid);
+      }
+      .ph-streak {
+        background: var(--amberBg); color: var(--amberText); border-color: var(--amberBorder);
+      }
+      .ph-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+
+      /* ---- Landing mobile ---- */
+      .m-landing { display: flex; flex-direction: column; height: 100%; }
+      .m-landing .hero {
+        padding: 16px 18px 4px; display: flex; flex-direction: column; gap: 12px;
+      }
+      .m-landing .badge {
+        align-self: flex-start;
+        font-size: 11px; font-weight: 500;
+        background: var(--tealLight); color: var(--tealText);
+        padding: 4px 10px; border-radius: 18px;
+      }
+      .m-landing h1 {
+        font-size: 36px; font-weight: 500; letter-spacing: -1.1px;
+        margin: 0; line-height: 1.05;
+      }
+      .m-landing .lede { font-size: 13px; color: var(--text2); margin: 0; line-height: 1.45; }
+      .m-landing .ctas { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+      .m-landing .coaster {
+        margin: 14px 18px;
+        height: 150px;
+        background: linear-gradient(180deg, var(--tealLight) 0%, var(--bg) 100%);
+        border: 0.5px solid var(--border);
+        border-radius: 14px;
+        position: relative; overflow: hidden;
+      }
+      .m-landing .coaster::after {
+        content: ""; position: absolute; inset: 0;
+        background-image: repeating-linear-gradient(45deg, rgba(0,92,130,0.05) 0 6px, transparent 6px 12px);
+      }
+      .m-landing .cup {
+        position: absolute; left: 50%; top: 22%; transform: translateX(-50%);
+        width: 54px; height: 70px;
+        background: #fff; border: 0.5px solid var(--border);
+        border-radius: 12% 12% 22% 22% / 6% 6% 18% 18%;
+      }
+      .m-landing .cup::after {
+        content: ""; position: absolute; left: 5px; right: 5px; bottom: 5px; height: 55%;
+        background: var(--teal); opacity: 0.75;
+        border-radius: 0 0 14% 14% / 0 0 30% 30%;
+      }
+      .m-landing .features { display: flex; flex-direction: column; gap: 8px; padding: 0 18px 14px; }
+      .m-landing .feat {
+        display: flex; align-items: flex-start; gap: 10px;
+        background: var(--surface); border: 0.5px solid var(--border); border-radius: 11px;
+        padding: 10px;
+      }
+      .m-landing .feat .ico {
+        width: 22px; height: 22px; border-radius: 6px; background: var(--tealLight);
+        flex: 0 0 auto;
+      }
+      .m-landing .feat .t { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
+      .m-landing .feat .b { font-size: 11px; color: var(--text2); line-height: 1.35; }
+
+      /* ---- Auth mobile ---- */
+      .m-auth { display: flex; flex-direction: column; height: 100%; }
+      .m-auth .top-panel {
+        background: var(--tealDark); color: #fff;
+        padding: 42px 22px 22px;
+        position: relative; overflow: hidden;
+      }
+      .m-auth .top-panel::before {
+        content: ""; position: absolute; inset: 0;
+        background-image:
+          radial-gradient(circle at 20% 80%, rgba(0,135,189,0.25) 0, transparent 50%),
+          radial-gradient(circle at 85% 20%, rgba(255,255,255,0.05) 0, transparent 40%);
+      }
+      .m-auth .top-panel .logo {
+        display: flex; align-items: center; gap: 9px; position: relative;
+        margin-bottom: 20px;
+      }
+      .m-auth .top-panel .logo .mark {
+        width: 28px; height: 28px; border-radius: 9px; background: rgba(255,255,255,0.16);
+        display: grid; place-items: center;
+      }
+      .m-auth .top-panel .logo .mark svg { width: 14px; height: 14px; fill: #fff; }
+      .m-auth .top-panel .logo span { font-size: 15px; font-weight: 500; }
+      .m-auth .top-panel h2 {
+        font-size: 22px; font-weight: 500; letter-spacing: -0.4px;
+        margin: 0; line-height: 1.2; position: relative;
+        text-wrap: balance;
+      }
+      .m-auth .form {
+        padding: 22px 22px; background: var(--surface);
+        flex: 1;
+        display: flex; flex-direction: column; gap: 13px;
+      }
+      .m-auth .form h3 {
+        font-size: 22px; font-weight: 500; letter-spacing: -0.3px; margin: 0 0 2px;
+      }
+      .m-auth .form .helper { font-size: 13px; color: var(--text2); margin: 0 0 4px; }
+      .m-auth .strength { display: flex; gap: 3px; margin-top: 6px; }
+      .m-auth .strength span { flex: 1; height: 3px; border-radius: 3px; background: #E6E4DC; }
+      .m-auth .strength span.on { background: var(--teal); }
+      .m-auth .pwd-hint { font-size: 11px; color: var(--text3); margin-top: 4px; }
+      .m-auth .bottom-link { font-size: 12px; color: var(--text2); text-align: center; margin-top: 6px; }
+
+      /* ---- Dashboard mobile ---- */
+      .m-dash { display: flex; flex-direction: column; height: 100%; }
+      .m-dash .greet {
+        padding: 14px 16px 10px; display: flex; justify-content: space-between; align-items: center;
+      }
+      .m-dash .greet .who { font-size: 11px; color: var(--text3); }
+      .m-dash .greet h4 { font-size: 18px; font-weight: 500; margin: 0; }
+      .m-dash .hero {
+        margin: 0 16px;
+        background: linear-gradient(135deg, var(--tealDark) 0%, #2A7AB9 55%, var(--teal) 100%);
+        color: #fff; padding: 22px;
+        border-radius: 16px;
+        display: flex; flex-direction: column; align-items: center;
+        position: relative; overflow: hidden;
+      }
+      .m-dash .hero::before {
+        content: ""; position: absolute; inset: 0;
+        background-image:
+          radial-gradient(circle at 18% 75%, rgba(255,255,255,0.12) 0, transparent 35%),
+          radial-gradient(circle at 85% 20%, rgba(255,255,255,0.08) 0, transparent 35%);
+      }
+      .m-dash .hero .label {
+        font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase;
+        color: rgba(255,255,255,0.78); position: relative;
+      }
+      .m-dash .hero .pct {
+        font-size: 60px; font-weight: 500; letter-spacing: -2px; line-height: 1;
+        margin: 6px 0 4px;
+        font-variant-numeric: tabular-nums; position: relative;
+      }
+      .m-dash .hero .pct sup { font-size: 22px; color: rgba(255,255,255,0.6); }
+      .m-dash .hero .total { font-size: 13px; color: rgba(255,255,255,0.88); position: relative; }
+      .m-dash .hero .bar {
+        margin-top: 14px; width: 100%; height: 7px;
+        background: rgba(255,255,255,0.2); border-radius: 20px; overflow: hidden; position: relative;
+      }
+      .m-dash .hero .bar::after {
+        content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 60%; background: #fff;
+      }
+      .m-dash .stats { padding: 14px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+      .m-dash .stat {
+        background: var(--surface); border: 0.5px solid var(--border); border-radius: 11px; padding: 12px;
+      }
+      .m-dash .stat .l {
+        font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px;
+        margin-bottom: 4px;
+      }
+      .m-dash .stat .v {
+        font-size: 22px; font-weight: 500; letter-spacing: -0.4px;
+        font-variant-numeric: tabular-nums; line-height: 1;
+      }
+      .m-dash .stat .s { font-size: 10px; color: var(--text3); margin-top: 3px; }
+      .m-dash .reminder {
+        margin: 4px 16px; padding: 14px;
+        background: var(--amberBg); border: 0.5px solid var(--amberBorder); border-radius: 13px;
+        display: flex; align-items: center; gap: 11px;
+      }
+      .m-dash .reminder .ico { width: 36px; height: 36px; border-radius: 10px; background: rgba(133,79,11,0.15); flex: 0 0 auto; }
+      .m-dash .reminder .t { font-size: 11px; color: var(--amberText); font-weight: 500; }
+      .m-dash .reminder .b { font-size: 13px; color: var(--amberText); }
+
+      /* ---- Settings mobile ---- */
+      .m-settings { display: flex; flex-direction: column; height: 100%; }
+      .m-settings .head { padding: 16px 16px 6px; }
+      .m-settings .head h2 {
+        font-size: 24px; font-weight: 500; letter-spacing: -0.5px; margin: 0;
+      }
+      .m-settings .head .sub { font-size: 11px; color: var(--text2); margin: 2px 0 0; }
+      .m-settings .sections {
+        padding: 12px 16px; display: flex; flex-direction: column; gap: 10px;
+      }
+      .m-settings .sec {
+        background: var(--surface); border: 0.5px solid var(--border);
+        border-radius: 13px; padding: 14px;
+      }
+      .m-settings .sec h3 { font-size: 14px; font-weight: 500; margin: 0 0 2px; }
+      .m-settings .sec .sub { font-size: 11px; color: var(--text2); margin: 0 0 10px; }
+      .m-settings .sec .field {
+        height: 36px; border: 0.5px solid var(--border); border-radius: 9px;
+        background: var(--surface); padding: 0 12px;
+        font-size: 12px; display: flex; align-items: center; color: var(--text1);
+        margin-bottom: 7px;
+      }
+      .m-settings .sec .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+      .m-settings .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+      .m-settings .pill {
+        font-size: 11px; padding: 5px 10px; border-radius: 16px;
+        border: 0.5px solid var(--border); background: var(--surface); color: var(--text2);
+      }
+      .m-settings .pill.on {
+        background: var(--tealLight); border-color: var(--teal); color: var(--tealText); font-weight: 500;
+      }
+      .m-settings .save-row {
+        margin-top: 10px; padding-top: 9px; border-top: 0.5px dashed var(--border);
+        display: flex; align-items: center; gap: 6px; font-size: 10px;
+      }
+      .m-settings .save-row .meta { flex: 1; color: var(--text3); }
+      .m-settings .save-row .btn-ghost {
+        font-size: 10px; padding: 5px 9px; border-radius: 8px;
+        border: 0.5px solid var(--border); background: transparent; color: var(--text1);
+      }
+      .m-settings .save-row .btn-primary {
+        font-size: 10px; padding: 5px 10px; border-radius: 8px;
+        border: none; background: var(--teal); color: #fff; font-weight: 600;
+      }
+
+      /* ---- Footer ---- */
+      .footer-strip {
+        margin-top: 60px; padding-top: 36px;
+        border-top: 1px solid var(--border);
+        display: flex; justify-content: space-between; align-items: center;
+        font-size: 18px; color: var(--text3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <!-- Header -->
+      <div class="header">
+        <div class="head-left">
+          <div class="logo-mark">
+            <svg viewBox="0 0 64 64"><path d="M32 8 C 44 22, 52 32, 52 42 A 20 20 0 0 1 12 42 C 12 32, 20 22, 32 8 Z" fill="#005C82"/></svg>
+          </div>
+          <div class="head-text">
+            <div class="wordmark">Sippy</div>
+            <div class="head-title">Page layouts — board view</div>
+            <div class="head-sub">Five chosen page layouts on a single canvas. Desktop above, mobile below. Brand color #0087BD.</div>
+          </div>
+        </div>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background:#0087BD"></div><div class="hex">#0087BD</div></div>
+          <div class="swatch"><div class="chip" style="background:#005C82"></div><div class="hex">#005C82</div></div>
+          <div class="swatch"><div class="chip" style="background:#E0F2FA"></div><div class="hex">#E0F2FA</div></div>
+          <div class="swatch"><div class="chip" style="background:#F1EFE8"></div><div class="hex">#F1EFE8</div></div>
+        </div>
+      </div>
+
+      <div class="section-label">
+        <span>Desktop</span>
+        <span class="meta">1440 PX · 16:10</span>
+        <span class="rule"></span>
+      </div>
+
+      <div class="desktop-row">
+        <div class="desktop-item">
+          <div class="browser-frame">
+            <div class="browser-bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">hydr8.app</div></div>
+            <img class="desktop-img" src="snaps/landing.png" alt="Landing">
+          </div>
+          <div class="label-block">
+            <span class="num">01 · Landing</span>
+            <span class="name">Know every sip.</span>
+            <span class="variation">Variation A · Split hero</span>
+          </div>
+        </div>
+        <div class="desktop-item">
+          <div class="browser-frame">
+            <div class="browser-bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">hydr8.app/signin</div></div>
+            <img class="desktop-img" src="snaps/signin.png" alt="Sign in">
+          </div>
+          <div class="label-block">
+            <span class="num">02 · Sign in</span>
+            <span class="name">Welcome back.</span>
+            <span class="variation">Variation B · Dark split panel</span>
+          </div>
+        </div>
+        <div class="desktop-item">
+          <div class="browser-frame">
+            <div class="browser-bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">hydr8.app/signup</div></div>
+            <img class="desktop-img" src="snaps/signup.png" alt="Create account">
+          </div>
+          <div class="label-block">
+            <span class="num">03 · Create account</span>
+            <span class="name">Start in ten seconds.</span>
+            <span class="variation">Variation B · Dark split panel</span>
+          </div>
+        </div>
+        <div class="desktop-item">
+          <div class="browser-frame">
+            <div class="browser-bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">hydr8.app/dashboard</div></div>
+            <img class="desktop-img" src="snaps/dashboard.png" alt="Dashboard">
+          </div>
+          <div class="label-block">
+            <span class="num">04 · Dashboard</span>
+            <span class="name">60% today.</span>
+            <span class="variation">Variation C · Hero progress</span>
+          </div>
+        </div>
+        <div class="desktop-item">
+          <div class="browser-frame">
+            <div class="browser-bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">hydr8.app/settings</div></div>
+            <img class="desktop-img" src="snaps/settings.png" alt="Settings">
+          </div>
+          <div class="label-block">
+            <span class="num">05 · Settings</span>
+            <span class="name">Per-section saves.</span>
+            <span class="variation">Variation B · Scrollable</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">
+        <span>Mobile</span>
+        <span class="meta">390 PX · 19.5:9</span>
+        <span class="rule"></span>
+      </div>
+
+      <div class="mobile-row">
+        <!-- Landing mobile -->
+        <div class="mobile-item">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status-bar">
+                <span>9:41</span>
+                <span style="display:flex; gap:4px; align-items:center;">
+                  <svg width="14" height="10" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="6" width="3" height="6" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
+                  <svg width="18" height="10" viewBox="0 0 22 12"><rect x="0.5" y="1" width="18" height="10" rx="2" stroke="currentColor" fill="none"/><rect x="2" y="2.5" width="14" height="7" rx="1" fill="currentColor"/><rect x="19.5" y="4" width="1.5" height="4" rx="0.5" fill="currentColor"/></svg>
+                </span>
+              </div>
+              <div class="m-landing">
+                <div class="ph-nav">
+                  <div class="ph-logo">
+                    <div class="mark"><svg viewBox="0 0 32 32"><path d="M16 4 C22 11 26 16 26 21 A10 10 0 0 1 6 21 C6 16 10 11 16 4 Z"/></svg></div>
+                    <span>Sippy</span>
+                  </div>
+                  <div class="ph-nav-right">≡</div>
+                </div>
+                <div class="hero">
+                  <span class="badge">Smart coaster · Bluetooth ready</span>
+                  <h1>Know every sip.</h1>
+                  <p class="lede">The Sippy coaster tracks your water intake automatically. No manual logging. Just drink.</p>
+                  <div class="ctas">
+                    <div class="ph-btn-primary">Create account</div>
+                    <div class="ph-btn-ghost">Try as guest</div>
+                  </div>
+                </div>
+                <div class="coaster"><div class="cup"></div></div>
+                <div class="features">
+                  <div class="feat"><div class="ico"></div><div><div class="t">Automatic sip detection</div><div class="b">Senses every cup pickup and refill.</div></div></div>
+                  <div class="feat"><div class="ico"></div><div><div class="t">Real-time tracking</div><div class="b">Updates instantly.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-block">
+            <span class="num">01 · Landing</span>
+            <span class="name">Know every sip.</span>
+            <span class="variation">Variation A · Split hero</span>
+          </div>
+        </div>
+
+        <!-- Sign in mobile -->
+        <div class="mobile-item">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="m-auth">
+                <div class="top-panel">
+                  <div class="logo">
+                    <div class="mark"><svg viewBox="0 0 32 32"><path d="M16 4 C22 11 26 16 26 21 A10 10 0 0 1 6 21 C6 16 10 11 16 4 Z"/></svg></div>
+                    <span>Sippy</span>
+                  </div>
+                  <h2>The scale watches. You drink. We do the rest.</h2>
+                </div>
+                <div class="form">
+                  <h3>Welcome back</h3>
+                  <p class="helper">Sign in to see your hydration history.</p>
+                  <div>
+                    <div class="ph-label">Email</div>
+                    <div class="ph-input">alex@hydrate.co</div>
+                  </div>
+                  <div>
+                    <div class="ph-label">Password</div>
+                    <div class="ph-input">••••••••••</div>
+                  </div>
+                  <div class="ph-btn-primary">Sign in</div>
+                  <div class="ph-btn-ghost">Continue as guest</div>
+                  <div class="bottom-link">No account? <span style="color:var(--tealText); font-weight:500;">Create one</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-block">
+            <span class="num">02 · Sign in</span>
+            <span class="name">Welcome back.</span>
+            <span class="variation">Variation B · Dark split panel</span>
+          </div>
+        </div>
+
+        <!-- Sign up mobile -->
+        <div class="mobile-item">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="m-auth">
+                <div class="top-panel">
+                  <div class="logo">
+                    <div class="mark"><svg viewBox="0 0 32 32"><path d="M16 4 C22 11 26 16 26 21 A10 10 0 0 1 6 21 C6 16 10 11 16 4 Z"/></svg></div>
+                    <span>Sippy</span>
+                  </div>
+                  <h2>Save your history. Set your own pace.</h2>
+                </div>
+                <div class="form">
+                  <h3>Create account</h3>
+                  <p class="helper">Takes ten seconds.</p>
+                  <div>
+                    <div class="ph-label">Full name</div>
+                    <div class="ph-input placeholder">Alex Rivera</div>
+                  </div>
+                  <div>
+                    <div class="ph-label">Email</div>
+                    <div class="ph-input placeholder">you@example.com</div>
+                  </div>
+                  <div>
+                    <div class="ph-label">Password</div>
+                    <div class="ph-input">••••••</div>
+                    <div class="strength">
+                      <span class="on"></span><span class="on"></span><span></span><span></span>
+                    </div>
+                    <div class="pwd-hint">Weak — needs uppercase + symbol</div>
+                  </div>
+                  <div class="ph-btn-primary">Create account</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-block">
+            <span class="num">03 · Create account</span>
+            <span class="name">Start in ten seconds.</span>
+            <span class="variation">Variation B · Dark split panel</span>
+          </div>
+        </div>
+
+        <!-- Dashboard mobile -->
+        <div class="mobile-item">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status-bar">
+                <span>9:41</span>
+                <span style="display:flex; gap:4px; align-items:center;">
+                  <svg width="14" height="10" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="6" width="3" height="6" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
+                  <svg width="18" height="10" viewBox="0 0 22 12"><rect x="0.5" y="1" width="18" height="10" rx="2" stroke="currentColor" fill="none"/><rect x="2" y="2.5" width="14" height="7" rx="1" fill="currentColor"/><rect x="19.5" y="4" width="1.5" height="4" rx="0.5" fill="currentColor"/></svg>
+                </span>
+              </div>
+              <div class="m-dash">
+                <div class="ph-nav">
+                  <div class="ph-logo">
+                    <div class="mark"><svg viewBox="0 0 32 32"><path d="M16 4 C22 11 26 16 26 21 A10 10 0 0 1 6 21 C6 16 10 11 16 4 Z"/></svg></div>
+                    <span>Sippy</span>
+                  </div>
+                  <span class="ph-chip"><span class="ph-dot"></span> Live</span>
+                </div>
+                <div class="greet">
+                  <div>
+                    <div class="who">Good afternoon,</div>
+                    <h4>Alex</h4>
+                  </div>
+                  <span class="ph-chip ph-streak">14 day streak</span>
+                </div>
+                <div class="hero">
+                  <span class="label">Today</span>
+                  <div class="pct">60<sup>%</sup></div>
+                  <div class="total">1,692 / 2,800 ml</div>
+                  <div class="bar"></div>
+                </div>
+                <div class="stats">
+                  <div class="stat"><div class="l">Sips</div><div class="v">15</div><div class="s">today</div></div>
+                  <div class="stat"><div class="l">Consumed</div><div class="v">1.7 L</div><div class="s">vs 1.4L yest</div></div>
+                  <div class="stat"><div class="l">Avg sip</div><div class="v">34 ml</div><div class="s">7 days</div></div>
+                  <div class="stat"><div class="l">Next</div><div class="v">8 m</div><div class="s">adaptive</div></div>
+                </div>
+                <div class="reminder">
+                  <div class="ico"></div>
+                  <div>
+                    <div class="t">Time to drink</div>
+                    <div class="b">8 minutes overdue</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-block">
+            <span class="num">04 · Dashboard</span>
+            <span class="name">60% today.</span>
+            <span class="variation">Variation C · Hero progress</span>
+          </div>
+        </div>
+
+        <!-- Settings mobile -->
+        <div class="mobile-item">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="m-settings">
+                <div class="ph-nav">
+                  <div class="ph-logo">
+                    <div class="mark"><svg viewBox="0 0 32 32"><path d="M16 4 C22 11 26 16 26 21 A10 10 0 0 1 6 21 C6 16 10 11 16 4 Z"/></svg></div>
+                    <span>Sippy</span>
+                  </div>
+                  <div class="ph-nav-right">Done</div>
+                </div>
+                <div class="head">
+                  <h2>Settings</h2>
+                  <div class="sub">Each section saves independently.</div>
+                </div>
+                <div class="sections">
+                  <div class="sec">
+                    <h3>Profile</h3>
+                    <div class="sub">Personal info.</div>
+                    <div class="row-2">
+                      <div class="field">Alex</div>
+                      <div class="field">Rivera</div>
+                    </div>
+                    <div class="field">alex@hydrate.co</div>
+                    <div class="save-row">
+                      <span class="meta">All saved</span>
+                      <button class="btn-ghost">Discard</button>
+                      <button class="btn-primary">Save</button>
+                    </div>
+                  </div>
+                  <div class="sec">
+                    <h3>Goals</h3>
+                    <div class="sub">Daily hydration target.</div>
+                    <div class="pills">
+                      <span class="pill">2.0 L</span>
+                      <span class="pill on">2.5 L</span>
+                      <span class="pill">2.8 L</span>
+                      <span class="pill">3.2 L</span>
+                    </div>
+                  </div>
+                  <div class="sec">
+                    <h3>Reminders</h3>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                      <span style="font-size:12px; color:var(--text1); font-weight:500;">Adaptive reminders</span>
+                      <span style="width:34px; height:20px; border-radius:20px; background:var(--teal); position:relative;">
+                        <span style="position:absolute; right:2px; top:2px; width:16px; height:16px; border-radius:50%; background:#fff;"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-block">
+            <span class="num">05 · Settings</span>
+            <span class="name">Per-section saves.</span>
+            <span class="variation">Variation B · Scrollable</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-strip">
+        <span>Sippy · Team review · May 2026</span>
+        <span>5 pages · Desktop &amp; mobile · #0087BD</span>
+      </div>
+    </div>
+  </body>
+</html>

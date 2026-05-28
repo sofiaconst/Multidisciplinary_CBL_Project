@@ -88,7 +88,10 @@ const navTabs = [
 					<span class="conn-dot"></span>
 					{scale.bt.connected ? 'Scale connected' : 'Scale offline'}
 				</div>
-				<div class="nav-avatar">{auth.user?.avatarInitials ?? '?'}</div>
+				<a href="/profile" class="avatar-pill">
+					<span class="avatar-circle">{auth.user?.avatarInitials ?? '?'}</span>
+					<span class="avatar-name">{auth.user?.name ?? ''}</span>
+				</a>
 			</div>
 		</nav>
 		<div class="app-content">
@@ -203,28 +206,45 @@ const navTabs = [
 }
 
 .conn-pill.conn-pill-on {
-	border-color: var(--teal-primary);
+	border-color: var(--teal-mid);
 	background: var(--teal-light);
-	color: var(--teal-dark);
+	color: var(--teal-text);
 }
 
 .conn-pill.conn-pill-on .conn-dot {
 	background: var(--teal-primary);
 }
 
-.nav-avatar {
-	width: 34px;
-	height: 34px;
+.avatar-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 36px;
+	padding: 0 12px 0 4px;
+	border-radius: 20px;
+	border: 0.5px solid var(--warm-border);
+	background: var(--warm-surface);
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.avatar-circle {
+	width: 28px;
+	height: 28px;
 	border-radius: 50%;
 	background: var(--teal-light);
-	border: 1.5px solid var(--teal-primary);
-	color: var(--teal-dark);
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	color: var(--teal-text);
+	display: grid;
+	place-items: center;
 	font-size: 11px;
-	font-weight: 700;
+	font-weight: 600;
 	flex-shrink: 0;
+}
+
+.avatar-name {
+	font-size: 13px;
+	color: var(--warm-text);
+	font-weight: 500;
 }
 
 /* ── Content ── */
