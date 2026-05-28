@@ -44,12 +44,9 @@ const tare = async () => {
 			<div class="greeting-label">{auth.greeting}</div>
 			<div class="greeting-name">{auth.user?.name ?? ''}</div>
 		</div>
-		<div class="badges">
-			<div class="streak-badge">🔥 {auth.streakDays}d streak</div>
-			<div class="ble-badge" class:ble-connected={scale.bt.connected}>
-				<span class="ble-dot"></span>
-				{scale.bt.connected ? 'Scale connected' : 'Offline'}
-			</div>
+		<div class="streak-badge">
+			<svg viewBox="0 0 20 20" fill="none" width="13" height="13"><path d="M10 2C7 6 5 8 5 11a5 5 0 0010 0c0-3-2-5-5-9z" fill="#f59e0b"/></svg>
+			{auth.streakDays} day streak
 		</div>
 	</div>
 
@@ -69,24 +66,36 @@ const tare = async () => {
 	</div>
 
 	<!-- Stats row -->
-	<div class="stats-grid">
+	<div class="stats-row">
 		<div class="stat-card">
-			<div class="stat-label">Sips</div>
+			<div class="stat-icon-label">
+				<svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M12 3C9 7.5 6 10 6 14a6 6 0 0012 0c0-4-3-6.5-6-11z" fill="currentColor" opacity=".25"/><path d="M12 3C9 7.5 6 10 6 14a6 6 0 0012 0c0-4-3-6.5-6-11z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+				Sips
+			</div>
 			<div class="stat-value">{scale.sipCount}</div>
 			<div class="stat-sub">today</div>
 		</div>
 		<div class="stat-card">
-			<div class="stat-label">Consumed</div>
+			<div class="stat-icon-label">
+				<svg viewBox="0 0 24 24" fill="none" width="14" height="14"><rect x="6" y="8" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M9 8V6a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+				Consumed
+			</div>
 			<div class="stat-value">{scale.consumedMl.toFixed(0)}<span class="stat-unit">ml</span></div>
 			<div class="stat-sub">vs goal</div>
 		</div>
 		<div class="stat-card">
-			<div class="stat-label">Avg sip</div>
+			<div class="stat-icon-label">
+				<svg viewBox="0 0 24 24" fill="none" width="14" height="14"><rect x="3" y="16" width="4" height="5" rx="1" fill="currentColor" opacity=".3"/><rect x="10" y="11" width="4" height="10" rx="1" fill="currentColor" opacity=".3"/><rect x="17" y="6" width="4" height="15" rx="1" fill="currentColor" opacity=".3"/><rect x="3" y="16" width="4" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="10" y="11" width="4" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="17" y="6" width="4" height="15" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+				Avg sip
+			</div>
 			<div class="stat-value">{scale.averageSipSizeMl.toFixed(0)}<span class="stat-unit">ml</span></div>
 			<div class="stat-sub">last 7 days</div>
 		</div>
 		<div class="stat-card">
-			<div class="stat-label">Next sip</div>
+			<div class="stat-icon-label">
+				<svg viewBox="0 0 24 24" fill="none" width="14" height="14"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				Next sip
+			</div>
 			<div class="stat-value">{formatMinutes(scale.nextSipDueInMs)}</div>
 			<div class="stat-sub">adaptive pace</div>
 		</div>
@@ -149,14 +158,15 @@ const tare = async () => {
 
 .greeting-bar {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
-	padding: 12px 0 4px;
+	padding: 10px 0 2px;
 }
 
 .greeting-label {
 	font-size: 12px;
 	color: var(--warm-text-secondary);
+	margin-bottom: 2px;
 }
 
 .greeting-name {
@@ -166,52 +176,18 @@ const tare = async () => {
 	letter-spacing: -0.3px;
 }
 
-.badges {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	align-items: flex-end;
-}
-
 .streak-badge {
+	display: flex;
+	align-items: center;
+	gap: 5px;
 	font-size: 12px;
 	font-weight: 600;
 	color: var(--amber-text);
 	background: var(--amber-bg);
 	border: 1px solid var(--amber-border);
 	border-radius: 20px;
-	padding: 3px 10px;
-}
-
-.ble-badge {
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	font-size: 12px;
-	font-weight: 500;
-	color: var(--warm-text-tertiary);
-	background: var(--warm-bg);
-	border: 1px solid var(--warm-border);
-	border-radius: 20px;
-	padding: 3px 10px;
-}
-
-.ble-dot {
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background: var(--warm-border);
+	padding: 4px 12px;
 	flex-shrink: 0;
-}
-
-.ble-badge.ble-connected {
-	color: var(--teal-dark);
-	background: var(--teal-light);
-	border-color: var(--teal-primary);
-}
-
-.ble-badge.ble-connected .ble-dot {
-	background: var(--teal-primary);
 }
 
 /* Hero gradient card */
@@ -286,31 +262,45 @@ const tare = async () => {
 }
 
 /* Stats */
-.stats-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 10px;
+.stats-row {
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	padding-bottom: 2px;
+}
+
+.stats-row::-webkit-scrollbar {
+	display: none;
 }
 
 .stat-card {
+	flex: 0 0 calc(50% - 4px);
 	background: var(--warm-surface);
-	border: 1px solid var(--warm-border);
-	border-radius: 14px;
+	border: 0.5px solid var(--warm-border);
+	border-radius: 16px;
 	padding: 14px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 }
 
-.stat-label {
+.stat-icon-label {
+	display: flex;
+	align-items: center;
+	gap: 6px;
 	font-size: 12px;
 	color: var(--warm-text-tertiary);
-	margin-bottom: 6px;
 }
 
 .stat-value {
 	font-size: 26px;
-	font-weight: 700;
+	font-weight: 500;
 	color: var(--warm-text);
 	line-height: 1;
 	font-variant-numeric: tabular-nums;
+	letter-spacing: -0.5px;
 }
 
 .stat-unit {
@@ -323,7 +313,6 @@ const tare = async () => {
 .stat-sub {
 	font-size: 11px;
 	color: var(--warm-text-tertiary);
-	margin-top: 4px;
 }
 
 /* Reminder */
