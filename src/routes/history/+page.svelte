@@ -1,17 +1,26 @@
 <script lang="ts">
 import { History } from '$lib/history.svelte'
+import { demo } from '$lib/demo.svelte'
 
 const history = History.getInstance()
 
-const weekMax = $derived(Math.max(...history.weekSessions.map((s) => s.consumedMl), 100))
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-const getDayLabel = (dateStr: string) => {
-	return new Date(dateStr).toLocaleDateString('en', { weekday: 'short' }).slice(0, 3)
-}
+const displayWeek = $derived(demo.active
+	? demo.weekData.map((ml, i) => ({ label: DAYS[i], consumedMl: ml }))
+	: history.weekSessions.map(s => ({
+		label: new Date(s.date).toLocaleDateString('en', { weekday: 'short' }).slice(0, 3),
+		consumedMl: s.consumedMl,
+	}))
+)
 
-const formatDate = (dateStr: string) => {
-	return new Date(dateStr).toLocaleDateString('en', { month: 'short', day: 'numeric' })
-}
+const weekMax = $derived(Math.max(...displayWeek.map(s => s.consumedMl), 1))
+
+const getDayLabel = (dateStr: string) =>
+	new Date(dateStr).toLocaleDateString('en', { weekday: 'short' }).slice(0, 3)
+
+const formatDate = (dateStr: string) =>
+	new Date(dateStr).toLocaleDateString('en', { month: 'short', day: 'numeric' })
 
 const goalPct = (session: (typeof history.weekSessions)[0]) => {
 	if (session.goalMl === 0) return 0
@@ -30,19 +39,19 @@ const goalPct = (session: (typeof history.weekSessions)[0]) => {
 	<div class="card">
 		<div class="section-label">This week</div>
 		<div class="chart">
-			{#each history.weekSessions as session, i}
+			{#each displayWeek as session, i}
 				{@const isToday = i === 6}
-				{@const pct = weekMax > 0 ? (session.consumedMl / weekMax) * 100 : 0}
+				{@const barPx = Math.max((session.consumedMl / weekMax) * 120, 4)}
 				<div class="chart-col">
+					<span class="chart-val">{session.consumedMl > 0 ? (session.consumedMl / 1000).toFixed(1) + 'L' : ''}</span>
 					<div class="chart-bar-wrap">
 						<div
 							class="chart-bar"
-							style="height: {Math.max(pct, 2)}%; background: {isToday
-								? 'var(--teal-primary)'
-								: 'var(--warm-border)'}; border: 1px solid {isToday ? 'var(--teal-dark)' : 'var(--warm-border)'}"
+							class:bar-today={isToday}
+							style="height:{barPx}px"
 						></div>
 					</div>
-					<div class="chart-label" class:today={isToday}>{getDayLabel(session.date)}</div>
+					<div class="chart-label" class:today={isToday}>{session.label}</div>
 				</div>
 			{/each}
 		</div>
@@ -135,9 +144,12 @@ const goalPct = (session: (typeof history.weekSessions)[0]) => {
 
 .chart {
 	display: flex;
-	gap: 6px;
-	height: 120px;
+	gap: 8px;
 	align-items: flex-end;
+	height: 160px;          /* explicit container height */
+	padding-bottom: 20px;   /* room for day labels sitting below bars */
+	position: relative;
+	box-sizing: border-box;
 }
 
 .chart-col {
@@ -145,11 +157,20 @@ const goalPct = (session: (typeof history.weekSessions)[0]) => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: flex-end; /* push bar + label to bottom */
 	height: 100%;
+	gap: 4px;
+}
+
+.chart-val {
+	font-size: 10px;
+	color: var(--warm-text-tertiary);
+	height: 14px;
+	line-height: 14px;
+	white-space: nowrap;
 }
 
 .chart-bar-wrap {
-	flex: 1;
 	width: 100%;
 	display: flex;
 	align-items: flex-end;
@@ -158,9 +179,11 @@ const goalPct = (session: (typeof history.weekSessions)[0]) => {
 .chart-bar {
 	width: 100%;
 	border-radius: 4px 4px 0 0;
-	min-height: 3px;
-	transition: height 0.3s ease;
+	background: var(--warm-border);
+	min-height: 4px;
+	transition: height 0.35s ease;
 }
+.chart-bar.bar-today { background: var(--teal-primary); }
 
 .chart-label {
 	font-size: 11px;
