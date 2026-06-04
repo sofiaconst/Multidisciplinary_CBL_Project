@@ -4,14 +4,22 @@ import { goto } from '$app/navigation'
 
 const auth = Auth.getInstance()
 let guestLoading = $state(false)
+let guestError = $state('')
 
 const continueAsGuest = async () => {
 	guestLoading = true
+	guestError = ''
 	try {
 		await auth.signInAsGuest()
 		await goto('/')
-	} catch {
+	} catch (err: unknown) {
 		guestLoading = false
+		const code = (err as { code?: string }).code ?? ''
+		if (code === 'auth/operation-not-allowed') {
+			guestError = 'Guest access is not enabled. Please create an account.'
+		} else {
+			guestError = 'Could not sign in as guest. Please try again.'
+		}
 	}
 }
 </script>
@@ -52,6 +60,9 @@ const continueAsGuest = async () => {
 				<button type="button" class="btn-guest" onclick={continueAsGuest} disabled={guestLoading}>
 					{guestLoading ? 'Loading…' : 'Continue as guest'}
 				</button>
+				{#if guestError}
+					<p class="guest-error">{guestError}</p>
+				{/if}
 			</div>
 
 			<p class="hint">
@@ -280,6 +291,13 @@ h1 {
 }
 .btn-guest:hover { color: var(--teal-primary); }
 .btn-guest:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.guest-error {
+	font-size: 13px;
+	color: #b91c1c;
+	text-align: center;
+	margin: 0;
+}
 
 .hint {
 	display: flex;

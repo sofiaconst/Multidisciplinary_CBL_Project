@@ -9,7 +9,7 @@ import {
 	signOut as firebaseSignOut,
 	sendPasswordResetEmail,
 	setPersistence,
-	inMemoryPersistence,
+	browserLocalPersistence,
 	onAuthStateChanged,
 	type User as FirebaseUser,
 } from 'firebase/auth'
@@ -21,6 +21,7 @@ export interface UserProfile {
 	avatarInitials: string
 	streakDays: number
 	lastActiveDate: string | null
+	avatarImageUrl?: string | null
 }
 
 export class Auth {
@@ -36,8 +37,7 @@ export class Auth {
 
 	private constructor() {
 		if (browser) {
-			// Don't persist session across app restarts — users must log in each time
-			void setPersistence(firebaseAuth, inMemoryPersistence)
+			void setPersistence(firebaseAuth, browserLocalPersistence)
 
 			onAuthStateChanged(firebaseAuth, async (fbUser) => {
 				this._firebaseUser = fbUser
@@ -124,6 +124,27 @@ export class Auth {
 			if (code === 'auth/invalid-email') throw new Error('Invalid email address.')
 			if (code === 'auth/weak-password') throw new Error('Password must be at least 6 characters.')
 			throw err
+		}
+	}
+
+	async updateName(name: string): Promise<void> {
+		if (!this.user) return
+		const trimmed = name.trim()
+		if (!trimmed) return
+		const initials = trimmed.slice(0, 2).toUpperCase()
+		this.user = { ...this.user, name: trimmed, avatarInitials: initials }
+		this._cache.current = this.user
+		if (this._uid && !this.isAnonymous) {
+			await updateDoc(doc(db, 'users', this._uid), { name: trimmed, avatarInitials: initials })
+		}
+	}
+
+	async setAvatarImage(dataUrl: string | null): Promise<void> {
+		if (!this.user) return
+		this.user = { ...this.user, avatarImageUrl: dataUrl }
+		this._cache.current = this.user
+		if (this._uid && !this.isAnonymous) {
+			await updateDoc(doc(db, 'users', this._uid), { avatarImageUrl: dataUrl ?? null })
 		}
 	}
 

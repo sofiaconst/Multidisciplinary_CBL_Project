@@ -454,40 +454,53 @@ const deleteAccount = async () => {
 			<div class="section-header">
 				<div>
 					<h2>Account</h2>
-					<p class="section-sub">Sign out and account actions.</p>
+					<p class="section-sub">{auth.isAnonymous ? 'You are browsing as a guest.' : 'Sign out and account actions.'}</p>
 				</div>
 			</div>
 
-			<button type="button" class="signout-btn" onclick={signOut}>
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-				Sign out
-			</button>
-
-			<div class="divider"></div>
-
-			<!-- Delete account -->
-			<div class="danger-zone">
-				<div class="danger-label">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-					Danger zone
-				</div>
-				<p class="danger-desc">Permanently deletes your account and all data. This cannot be undone.</p>
-
-				{#if !deleteConfirm}
-					<button type="button" class="delete-btn" onclick={() => deleteConfirm = true}>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
-						Delete account
+			{#if auth.isAnonymous}
+				<div class="guest-actions">
+					<a href="/signup" class="guest-create-btn">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+						Create account
+					</a>
+					<button type="button" class="guest-login-btn" onclick={signOut}>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+						Back to log in
 					</button>
-				{:else}
-					<div class="delete-confirm">
-						<p>Are you sure? This will delete all your history and goals.</p>
-						<div class="delete-confirm-btns">
-							<button type="button" class="ghost-sm" onclick={() => deleteConfirm = false}>Cancel</button>
-							<button type="button" class="delete-btn-confirm" onclick={deleteAccount}>Yes, delete my account</button>
-						</div>
+				</div>
+			{:else}
+				<button type="button" class="signout-btn" onclick={signOut}>
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+					Sign out
+				</button>
+
+				<div class="divider"></div>
+
+				<!-- Delete account -->
+				<div class="danger-zone">
+					<div class="danger-label">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+						Danger zone
 					</div>
-				{/if}
-			</div>
+					<p class="danger-desc">Permanently deletes your account and all data. This cannot be undone.</p>
+
+					{#if !deleteConfirm}
+						<button type="button" class="delete-btn" onclick={() => deleteConfirm = true}>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+							Delete account
+						</button>
+					{:else}
+						<div class="delete-confirm">
+							<p>Are you sure? This will delete all your history and goals.</p>
+							<div class="delete-confirm-btns">
+								<button type="button" class="ghost-sm" onclick={() => deleteConfirm = false}>Cancel</button>
+								<button type="button" class="delete-btn-confirm" onclick={deleteAccount}>Yes, delete my account</button>
+							</div>
+						</div>
+					{/if}
+				</div>
+			{/if}
 		</div>
 
 	</main>
@@ -841,4 +854,43 @@ h2 {
 	transition: background 0.15s;
 }
 .signout-btn:hover { background: #fee2e2; }
+
+.guest-actions { display: flex; flex-direction: column; gap: 8px; }
+
+.guest-create-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 36px;
+	padding: 0 16px;
+	background: var(--teal-primary);
+	color: #fff;
+	border: none;
+	border-radius: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: inherit;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.guest-create-btn:hover { background: var(--teal-dark); }
+
+.guest-login-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 36px;
+	padding: 0 16px;
+	background: transparent;
+	color: var(--warm-text-secondary);
+	border: 0.5px solid var(--warm-border);
+	border-radius: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: inherit;
+	cursor: pointer;
+	transition: background 0.15s, color 0.15s;
+}
+.guest-login-btn:hover { background: var(--warm-bg); color: var(--warm-text); }
 </style>

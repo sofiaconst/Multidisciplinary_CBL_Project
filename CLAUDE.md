@@ -115,14 +115,14 @@ pnpm format       # biome format --write
 | `/signup` | Create account — same split panel + password strength bar | Public. `novalidate` + full inline validation. |
 | `/` | Dashboard — hero %, 4-col stat grid, reminder + scale cards | Auth-gated. |
 | `/history` | Weekly bar chart + session list | Auth-gated. |
-| `/profile` | Avatar, streak, stat cards, linked scale info | Auth-gated. |
+| `/profile` | Avatar (editable), name (editable), streak, stat cards, linked scale info | Auth-gated. |
 | `/settings` | Goals, reminders, scale, account — per-section save | Auth-gated. Max-width 920px. |
 
 ### Layout & navigation
 
 Shell lives in `src/routes/+layout.svelte`. Unauthenticated visits to auth-gated routes redirect to `/welcome`.
 
-**Top navbar:** 64 px sticky, three zones: Logo mark + "Sippy" wordmark | Nav tabs with teal underline on active | ConnectionPill + AvatarPill.
+**Top navbar:** 64 px sticky, three zones: Logo mark + "Sippy" wordmark | Nav tabs with teal underline on active | ConnectionPill + AvatarPill. The AvatarPill shows the user's profile photo when set, falling back to initials.
 
 **Footer:** rendered inside `.app-content` on all authenticated pages — `© 2026 Sippy · Built by the Sippy team · v1.0`.
 
@@ -138,12 +138,18 @@ Firebase Auth + Firestore profile. Singleton: `Auth.getInstance()`.
 | `logout()` | Signs out, clears profile cache. |
 | `deleteAccount()` | `deleteUser(currentUser)`. Clears cache. Redirects caller to `/welcome`. |
 | `sendPasswordReset(email)` | Sends Firebase password-reset email. |
+| `updateName(name)` | Updates display name + `avatarInitials`. Persists to Firestore + localStorage cache. No-op for anonymous users (localStorage only). |
+| `setAvatarImage(dataUrl \| null)` | Stores a base64 JPEG avatar (256×256, resized in-browser). `null` removes it and restores initials. Persists to Firestore + localStorage cache. |
 | `isLoggedIn` | `true` for both real and anonymous users. |
 | `isAnonymous` | `true` for guest (anonymous) sessions. |
 | `streakDays` | Day-streak count from Firestore profile. Uses **local calendar date** (`Intl.DateTimeFormat('en-CA')`), not UTC. |
 
-**Profile fields:** `name`, `email`, `avatarInitials`, `streakDays`, `lastActiveDate`.
+**Profile fields:** `name`, `email`, `avatarInitials`, `streakDays`, `lastActiveDate`, `avatarImageUrl?`.
 Anonymous users get `name: 'Guest', avatarInitials: 'GU', streakDays: 0`.
+
+**Session persistence:** `browserLocalPersistence` — real users stay logged in across page refreshes. Anonymous sessions are cleared on sign-out.
+
+**Guest sign-in errors:** `auth/operation-not-allowed` means Anonymous Auth is not enabled in the Firebase console (Authentication → Sign-in method → Anonymous → Enable).
 
 ### Form validation rules
 
@@ -173,7 +179,7 @@ Five sections, each with its own **per-section save block** (dashed border top, 
 | Goals | NumberStepper for daily target (100 ml step) and hourly target (10 ml step) |
 | Reminders | Adaptive toggle + LED color (6 swatches, hex text input with live preview, "Add hex" button, "Test LED") |
 | Scale | Reference weight input + Tare / Calibrate buttons + collapsible advanced thresholds + debug toggle |
-| Account | Sign out button + Delete account (2-step confirm → Firebase `deleteUser`) |
+| Account | **For real users:** Sign out + Delete account (2-step confirm → Firebase `deleteUser`). **For anonymous/guest users:** "Create account" (→ `/signup`) + "Back to log in" (calls `logout` → `/login`). No delete option for guests. |
 
 ### Scale (`src/lib/scale.svelte.ts`)
 

@@ -89,7 +89,13 @@ const navTabs = [
 					{scale.bt.connected ? 'Scale connected' : 'Scale offline'}
 				</div>
 				<a href="/profile" class="avatar-pill">
-					<span class="avatar-circle">{auth.user?.avatarInitials ?? '?'}</span>
+					<span class="avatar-circle">
+						{#if auth.user?.avatarImageUrl}
+							<img src={auth.user.avatarImageUrl} alt="" class="avatar-circle-img" />
+						{:else}
+							{auth.user?.avatarInitials ?? '?'}
+						{/if}
+					</span>
 					<span class="avatar-name">{auth.user?.name ?? ''}</span>
 				</a>
 			</div>
@@ -246,6 +252,14 @@ const navTabs = [
 	font-size: 11px;
 	font-weight: 600;
 	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.avatar-circle-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
 }
 
 .avatar-name {
