@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Scale } from '$lib/scale.svelte'
 import { Auth } from '$lib/auth.svelte'
+import { persistedState } from 'svelte-persisted-state'
 import { goto } from '$app/navigation'
 import toast from 'svelte-french-toast'
 import { Toaster } from 'svelte-french-toast'
@@ -24,35 +25,54 @@ function markDirty(section: 'goals' | 'reminders' | 'scale') {
 	if (section === 'scale') scaleDirty = true
 }
 
+// ── Snapshots for Discard ────────────────────────────────────────
+let goalsSnap = { daily: scale.dailyTargetIntake.current, hourly: scale.hourlyTargetIntake.current }
+let remSnap   = { ledColor: scale.sipDueLedColor.current, adaptive: scale.adaptiveRemindersEnabled.current }
+let scaleSnap = { refWeight: scale.calibrationReferenceWeight.current, debug: scale.showTrackingDebugPanels.current }
+let remSnap_customs: string[] = []
+
 async function saveSection(
 	section: 'goals' | 'reminders' | 'scale',
 	action: 'save' | 'discard' = 'save'
 ) {
 	if (section === 'goals') {
-		if (action === 'discard') { goalsDirty = false; return }
+		if (action === 'discard') {
+			scale.dailyTargetIntake.current  = goalsSnap.daily
+			scale.hourlyTargetIntake.current = goalsSnap.hourly
+			goalsDirty = false; return
+		}
 		goalsSave = 'saving'
 		await new Promise((r) => setTimeout(r, 400))
-		goalsDirty = false
-		goalsSave = 'saved'
+		goalsSnap = { daily: scale.dailyTargetIntake.current, hourly: scale.hourlyTargetIntake.current }
+		goalsDirty = false; goalsSave = 'saved'
 		setTimeout(() => { goalsSave = 'idle' }, 1600)
 	}
 	if (section === 'reminders') {
-		if (action === 'discard') { remindersDirty = false; return }
+		if (action === 'discard') {
+			scale.sipDueLedColor.current           = remSnap.ledColor
+			scale.adaptiveRemindersEnabled.current = remSnap.adaptive
+			customSwatches.current = [...remSnap_customs]
+			hexInput = remSnap.ledColor
+			remindersDirty = false; return
+		}
 		remindersSave = 'saving'
-		try {
-			await scale.stopSipDueLedPreview()
-		} catch { /* ignore */ }
+		try { await scale.stopSipDueLedPreview() } catch { /* ignore */ }
 		await new Promise((r) => setTimeout(r, 400))
-		remindersDirty = false
-		remindersSave = 'saved'
+		remSnap = { ledColor: scale.sipDueLedColor.current, adaptive: scale.adaptiveRemindersEnabled.current }
+		remSnap_customs = [...customSwatches.current]
+		remindersDirty = false; remindersSave = 'saved'
 		setTimeout(() => { remindersSave = 'idle' }, 1600)
 	}
 	if (section === 'scale') {
-		if (action === 'discard') { scaleDirty = false; return }
+		if (action === 'discard') {
+			scale.calibrationReferenceWeight.current = scaleSnap.refWeight
+			scale.showTrackingDebugPanels.current    = scaleSnap.debug
+			scaleDirty = false; return
+		}
 		scaleSave = 'saving'
 		await new Promise((r) => setTimeout(r, 400))
-		scaleDirty = false
-		scaleSave = 'saved'
+		scaleSnap = { refWeight: scale.calibrationReferenceWeight.current, debug: scale.showTrackingDebugPanels.current }
+		scaleDirty = false; scaleSave = 'saved'
 		setTimeout(() => { scaleSave = 'idle' }, 1600)
 	}
 }
@@ -90,14 +110,27 @@ const previewLed = async (hex: string) => {
 let showAdvanced = $state(false)
 
 // ── LED color ────────────────────────────────────────────────────
-const swatches = ['#0087BD', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF']
+const PRESET_SWATCHES = ['#0087BD', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF']
+const customSwatches = persistedState<string[]>('sippy.custom-swatches.v1', [])
+remSnap_customs = [...customSwatches.current]
+const swatches = $derived([...PRESET_SWATCHES, ...customSwatches.current])
 let hexInput = $state(scale.sipDueLedColor.current)
 
+function normalizeHex(raw: string): string {
+	return ('#' + raw.replace(/^#+/, '').toUpperCase()).slice(0, 7)
+}
+
 const applyHex = async () => {
-	const val = hexInput.trim()
+	const val = normalizeHex(hexInput.trim())
 	if (!/^#[0-9A-Fa-f]{6}$/.test(val)) return
+	hexInput = val
 	scale.sipDueLedColor.current = val
 	markDirty('reminders')
+	const already = swatches.some(s => s.toUpperCase() === val.toUpperCase())
+	if (!already) {
+		const cur = customSwatches.current
+		customSwatches.current = cur.length >= 3 ? [...cur.slice(1), val] : [...cur, val]
+	}
 	try { await scale.previewSipDueLedColor(val) } catch { /* ignore */ }
 }
 
@@ -247,7 +280,7 @@ const deleteAccount = async () => {
 							placeholder="#0087BD"
 							maxlength="7"
 							class="hex-input"
-							oninput={() => { if (/^#[0-9A-Fa-f]{6}$/.test(hexInput)) scale.sipDueLedColor.current = hexInput }}
+							oninput={() => { const n = normalizeHex(hexInput); if (n !== hexInput) hexInput = n; if (/^#[0-9A-Fa-f]{6}$/.test(hexInput)) { scale.sipDueLedColor.current = hexInput; markDirty("reminders") } }}
 						/>
 						<button type="button" class="ghost-sm" onclick={applyHex}>Add hex</button>
 						<button
@@ -667,7 +700,11 @@ h2 {
 	padding: 0;
 	transition: background 0.15s;
 	flex-shrink: 0;
+	outline: none; box-shadow: none; overflow: hidden;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-appearance: none; appearance: none;
 }
+.toggle:focus, .toggle:focus-visible { outline: none; box-shadow: none; }
 .toggle.toggle-on { background: var(--teal-primary); }
 .toggle-knob {
 	position: absolute;

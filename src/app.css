@@ -46,9 +46,16 @@
 	--amber-text: #854f0b;
 }
 
-body,
 html {
 	height: 100%;
+	overflow-x: hidden;
+	touch-action: manipulation;
+}
+
+body {
+	height: 100%;
+	overflow-x: hidden;
+	max-width: 100vw;
 	background-color: var(--warm-bg);
 	color: var(--warm-text);
 	font-family: 'DM Sans', system-ui, sans-serif;

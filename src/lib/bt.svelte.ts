@@ -77,7 +77,18 @@ export class Bluetooth {
       optionalServices: [BATTERY_SERVICE, CONTROL_SERVICE_UUID],
     })
 
-    await BleClient.connect(this.device.deviceId, () => {
+    await this.connectToDevice(this.device.deviceId)
+  }
+
+  connectById = async (deviceId: string) => {
+    if (!browser) return
+    await this.logEvent('connect_by_id_start', { deviceId })
+    this.device = { deviceId } as BleDevice
+    await this.connectToDevice(deviceId)
+  }
+
+  private connectToDevice = async (deviceId: string) => {
+    await BleClient.connect(deviceId, () => {
       this.connected = false
       this.currentWeight = 0
       this.batteryLevel = undefined
@@ -90,11 +101,7 @@ export class Bluetooth {
 
     // Read battery
     try {
-      const batteryData = await BleClient.read(
-        this.device.deviceId,
-        BATTERY_SERVICE,
-        BATTERY_LEVEL
-      )
+      const batteryData = await BleClient.read(deviceId, BATTERY_SERVICE, BATTERY_LEVEL)
       this.batteryLevel = batteryData.getUint8(0)
       await this.logEvent('battery_read_ok', { batteryLevel: this.batteryLevel })
     } catch (err) {
@@ -103,7 +110,7 @@ export class Bluetooth {
 
     // Subscribe to weight notifications
     await BleClient.startNotifications(
-      this.device.deviceId,
+      deviceId,
       WEIGHT_SCALE_SERVICE,
       WEIGHT_MEASUREMENT,
       (data) => {
@@ -116,16 +123,12 @@ export class Bluetooth {
 
     // Control service
     try {
-      const statusData = await BleClient.read(
-        this.device.deviceId,
-        CONTROL_SERVICE_UUID,
-        CONTROL_STATUS_UUID
-      )
+      const statusData = await BleClient.read(deviceId, CONTROL_SERVICE_UUID, CONTROL_STATUS_UUID)
       const payload = new TextDecoder().decode(new Uint8Array(statusData.buffer))
       this.applyControlStatus(payload)
 
       await BleClient.startNotifications(
-        this.device.deviceId,
+        deviceId,
         CONTROL_SERVICE_UUID,
         CONTROL_STATUS_UUID,
         (data) => {

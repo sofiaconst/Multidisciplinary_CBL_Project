@@ -2,7 +2,8 @@
 import '../../app.css'
 import { Auth } from '$lib/auth.svelte'
 import { Scale } from '$lib/scale.svelte'
-import { browser } from '$app/environment'
+import { demo } from '$lib/demo.svelte'
+import DemoPanel from '$lib/DemoPanel.svelte'
 import { goto } from '$app/navigation'
 import { page } from '$app/state'
 
@@ -21,12 +22,37 @@ $effect(() => {
 	}
 })
 
+$effect(() => {
+	// Block pinch-zoom — Safari ignores the viewport meta since iOS 10
+	const block = (e: TouchEvent) => { if (e.touches.length > 1) e.preventDefault() }
+	document.addEventListener('touchstart', block, { passive: false })
+	return () => document.removeEventListener('touchstart', block)
+})
+
 const tabs = [
 	{ label: 'Home',     href: '/m',          match: (p: string) => p === '/m' },
 	{ label: 'History',  href: '/m/history',   match: (p: string) => p === '/m/history' },
 	{ label: 'Profile',  href: '/m/profile',   match: (p: string) => p === '/m/profile' },
 	{ label: 'Settings', href: '/m/settings',  match: (p: string) => p === '/m/settings' },
 ]
+
+let touchX = 0
+let touchY = 0
+
+function onTouchStart(e: TouchEvent) {
+	touchX = e.touches[0].clientX
+	touchY = e.touches[0].clientY
+}
+function onTouchEnd(e: TouchEvent) {
+	const dx = e.changedTouches[0].clientX - touchX
+	const dy = e.changedTouches[0].clientY - touchY
+	if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.8) {
+		const idx = tabs.findIndex(t => t.match(page.url.pathname))
+		if (idx < 0) return
+		if (dx < 0 && idx < tabs.length - 1) void goto(tabs[idx + 1].href)
+		if (dx > 0 && idx > 0) void goto(tabs[idx - 1].href)
+	}
+}
 </script>
 
 {#if isPublic}
@@ -37,22 +63,29 @@ const tabs = [
 	</div>
 {:else}
 	<div class="shell">
-		<!-- Top bar -->
-		<header class="topbar">
-			<a href="/m" class="topbar-brand">
-				<img src="/logo-icon.png" alt="" class="topbar-logo" />
-				<span class="topbar-name">Sippy</span>
-			</a>
-			<a href="/" class="view-toggle" title="Switch to desktop view">
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-				Desktop
-			</a>
-		</header>
-
-		<!-- Scrollable content -->
-		<main class="content">
+		<main class="content" ontouchstart={onTouchStart} ontouchend={onTouchEnd}>
 			{@render children()}
 		</main>
+
+		<!-- Demo mode panel -->
+		{#if demo.panelOpen}
+			<DemoPanel />
+		{/if}
+
+		<!-- Demo trigger button — sits above the bottom nav -->
+		<div class="demo-strip">
+			{#if demo.active}
+				<button class="demo-active-btn" onclick={() => demo.panelOpen = true}>
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 14H11v-2h2v2zm0-4H11V8h2v4z"/></svg>
+					DEMO ON
+				</button>
+			{:else}
+				<button class="demo-idle-btn" onclick={() => { demo.active = true; demo.panelOpen = true }}>
+					<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+					Test
+				</button>
+			{/if}
+		</div>
 
 		<!-- Bottom nav -->
 		<nav class="bottom-nav">
@@ -82,44 +115,44 @@ const tabs = [
 	display: flex;
 	flex-direction: column;
 	height: 100dvh;
+	width: 100%;
+	max-width: 100vw;
+	overflow: hidden;
 	background: var(--warm-bg);
+	touch-action: pan-y; /* allows vertical scroll, blocks pinch-zoom */
 }
 
-/* ── Top bar ── */
-.topbar {
-	height: 52px;
-	background: var(--warm-surface);
-	border-bottom: 0.5px solid var(--warm-border);
+/* ── Demo strip ── */
+.demo-strip {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0 18px;
+	justify-content: flex-end;
+	padding: 4px 12px 2px;
+	background: var(--warm-bg);
 	flex-shrink: 0;
-	position: sticky;
-	top: 0;
-	z-index: 20;
 }
-.topbar-brand {
-	display: flex; align-items: center; gap: 8px; text-decoration: none;
-}
-.topbar-logo { width: 24px; height: 24px; object-fit: contain; }
-.topbar-name { font-size: 16px; font-weight: 700; color: var(--warm-text); letter-spacing: -0.2px; }
-
-.view-toggle {
+.demo-idle-btn {
 	display: inline-flex; align-items: center; gap: 5px;
-	font-size: 12px; font-weight: 500; color: var(--warm-text-secondary);
-	text-decoration: none; padding: 5px 10px; border-radius: 8px;
-	border: 0.5px solid var(--warm-border); background: var(--warm-bg);
-	transition: color 0.15s, border-color 0.15s;
+	height: 26px; padding: 0 10px; border-radius: 20px;
+	background: var(--warm-bg); border: 0.5px solid var(--warm-border);
+	color: var(--warm-text-tertiary); font-size: 11px; font-weight: 500;
+	font-family: inherit; cursor: pointer;
+	outline: none; -webkit-tap-highlight-color: transparent;
 }
-.view-toggle:hover { color: var(--teal-primary); border-color: var(--teal-primary); }
+.demo-active-btn {
+	display: inline-flex; align-items: center; gap: 5px;
+	height: 26px; padding: 0 10px; border-radius: 20px;
+	background: var(--teal-light); border: 1px solid var(--teal-primary);
+	color: var(--teal-dark); font-size: 11px; font-weight: 700;
+	font-family: inherit; cursor: pointer;
+	outline: none; -webkit-tap-highlight-color: transparent;
+}
 
 /* ── Content ── */
 .content {
 	flex: 1;
 	overflow-y: auto;
+	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
-	/* Extra bottom padding so last card clears the bottom nav on all devices */
 	padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -128,13 +161,14 @@ const tabs = [
 	background: var(--warm-surface);
 	border-top: 0.5px solid var(--warm-border);
 	display: flex;
+	justify-content: center;
 	align-items: stretch;
 	flex-shrink: 0;
-	/* 64px nav + safe area for iPhone home indicator */
 	padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .tab {
 	flex: 1;
+	max-width: 90px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

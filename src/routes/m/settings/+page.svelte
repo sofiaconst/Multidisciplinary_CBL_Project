@@ -1,6 +1,8 @@
 <script lang="ts">
 import { Scale } from '$lib/scale.svelte'
 import { Auth } from '$lib/auth.svelte'
+import QRScanner from '$lib/QRScanner.svelte'
+import { persistedState } from 'svelte-persisted-state'
 import { goto } from '$app/navigation'
 import toast from 'svelte-french-toast'
 import { Toaster } from 'svelte-french-toast'
@@ -13,31 +15,90 @@ let goalsDirty = $state(false); let goalsSave = $state<SS>('idle')
 let remDirty   = $state(false); let remSave   = $state<SS>('idle')
 let scaleDirty = $state(false); let scaleSave  = $state<SS>('idle')
 
+// ── Snapshots for Discard ─────────────────────────────────────
+// Captured when the page loads; restored on Discard.
+let goalsSnap = {
+	daily:  scale.dailyTargetIntake.current,
+	hourly: scale.hourlyTargetIntake.current,
+}
+let remSnap = {
+	ledColor: scale.sipDueLedColor.current,
+	adaptive: scale.adaptiveRemindersEnabled.current,
+}
+let scaleSnap = {
+	refWeight: scale.calibrationReferenceWeight.current,
+	debug:     scale.showTrackingDebugPanels.current,
+}
+
+function discardGoals() {
+	scale.dailyTargetIntake.current  = goalsSnap.daily
+	scale.hourlyTargetIntake.current = goalsSnap.hourly
+	goalsDirty = false
+}
+function discardRem() {
+	scale.sipDueLedColor.current          = remSnap.ledColor
+	scale.adaptiveRemindersEnabled.current = remSnap.adaptive
+	customSwatches.current = [...remSnap_customs]
+	hexInput = remSnap.ledColor
+	remDirty = false
+}
+function discardScale() {
+	scale.calibrationReferenceWeight.current = scaleSnap.refWeight
+	scale.showTrackingDebugPanels.current    = scaleSnap.debug
+	scaleDirty = false
+}
+
 async function saveSection(section: 'goals' | 'rem' | 'scale') {
 	if (section === 'goals') {
 		goalsSave = 'saving'
 		await new Promise(r => setTimeout(r, 400))
+		// Update snapshot so next discard reverts to the newly saved values
+		goalsSnap = { daily: scale.dailyTargetIntake.current, hourly: scale.hourlyTargetIntake.current }
 		goalsDirty = false; goalsSave = 'saved'
 		setTimeout(() => goalsSave = 'idle', 1600)
 	} else if (section === 'rem') {
 		remSave = 'saving'
 		await new Promise(r => setTimeout(r, 400))
+		remSnap = { ledColor: scale.sipDueLedColor.current, adaptive: scale.adaptiveRemindersEnabled.current }
+		remSnap_customs = [...customSwatches.current]
 		remDirty = false; remSave = 'saved'
 		setTimeout(() => remSave = 'idle', 1600)
 	} else {
 		scaleSave = 'saving'
 		await new Promise(r => setTimeout(r, 400))
+		scaleSnap = { refWeight: scale.calibrationReferenceWeight.current, debug: scale.showTrackingDebugPanels.current }
 		scaleDirty = false; scaleSave = 'saved'
 		setTimeout(() => scaleSave = 'idle', 1600)
 	}
 }
 
-const swatches = ['#0087BD', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF']
+// ── LED colour swatches ───────────────────────────────────────
+const PRESET_SWATCHES = ['#0087BD', '#3B82F6', '#D97706', '#A32D2D', '#7C3AED', '#FFFFFF']
+// Custom slots persist across sessions (max 3, FIFO eviction)
+const customSwatches = persistedState<string[]>('sippy.custom-swatches.v1', [])
+// Snapshot of customs at load/save time for Discard
+let remSnap_customs = [...customSwatches.current]
+
+const swatches = $derived([...PRESET_SWATCHES, ...customSwatches.current])
 let hexInput = $state(scale.sipDueLedColor.current)
+
+function normalizeHex(raw: string): string {
+	return ('#' + raw.replace(/^#+/, '').toUpperCase()).slice(0, 7)
+}
+
 const applyHex = async () => {
-	const v = hexInput.trim()
+	const v = normalizeHex(hexInput.trim())
 	if (!/^#[0-9A-Fa-f]{6}$/.test(v)) return
-	scale.sipDueLedColor.current = v; remDirty = true
+	hexInput = v
+	scale.sipDueLedColor.current = v
+	remDirty = true
+	const already = swatches.some(s => s.toUpperCase() === v.toUpperCase())
+	if (!already) {
+		const cur = customSwatches.current
+		customSwatches.current = cur.length >= 3
+			? [...cur.slice(1), v]   // FIFO: drop oldest
+			: [...cur, v]
+	}
 	try { await scale.previewSipDueLedColor(v) } catch {}
 }
 
@@ -61,6 +122,15 @@ const calibrate = async () => {
 	} catch (e) { toast.error((e as Error).message) }
 }
 
+let showQR = $state(false)
+const onQRScan = async (result: string) => {
+	showQR = false
+	try {
+		await scale.bt.connectById(result.trim())
+		toast.success('Scale connected!')
+	} catch (e) { toast.error(`Connect failed: ${(e as Error).message}`) }
+}
+
 let deleteConfirm = $state(false)
 const signOut = async () => { await auth.logout(); await goto('/m/welcome') }
 const deleteAccount = async () => {
@@ -68,6 +138,10 @@ const deleteAccount = async () => {
 	catch (e) { toast.error(`Could not delete: ${(e as Error).message}`); deleteConfirm = false }
 }
 </script>
+
+{#if showQR}
+	<QRScanner onScan={onQRScan} onClose={() => showQR = false} />
+{/if}
 
 <div class="page">
 
@@ -117,7 +191,7 @@ const deleteAccount = async () => {
 				{goalsSave === 'saved' ? '✓ Saved' : goalsDirty ? '● Unsaved changes' : 'All saved'}
 			</span>
 			<div class="save-btns">
-				<button class="btn-ghost-sm" disabled={!goalsDirty || goalsSave === 'saving'} onclick={() => goalsDirty = false}>Discard</button>
+				<button class="btn-ghost-sm" disabled={!goalsDirty || goalsSave === 'saving'} onclick={discardGoals}>Discard</button>
 				<button class="btn-teal-sm"  disabled={!goalsDirty || goalsSave === 'saving'} onclick={() => saveSection('goals')}>
 					{goalsSave === 'saving' ? 'Saving…' : 'Save'}
 				</button>
@@ -159,14 +233,21 @@ const deleteAccount = async () => {
 				{/each}
 			</div>
 			<div class="hex-row">
-				<div class="hex-dot" style="background:{scale.sipDueLedColor.current}"></div>
 				<input
 					type="text"
 					bind:value={hexInput}
 					placeholder="#0087BD"
-					maxlength="7"
+					maxlength="8"
 					class="hex-input"
-					oninput={() => { if (/^#[0-9A-Fa-f]{6}$/.test(hexInput)) { scale.sipDueLedColor.current = hexInput; remDirty = true } }}
+					oninput={() => {
+						// Normalize on every input: strip duplicate #, uppercase, cap length
+						const n = normalizeHex(hexInput)
+						if (n !== hexInput) hexInput = n
+						if (/^#[0-9A-Fa-f]{6}$/.test(hexInput)) {
+							scale.sipDueLedColor.current = hexInput
+							remDirty = true
+						}
+					}}
 				/>
 				<button class="btn-ghost-sm" onclick={applyHex}>Add hex</button>
 			</div>
@@ -177,7 +258,7 @@ const deleteAccount = async () => {
 				{remSave === 'saved' ? '✓ Saved' : remDirty ? '● Unsaved changes' : 'All saved'}
 			</span>
 			<div class="save-btns">
-				<button class="btn-ghost-sm" disabled={!remDirty || remSave === 'saving'} onclick={() => remDirty = false}>Discard</button>
+				<button class="btn-ghost-sm" disabled={!remDirty || remSave === 'saving'} onclick={discardRem}>Discard</button>
 				<button class="btn-teal-sm"  disabled={!remDirty || remSave === 'saving'} onclick={() => saveSection('rem')}>
 					{remSave === 'saving' ? 'Saving…' : 'Save'}
 				</button>
@@ -211,12 +292,20 @@ const deleteAccount = async () => {
 				class="btn-ghost-md"
 				onclick={tare}
 				disabled={!scale.bt.connected || scale.bt.calibrationBusy}
-			>Tare scale</button>
+			>Tare</button>
 			<button
 				class="btn-teal-md"
 				onclick={calibrate}
 				disabled={!scale.bt.connected || scale.bt.calibrationBusy || scale.calibrationReferenceWeight.current <= 0}
 			>Calibrate</button>
+			<button
+				class="btn-ghost-md qr-scan-btn"
+				onclick={() => showQR = true}
+				title="Scan QR code to connect scale"
+			>
+				<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
+				Scan QR
+			</button>
 		</div>
 
 		<div class="cal-status">
@@ -244,7 +333,7 @@ const deleteAccount = async () => {
 				{scaleSave === 'saved' ? '✓ Saved' : scaleDirty ? '● Unsaved changes' : 'All saved'}
 			</span>
 			<div class="save-btns">
-				<button class="btn-ghost-sm" disabled={!scaleDirty || scaleSave === 'saving'} onclick={() => scaleDirty = false}>Discard</button>
+				<button class="btn-ghost-sm" disabled={!scaleDirty || scaleSave === 'saving'} onclick={discardScale}>Discard</button>
 				<button class="btn-teal-sm"  disabled={!scaleDirty || scaleSave === 'saving'} onclick={() => saveSection('scale')}>
 					{scaleSave === 'saving' ? 'Saving…' : 'Save'}
 				</button>
@@ -288,10 +377,10 @@ const deleteAccount = async () => {
 
 <style>
 .page {
-	padding: 20px 16px 48px;
+	padding: 16px 14px 48px;
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 12px;
 }
 
 /* Page header */
@@ -309,11 +398,12 @@ h1 {
 .card {
 	background: var(--warm-surface);
 	border: 0.5px solid var(--warm-border);
-	border-radius: 18px;
-	padding: 20px;
+	border-radius: 16px;
+	padding: 18px;
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 14px;
+	overflow: hidden;
 }
 
 .section-title {
@@ -327,8 +417,8 @@ h1 {
 /* Fields */
 .field { display: flex; flex-direction: column; gap: 10px; }
 .field-label { display: flex; flex-direction: column; gap: 2px; }
-.lbl { font-size: 15px; font-weight: 500; color: var(--warm-text); }
-.hint { font-size: 13px; color: var(--warm-text-tertiary); line-height: 1.4; }
+.lbl { font-size: 14px; font-weight: 500; color: var(--warm-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hint { font-size: 12px; color: var(--warm-text-tertiary); line-height: 1.4; }
 
 /* Stepper — full width, large */
 .stepper {
@@ -389,9 +479,9 @@ h1 {
 .row-item {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 12px;
 }
-.row-item .field-label { flex: 1; }
+.row-item .field-label { flex: 1; min-width: 0; }
 
 /* Toggle */
 .toggle {
@@ -399,7 +489,11 @@ h1 {
 	border: none; background: #C7C5BC;
 	position: relative; cursor: pointer; padding: 0;
 	transition: background 0.15s; flex-shrink: 0;
+	outline: none; box-shadow: none; overflow: hidden;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-appearance: none; appearance: none;
 }
+.toggle:focus, .toggle:focus-visible { outline: none; box-shadow: none; }
 .toggle.on { background: var(--teal-primary); }
 .knob {
 	position: absolute; top: 4px; left: 4px;
@@ -427,15 +521,12 @@ h1 {
 .hex-row {
 	display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 }
-.hex-dot {
-	width: 34px; height: 34px; border-radius: 10px;
-	border: 1px solid var(--warm-border); flex-shrink: 0;
-}
+
 .hex-input {
-	flex: 1; min-width: 110px; height: 44px; padding: 0 12px;
+	flex: 1; min-width: 90px; height: 40px; padding: 0 10px;
 	border: 1px solid var(--warm-border); border-radius: 10px;
 	background: var(--warm-bg); color: var(--warm-text);
-	font-size: 15px; font-family: ui-monospace, monospace; outline: none;
+	font-size: 14px; font-family: ui-monospace, monospace; outline: none;
 	transition: border-color 0.12s;
 }
 .hex-input:focus { border-color: var(--teal-primary); }
@@ -464,7 +555,10 @@ h1 {
 
 /* Calibration */
 .cal-buttons {
-	display: flex; gap: 10px;
+	display: flex; gap: 8px; flex-wrap: wrap;
+}
+.qr-scan-btn {
+	display: inline-flex; align-items: center; gap: 6px;
 }
 .cal-status {
 	display: flex; align-items: baseline; gap: 10px;
@@ -481,12 +575,14 @@ h1 {
 .save-row {
 	display: flex;
 	align-items: center;
-	gap: 10px;
-	padding-top: 14px;
+	gap: 8px;
+	padding-top: 12px;
 	border-top: 0.5px dashed var(--warm-border);
+	flex-wrap: nowrap;
 }
 .save-status {
-	flex: 1; font-size: 13px; color: var(--warm-text-tertiary);
+	flex: 1; font-size: 12px; color: var(--warm-text-tertiary);
+	min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .save-status.unsaved { color: var(--amber-text); }
 .save-status.saved   { color: var(--teal-text); }

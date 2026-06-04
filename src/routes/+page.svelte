@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Scale } from '$lib/scale.svelte'
 import { Auth } from '$lib/auth.svelte'
+import { demo } from '$lib/demo.svelte'
 import ConnectStartButton from './ConnectStartButton.svelte'
 import { Toaster } from 'svelte-french-toast'
 import toast from 'svelte-french-toast'
@@ -13,15 +14,33 @@ const formatMinutes = (ms: number | null) => {
 	return `${Math.max(1, Math.round(ms / 60000))} m`
 }
 
-const goalPct = $derived(
-	scale.dailyTargetIntake.current > 0
-		? Math.min(100, (scale.consumedMl / scale.dailyTargetIntake.current) * 100)
-		: 0,
-)
-
-const isSipDue = $derived(scale.reminderStatus === 'sip_due')
-
 const fmtMl = (n: number) => n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+const d = $derived(demo.active ? {
+	consumedMl:     demo.consumedMl,
+	target:         demo.dailyTargetMl,
+	sipCount:       demo.sipCount,
+	avgSipMl:       demo.avgSipMl,
+	nextSipInMs:    demo.nextSipInMs,
+	remStatus:      demo.reminderStatus,
+	hourlyConsumed: demo.consumedThisHourMl,
+	hourlyTarget:   demo.hourlyTargetMl,
+} : {
+	consumedMl:     scale.consumedMl,
+	target:         scale.dailyTargetIntake.current,
+	sipCount:       scale.sipCount,
+	avgSipMl:       scale.averageSipSizeMl,
+	nextSipInMs:    scale.nextSipDueInMs,
+	remStatus:      scale.reminderStatus,
+	hourlyConsumed: scale.consumedThisHourMl,
+	hourlyTarget:   scale.hourlyTargetIntake.current,
+})
+
+const rawPct   = $derived(d.target > 0 ? (d.consumedMl / d.target) * 100 : 0)
+const goalPct  = $derived(Math.min(100, rawPct))
+const overGoal = $derived(rawPct > 100)
+const overMl   = $derived(Math.max(0, Math.round(d.consumedMl - d.target)))
+const isSipDue = $derived(d.remStatus === 'sip_due')
 
 const tare = async () => {
 	try {
@@ -47,18 +66,25 @@ const tare = async () => {
 		</div>
 
 		<!-- Hero progress card -->
-		<div class="hero">
+		<div class="hero" class:hero-over={overGoal}>
 			<div class="hero-orbs"></div>
 			<div class="hero-today">TODAY</div>
 			<div class="hero-pct">
-				{Math.round(goalPct)}<span class="hero-pct-sign">%</span>
+				{Math.round(rawPct)}<span class="hero-pct-sign">%</span>
 			</div>
 			<div class="hero-ml">
-				{fmtMl(scale.consumedMl)} / {fmtMl(scale.dailyTargetIntake.current)} ml
+				{fmtMl(d.consumedMl)} / {fmtMl(d.target)} ml
 			</div>
 			<div class="hero-bar">
 				<div class="hero-fill" style="width: {goalPct}%"></div>
+				{#if overGoal}<span class="hero-overflow-dot"></span>{/if}
 			</div>
+			{#if overGoal}
+				<div class="hero-badge">
+					<svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+					Goal crushed! +{fmtMl(overMl)} ml extra
+				</div>
+			{/if}
 		</div>
 
 		<!-- 4-column stat grid -->
@@ -68,7 +94,7 @@ const tare = async () => {
 					<svg viewBox="0 0 24 24" fill="none" width="14" height="14" color="var(--warm-text-tertiary)"><path d="M12 3C9 7.5 6 10 6 14a6 6 0 0012 0c0-4-3-6.5-6-11z" fill="currentColor" opacity=".2"/><path d="M12 3C9 7.5 6 10 6 14a6 6 0 0012 0c0-4-3-6.5-6-11z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
 					Sips
 				</div>
-				<div class="stat-val">{scale.sipCount}</div>
+				<div class="stat-val">{d.sipCount}</div>
 				<div class="stat-sub">today</div>
 			</div>
 			<div class="stat-card">
@@ -76,7 +102,7 @@ const tare = async () => {
 					<svg viewBox="0 0 24 24" fill="none" width="14" height="14" color="var(--warm-text-tertiary)"><rect x="7" y="9" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M9 9V7a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
 					Consumed
 				</div>
-				<div class="stat-val">{fmtMl(scale.consumedMl)} <span class="stat-unit">ml</span></div>
+				<div class="stat-val">{fmtMl(d.consumedMl)} <span class="stat-unit">ml</span></div>
 				<div class="stat-sub">vs goal</div>
 			</div>
 			<div class="stat-card">
@@ -84,7 +110,7 @@ const tare = async () => {
 					<svg viewBox="0 0 24 24" fill="none" width="14" height="14" color="var(--warm-text-tertiary)"><rect x="3" y="15" width="4" height="6" rx="1" fill="currentColor" opacity=".25"/><rect x="10" y="10" width="4" height="11" rx="1" fill="currentColor" opacity=".25"/><rect x="17" y="5" width="4" height="16" rx="1" fill="currentColor" opacity=".25"/><rect x="3" y="15" width="4" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="10" y="10" width="4" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="17" y="5" width="4" height="16" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
 					Avg sip
 				</div>
-				<div class="stat-val">{scale.averageSipSizeMl.toFixed(0)} <span class="stat-unit">ml</span></div>
+				<div class="stat-val">{d.avgSipMl.toFixed(0)} <span class="stat-unit">ml</span></div>
 				<div class="stat-sub">last 7 days</div>
 			</div>
 			<div class="stat-card">
@@ -92,7 +118,7 @@ const tare = async () => {
 					<svg viewBox="0 0 24 24" fill="none" width="14" height="14" color="var(--warm-text-tertiary)"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 					Next sip
 				</div>
-				<div class="stat-val">{formatMinutes(scale.nextSipDueInMs)}</div>
+				<div class="stat-val">{formatMinutes(d.nextSipInMs)}</div>
 				<div class="stat-sub">adaptive pace</div>
 			</div>
 		</div>
@@ -105,19 +131,19 @@ const tare = async () => {
 				</div>
 				<div class="card-body">
 					<div class="card-title">
-						{#if scale.reminderStatus === 'sip_due'}Time to drink
-						{:else if scale.reminderStatus === 'on_track'}Next reminder
-						{:else if scale.reminderStatus === 'target_reached'}Hourly target reached
+						{#if d.remStatus === 'sip_due'}Time to drink
+						{:else if d.remStatus === 'on_track'}Next reminder
+						{:else if d.remStatus === 'target_reached'}Hourly target reached
 						{:else}Reminders off{/if}
 					</div>
 					<div class="card-desc">
-						{#if scale.reminderStatus === 'sip_due'}Drink now
-						{:else if scale.reminderStatus === 'on_track'}In {formatMinutes(scale.nextSipDueInMs)} · adaptive pacing
-						{:else if scale.reminderStatus === 'target_reached'}Great job this hour!
+						{#if d.remStatus === 'sip_due'}Drink now
+						{:else if d.remStatus === 'on_track'}In {formatMinutes(d.nextSipInMs)} · adaptive pacing
+						{:else if d.remStatus === 'target_reached'}Great job this hour!
 						{:else}&nbsp;{/if}
 					</div>
 				</div>
-				<div class="card-aside">{fmtMl(scale.consumedThisHourMl)} / {fmtMl(scale.hourlyTargetIntake.current)} ml this hour</div>
+				<div class="card-aside">{fmtMl(d.hourlyConsumed)} / {fmtMl(d.hourlyTarget)} ml this hour</div>
 			</div>
 
 			{#if scale.bt.connected}
@@ -271,7 +297,7 @@ const tare = async () => {
 	height: 10px;
 	background: rgba(255,255,255,0.20);
 	border-radius: 20px;
-	overflow: hidden;
+	overflow: visible;
 }
 
 .hero-fill {
@@ -280,6 +306,30 @@ const tare = async () => {
 	border-radius: 20px;
 	min-width: 4px;
 	transition: width 600ms cubic-bezier(.2,.7,.3,1);
+}
+
+.hero-overflow-dot {
+	position: absolute; right: -5px; top: 50%;
+	transform: translateY(-50%);
+	width: 18px; height: 18px; border-radius: 50%;
+	background: rgba(255,255,255,0.95);
+	animation: overflow-pulse 1.4s ease-out infinite;
+}
+@keyframes overflow-pulse {
+	0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
+	70%  { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+	100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+.hero-badge {
+	display: inline-flex; align-items: center; gap: 5px;
+	font-size: 13px; font-weight: 600;
+	color: rgba(255,255,255,0.95);
+	background: rgba(255,255,255,0.18);
+	border: 1px solid rgba(255,255,255,0.3);
+	border-radius: 20px; padding: 5px 14px; margin-top: 14px;
+}
+.hero.hero-over {
+	background: linear-gradient(135deg, #004d6e 0%, #0077a8 50%, #00a3d9 100%);
 }
 
 /* Stat grid */

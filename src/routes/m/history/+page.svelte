@@ -1,8 +1,19 @@
 <script lang="ts">
 import { History } from '$lib/history.svelte'
+import { demo } from '$lib/demo.svelte'
 
 const history = History.getInstance()
-const weekMax     = $derived(Math.max(...history.weekSessions.map(s => s.consumedMl), 100))
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+// When demo active, use the synthetic week sliders
+const displayWeek = $derived(demo.active
+	? demo.weekData.map((ml, i) => ({ label: DAYS[i], consumedMl: ml }))
+	: history.weekSessions.map(s => ({
+		label: new Date(s.date).toLocaleDateString('en', { weekday: 'short' }).slice(0, 3),
+		consumedMl: s.consumedMl,
+	}))
+)
+const weekMax     = $derived(Math.max(...displayWeek.map(s => s.consumedMl), 100))
 const getDayLabel = (d: string) => new Date(d).toLocaleDateString('en', { weekday: 'short' }).slice(0, 3)
 const formatDate  = (d: string) => new Date(d).toLocaleDateString('en', { month: 'short', day: 'numeric' })
 const goalPct     = (s: (typeof history.weekSessions)[0]) =>
@@ -20,7 +31,7 @@ const goalPct     = (s: (typeof history.weekSessions)[0]) =>
 	<div class="card">
 		<p class="section-label">This week</p>
 		<div class="chart">
-			{#each history.weekSessions as session, i}
+			{#each displayWeek as session, i}
 				{@const isToday = i === 6}
 				{@const pct    = weekMax > 0 ? (session.consumedMl / weekMax) * 100 : 0}
 				<div class="chart-col">
@@ -32,7 +43,7 @@ const goalPct     = (s: (typeof history.weekSessions)[0]) =>
 						></div>
 					</div>
 					<span class="day-label" class:today-label={isToday}>
-						{getDayLabel(session.date)}
+						{session.label}
 					</span>
 				</div>
 			{/each}
@@ -74,10 +85,10 @@ const goalPct     = (s: (typeof history.weekSessions)[0]) =>
 
 <style>
 .page {
-	padding: 20px 16px 40px;
+	padding: 16px 14px 40px;
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 12px;
 }
 
 .page-head { padding: 2px 0 4px; }
@@ -97,8 +108,9 @@ h1 {
 .card {
 	background: var(--warm-surface);
 	border: 0.5px solid var(--warm-border);
-	border-radius: 18px;
-	padding: 20px;
+	border-radius: 16px;
+	padding: 18px;
+	overflow: hidden;
 }
 
 .section-label {
@@ -182,15 +194,23 @@ h1 {
 	display: flex;
 	flex-direction: column;
 	gap: 3px;
+	min-width: 0;
+	overflow: hidden;
 }
 .session-date {
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 600;
 	color: var(--warm-text);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .session-stats {
-	font-size: 13px;
+	font-size: 12px;
 	color: var(--warm-text-secondary);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 /* Badges */

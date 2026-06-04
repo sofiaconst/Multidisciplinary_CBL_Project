@@ -1,8 +1,11 @@
 <script lang="ts">
 import { Auth } from '$lib/auth.svelte'
 import { goto } from '$app/navigation'
+import { page } from '$app/state'
 
 const auth = Auth.getInstance()
+
+const backHref = $derived(page.url.searchParams.get('back') ?? '/m/welcome')
 
 let email       = $state('')
 let password    = $state('')
@@ -46,7 +49,7 @@ const handleSignUp = async (e: Event) => {
 
 <div class="page">
 	<div class="header">
-		<a href="/m/welcome" class="back">
+		<a href={backHref} class="back">
 			<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 4L6 10l6 6"/></svg>
 			Back
 		</a>

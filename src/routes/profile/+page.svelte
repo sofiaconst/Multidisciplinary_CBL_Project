@@ -2,10 +2,22 @@
 import { Auth } from '$lib/auth.svelte'
 import { History } from '$lib/history.svelte'
 import { Scale } from '$lib/scale.svelte'
+import QRScanner from '$lib/QRScanner.svelte'
+import toast from 'svelte-french-toast'
+import { Toaster } from 'svelte-french-toast'
 
 const auth = Auth.getInstance()
 const history = History.getInstance()
 const scale = Scale.getInstance()
+
+let showQR = $state(false)
+const onQRScan = async (result: string) => {
+	showQR = false
+	try {
+		await scale.bt.connectById(result.trim())
+		toast.success('Scale connected!')
+	} catch (e) { toast.error(`Could not connect: ${(e as Error).message}`) }
+}
 
 // ── Name editing ─────────────────────────────────────────────
 let editingName = $state(false)
@@ -92,6 +104,12 @@ async function removeImage() {
 const hasImage = $derived(!!auth.user?.avatarImageUrl)
 </script>
 
+{#if showQR}
+	<QRScanner onScan={onQRScan} onClose={() => showQR = false} />
+{/if}
+
+<Toaster />
+
 <div class="page">
 	<main class="content">
 	<div class="page-header">
@@ -140,7 +158,15 @@ const hasImage = $derived(!!auth.user?.avatarImageUrl)
 		/>
 
 		<!-- Name -->
-		{#if editingName}
+		{#if auth.isAnonymous}
+			<div class="identity-name-row">
+				<span class="identity-name">Guest</span>
+			</div>
+			<p class="guest-note">
+				<a href="/signup" class="guest-link">Create an account</a> to set your name, upload a photo,
+				and keep your history across devices.
+			</p>
+		{:else if editingName}
 			<div class="name-edit-row">
 				<input
 					class="name-input"
@@ -166,7 +192,9 @@ const hasImage = $derived(!!auth.user?.avatarImageUrl)
 			</div>
 		{/if}
 
-		<div class="identity-email">{auth.user?.email ?? '—'}</div>
+		{#if !auth.isAnonymous}
+			<div class="identity-email">{auth.user?.email ?? '—'}</div>
+		{/if}
 		<div class="streak-pill">{auth.streakDays} day streak</div>
 	</div>
 
@@ -195,7 +223,7 @@ const hasImage = $derived(!!auth.user?.avatarImageUrl)
 					<div class="scale-detail">Factor: {scale.bt.calibrationFactor.toFixed(3)}</div>
 				{/if}
 			</div>
-			<button type="button" class="qr-btn" disabled>
+			<button type="button" class="qr-btn" onclick={() => showQR = true}>
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
 					<rect x="3" y="3" width="7" height="7" rx="1" />
 					<rect x="14" y="3" width="7" height="7" rx="1" />
@@ -529,7 +557,20 @@ const hasImage = $derived(!!auth.user?.avatarImageUrl)
 	font-weight: 500;
 	cursor: pointer;
 }
-.qr-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.guest-note {
+	font-size: 12px;
+	color: var(--warm-text-tertiary);
+	text-align: center;
+	margin: 2px 0 0;
+	line-height: 1.5;
+	max-width: 260px;
+}
+.guest-link {
+	color: var(--teal-primary);
+	text-decoration: none;
+	font-weight: 500;
+}
+.guest-link:hover { text-decoration: underline; }
 
 .sr-only {
 	position: absolute;

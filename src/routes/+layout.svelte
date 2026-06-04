@@ -3,6 +3,8 @@ import '../app.css'
 import { Bluetooth } from '$lib/bt.svelte'
 import { Scale } from '$lib/scale.svelte'
 import { Auth } from '$lib/auth.svelte'
+import { demo } from '$lib/demo.svelte'
+import DemoPanel from '$lib/DemoPanel.svelte'
 import { browser } from '$app/environment'
 import { goto } from '$app/navigation'
 import { page } from '$app/state'
@@ -46,8 +48,11 @@ const isPublicPage = $derived(
 	page.url.pathname === '/welcome'
 )
 
+// All /m/* routes are handled entirely by src/routes/m/+layout.svelte
+const isMobilePage = $derived(page.url.pathname.startsWith('/m'))
+
 $effect(() => {
-	if (!auth.loading && !auth.isLoggedIn && !isPublicPage) {
+	if (!auth.loading && !auth.isLoggedIn && !isPublicPage && !isMobilePage) {
 		void goto('/welcome')
 	}
 })
@@ -60,13 +65,15 @@ const navTabs = [
 ]
 </script>
 
-{#if isPublicPage}
+{#if isPublicPage || isMobilePage}
 	{@render children()}
 {:else if auth.loading || !auth.isLoggedIn}
 	<div class="splash">
 		<div class="splash-dot"></div>
 	</div>
 {:else}
+	{#if demo.panelOpen}<DemoPanel />{/if}
+
 	<div class="app-shell">
 		<!-- Snap-exact navbar -->
 		<nav class="app-nav">
@@ -104,11 +111,12 @@ const navTabs = [
 			{@render children()}
 			<footer class="app-footer">
 				<span>© 2026 Sippy</span>
-				<a href="/m" class="phone-link">
-					<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
-					Phone view
-				</a>
 				<span>Built by the Sippy team · v1.0</span>
+				{#if demo.active}
+					<button class="demo-active-btn" onclick={() => demo.panelOpen = true}>DEMO ON</button>
+				{:else}
+					<button class="demo-idle-btn" onclick={() => { demo.active = true; demo.panelOpen = true }}>Test mode</button>
+				{/if}
 			</footer>
 		</div>
 	</div>
@@ -290,19 +298,23 @@ const navTabs = [
 	font-family: 'DM Sans', system-ui, sans-serif;
 }
 
-.phone-link {
-	display: inline-flex;
-	align-items: center;
-	gap: 5px;
-	color: var(--warm-text-tertiary);
-	text-decoration: none;
-	font-size: 12px;
-	padding: 4px 10px;
-	border-radius: 8px;
-	border: 0.5px solid var(--warm-border);
-	transition: color 0.15s, border-color 0.15s;
+
+.demo-idle-btn {
+	display: inline-flex; align-items: center; gap: 5px;
+	height: 26px; padding: 0 10px; border-radius: 20px;
+	background: var(--warm-bg); border: 0.5px solid var(--warm-border);
+	color: var(--warm-text-tertiary); font-size: 11px; font-weight: 500;
+	font-family: inherit; cursor: pointer; outline: none;
+	-webkit-tap-highlight-color: transparent;
 }
-.phone-link:hover { color: var(--teal-primary); border-color: var(--teal-primary); }
+.demo-active-btn {
+	display: inline-flex; align-items: center; gap: 5px;
+	height: 26px; padding: 0 10px; border-radius: 20px;
+	background: var(--teal-light); border: 1px solid var(--teal-primary);
+	color: var(--teal-dark); font-size: 11px; font-weight: 700;
+	font-family: inherit; cursor: pointer; outline: none;
+	-webkit-tap-highlight-color: transparent;
+}
 
 /* ── Splash ── */
 .splash {
