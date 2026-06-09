@@ -546,9 +546,15 @@ const deleteAccount = async () => {
 </svelte:head>
 
 <style>
-.page { background: var(--warm-bg); min-height: 100%; }
+.page {
+	background: var(--warm-bg);
+	flex: 1;
+	min-height: 0;
+}
 
 .content {
+	position: relative;
+	z-index: 1;
 	width: 100%;
 	max-width: 920px;
 	margin: 0 auto;

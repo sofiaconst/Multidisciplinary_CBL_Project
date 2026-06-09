@@ -75,6 +75,30 @@ const navTabs = [
 	{#if demo.panelOpen}<DemoPanel />{/if}
 
 	<div class="app-shell">
+		<!-- Background rings — fixed to viewport, visible on all authenticated pages -->
+		<svg class="bg-ring bg-ring-a" style="top:-150px;right:-120px;" width="380" height="380" viewBox="0 0 380 380" fill="none" aria-hidden="true">
+			<circle cx="190" cy="190" r="22"  stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="190" cy="190" r="44"  stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="190" cy="190" r="66"  stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="190" cy="190" r="88"  stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="190" cy="190" r="110" stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="190" cy="190" r="132" stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="190" cy="190" r="154" stroke="var(--teal-primary)" stroke-width="3"/>
+		</svg>
+		<svg class="bg-ring bg-ring-b" style="bottom:0;left:0;" width="600" height="600" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+			<circle cx="0" cy="600" r="180" stroke="var(--teal-primary)" stroke-width="2.5"/>
+			<circle cx="0" cy="600" r="215" stroke="var(--teal-primary)" stroke-width="2.5"/>
+			<circle cx="0" cy="600" r="250" stroke="var(--teal-primary)" stroke-width="2.5"/>
+			<circle cx="0" cy="600" r="285" stroke="var(--teal-primary)" stroke-width="2.5"/>
+			<circle cx="0" cy="600" r="320" stroke="var(--teal-primary)" stroke-width="2.5"/>
+			<circle cx="0" cy="600" r="355" stroke="var(--teal-primary)" stroke-width="2.5"/>
+			<circle cx="0" cy="600" r="390" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		</svg>
+		<svg class="bg-ring bg-ring-c" style="bottom:0;right:0;" width="600" height="600" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+			<circle cx="600" cy="600" r="130" stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="600" cy="600" r="195" stroke="var(--teal-primary)" stroke-width="3"/>
+			<circle cx="600" cy="600" r="260" stroke="var(--teal-primary)" stroke-width="3"/>
+		</svg>
 		<!-- Snap-exact navbar -->
 		<nav class="app-nav">
 			<a href="/" class="nav-brand">
@@ -285,11 +309,28 @@ const navTabs = [
 	flex-direction: column;
 }
 
+/* ── Background rings ── */
+@keyframes ringPulseA { 0%, 100% { opacity: 0.06; } 50% { opacity: 0.15; } }
+@keyframes ringPulseB { 0%, 100% { opacity: 0.13; } 50% { opacity: 0.30; } }
+@keyframes ringPulseC { 0%, 100% { opacity: 0.09; } 50% { opacity: 0.24; } }
+
+.bg-ring {
+	position: fixed;
+	pointer-events: none;
+	z-index: 0;
+}
+.bg-ring-a { animation: ringPulseA 5s ease-in-out infinite; }
+.bg-ring-b { animation: ringPulseB 6s ease-in-out infinite 1.5s; animation-fill-mode: backwards; }
+.bg-ring-c { animation: ringPulseC 5.5s ease-in-out infinite 3s; animation-fill-mode: backwards; }
+
 /* ── Footer ── */
 .app-footer {
+	position: relative;
+	z-index: 2;
 	margin-top: auto;
 	padding: 24px 32px;
-	border-top: 0.5px solid var(--warm-border);
+	background: var(--warm-bg);
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

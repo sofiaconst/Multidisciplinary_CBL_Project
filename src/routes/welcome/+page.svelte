@@ -25,6 +25,23 @@ const continueAsGuest = async () => {
 </script>
 
 <div class="page">
+	<!-- Top-right corner arc -->
+	<svg class="swirl swirl-tr" style="top:0;right:0;" width="320" height="320" viewBox="0 0 320 320" fill="none" aria-hidden="true">
+		<circle cx="320" cy="0" r="138" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="320" cy="0" r="160" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="320" cy="0" r="182" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="320" cy="0" r="204" stroke="var(--teal-primary)" stroke-width="2.5"/>
+	</svg>
+	<!-- Ring 5b — bottom-left corner-pinned arc -->
+	<svg class="swirl swirl-bl" style="bottom:0;left:0;" width="240" height="240" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+		<circle cx="0" cy="240" r="72"  stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="0" cy="240" r="86"  stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="0" cy="240" r="100" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="0" cy="240" r="114" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="0" cy="240" r="128" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="0" cy="240" r="142" stroke="var(--teal-primary)" stroke-width="2.5"/>
+		<circle cx="0" cy="240" r="156" stroke="var(--teal-primary)" stroke-width="2.5"/>
+	</svg>
 	<!-- Nav -->
 	<nav class="nav">
 		<a href="/welcome" class="brand">
@@ -73,6 +90,18 @@ const continueAsGuest = async () => {
 
 		<!-- Decorative coaster mockup — hidden on small screens -->
 		<div class="mockup-wrap" aria-hidden="true">
+			<!-- Ring 5a — sonar pulse behind coaster -->
+			<svg class="sonar-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation-duration:2s;" width="680" height="680" viewBox="0 0 680 680" fill="none" aria-hidden="true">
+				<circle cx="340" cy="340" r="56"  stroke="var(--teal-primary)" stroke-width="3.4" opacity="1"/>
+				<circle cx="340" cy="340" r="88"  stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.9"/>
+				<circle cx="340" cy="340" r="120" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.8"/>
+				<circle cx="340" cy="340" r="152" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.7"/>
+				<circle cx="340" cy="340" r="184" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.6"/>
+				<circle cx="340" cy="340" r="216" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.5"/>
+				<circle cx="340" cy="340" r="248" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.4"/>
+				<circle cx="340" cy="340" r="280" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.3"/>
+				<circle cx="340" cy="340" r="312" stroke="var(--teal-primary)" stroke-width="3.4" opacity="0.2"/>
+			</svg>
 			<div class="mockup">
 				<div class="mockup-grid"></div>
 				<div class="cup">
@@ -135,6 +164,21 @@ const continueAsGuest = async () => {
 	100% { box-shadow: 0 0 0 0 rgba(0,135,189,0); }
 }
 
+@keyframes sonarBreath {
+	0%, 100% { opacity: 0.10; }
+	50%       { opacity: 0.24; }
+}
+
+.sonar-pulse {
+	animation: sonarBreath 4s ease-in-out infinite;
+}
+
+@keyframes swirlPulseTR { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.20; } }
+@keyframes swirlPulseBL { 0%, 100% { opacity: 0.13; } 50% { opacity: 0.30; } }
+
+.swirl-tr { animation: swirlPulseTR 5s ease-in-out infinite 2s; animation-fill-mode: backwards; }
+.swirl-bl { animation: swirlPulseBL 6s ease-in-out infinite 0.5s; animation-fill-mode: backwards; }
+
 .page {
 	background: var(--warm-bg);
 	min-height: 100dvh;
@@ -142,6 +186,13 @@ const continueAsGuest = async () => {
 	flex-direction: column;
 	font-family: 'DM Sans', system-ui, sans-serif;
 	color: var(--warm-text);
+	position: relative;
+	overflow: clip;
+}
+
+.swirl {
+	position: absolute;
+	pointer-events: none;
 }
 
 /* ── Nav ── */
@@ -172,6 +223,8 @@ const continueAsGuest = async () => {
 
 /* ── Hero ── */
 .hero {
+	position: relative;
+	z-index: 1;
 	flex: 1;
 	display: flex;
 	align-items: center;
@@ -194,7 +247,7 @@ const continueAsGuest = async () => {
 }
 
 .wordmark {
-	height: 52px;
+	height: 72px;
 	width: auto;
 	margin-bottom: 28px;
 }
@@ -341,6 +394,7 @@ h1 {
 		align-items: center;
 		justify-content: center;
 		width: 380px;
+		position: relative;
 	}
 }
 
@@ -397,6 +451,8 @@ h1 {
 
 /* ── Features ── */
 .features {
+	position: relative;
+	z-index: 1;
 	padding: 8px 24px 56px;
 	max-width: 1200px;
 	margin: 0 auto;
@@ -430,8 +486,11 @@ h1 {
 
 /* ── Footer ── */
 .site-footer {
+	position: relative;
+	z-index: 2;
 	padding: 20px 24px;
-	border-top: 0.5px solid var(--warm-border);
+	background: var(--warm-bg);
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
 	display: flex;
 	justify-content: space-between;
 	font-size: 12px;
@@ -453,7 +512,7 @@ h1 {
 @media (max-width: 480px) {
 	h1 { font-size: 44px; letter-spacing: -1.5px; }
 	.hero-body { font-size: 16px; }
-	.wordmark { height: 44px; }
+	.wordmark { height: 56px; }
 	.nav { padding: 0 16px; }
 }
 </style>

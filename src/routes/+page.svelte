@@ -185,10 +185,13 @@ const tare = async () => {
 <style>
 .page {
 	background: var(--warm-bg);
-	min-height: 100%;
+	flex: 1;
+	min-height: 0;
 }
 
 .content {
+	position: relative;
+	z-index: 1;
 	width: 100%;
 	max-width: 1180px;
 	margin: 0 auto;

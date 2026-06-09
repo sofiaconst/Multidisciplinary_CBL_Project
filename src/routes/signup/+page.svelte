@@ -60,6 +60,26 @@ const handleSignUp = async (e: Event) => {
 	<!-- Left dark panel -->
 	<div class="brand-panel">
 		<div class="panel-bg"></div>
+		<!-- Ring A — sonar fade top-left -->
+		<svg class="panel-swirl sonar-pulse" style="top:-150px;left:-130px;" width="460" height="460" viewBox="0 0 460 460" fill="none" aria-hidden="true">
+			<circle cx="230" cy="230" r="30"  stroke="white" stroke-width="2.2" opacity="1"/>
+			<circle cx="230" cy="230" r="58"  stroke="white" stroke-width="2.2" opacity="0.889"/>
+			<circle cx="230" cy="230" r="86"  stroke="white" stroke-width="2.2" opacity="0.778"/>
+			<circle cx="230" cy="230" r="114" stroke="white" stroke-width="2.2" opacity="0.667"/>
+			<circle cx="230" cy="230" r="142" stroke="white" stroke-width="2.2" opacity="0.556"/>
+			<circle cx="230" cy="230" r="170" stroke="white" stroke-width="2.2" opacity="0.444"/>
+			<circle cx="230" cy="230" r="198" stroke="white" stroke-width="2.2" opacity="0.333"/>
+			<circle cx="230" cy="230" r="226" stroke="white" stroke-width="2.2" opacity="0.222"/>
+		</svg>
+		<!-- Ring B — dense corner arc bottom-right -->
+		<svg class="panel-swirl panel-swirl-br" style="bottom:0;right:0;" width="400" height="400" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+			<circle cx="400" cy="400" r="120" stroke="white" stroke-width="2.5"/>
+			<circle cx="400" cy="400" r="143" stroke="white" stroke-width="2.5"/>
+			<circle cx="400" cy="400" r="167" stroke="white" stroke-width="2.5"/>
+			<circle cx="400" cy="400" r="190" stroke="white" stroke-width="2.5"/>
+			<circle cx="400" cy="400" r="213" stroke="white" stroke-width="2.5"/>
+			<circle cx="400" cy="400" r="237" stroke="white" stroke-width="2.5"/>
+		</svg>
 		<div class="panel-content">
 			<a href="/welcome" class="back-link">
 				<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 4L6 10l6 6"/></svg>
@@ -214,6 +234,18 @@ const handleSignUp = async (e: Event) => {
 </svelte:head>
 
 <style>
+@keyframes sonarBreath {
+	0%, 100% { opacity: 0.10; }
+	50%       { opacity: 0.28; }
+}
+@keyframes panelBR {
+	0%, 100% { opacity: 0.20; }
+	50%       { opacity: 0.44; }
+}
+
+.sonar-pulse { animation: sonarBreath 3s ease-in-out infinite; }
+.panel-swirl-br { animation: panelBR 5s ease-in-out infinite 2s; animation-fill-mode: backwards; }
+
 .page {
 	min-height: 100dvh;
 	display: grid;
@@ -249,6 +281,11 @@ const handleSignUp = async (e: Event) => {
 
 /* ── Left dark panel ── */
 .brand-panel { background: var(--teal-dark); position: relative; overflow: hidden; }
+
+.panel-swirl {
+	position: absolute;
+	pointer-events: none;
+}
 .panel-bg {
 	position: absolute; inset: 0;
 	background-image:
@@ -268,7 +305,7 @@ const handleSignUp = async (e: Event) => {
 .back-link:hover { color: #fff; }
 .panel-wordmark { margin-bottom: 32px; }
 .wordmark-img {
-	height: 32px; width: auto; display: block;
+	height: 46px; width: auto; display: block;
 	filter: brightness(0) invert(1);
 }
 .panel-foot { margin-top: auto; }
